@@ -4,6 +4,9 @@ module.exports = {
   darkMode: false, // or 'media' or 'class'
   theme: {
     extend: {},
+    fontFamily: {
+      sans: ['Poppins', 'sans-serif']
+    },
     colors: {
       beyaz: {
         0: "#FAFAFA",

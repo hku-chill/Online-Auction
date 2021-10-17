@@ -1,2 +1,2 @@
-*{margin:0}
+@tailwind base;@tailwind components;@tailwind utilities;*{-webkit-box-sizing:border-box;box-sizing:border-box}html{scroll-behavior:smooth;overflow-x:hidden}@layer base{html{@apply font-sans}}#login-form-body{width:-webkit-fit-content;width:-moz-fit-content;width:fit-content}
 /*# sourceMappingURL=-tailwind.min.css.map */
