@@ -1,0 +1,29 @@
+//@at-root
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+*{
+    box-sizing: border-box;
+}
+
+html{
+    scroll-behavior: smooth;
+    overflow-x: hidden;
+
+
+}
+
+
+@layer base{
+    html{
+        @apply font-sans;
+    }
+}
+
+
+
+#login-form-body{
+    width: fit-content;
+}
