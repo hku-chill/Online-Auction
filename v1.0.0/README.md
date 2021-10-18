@@ -1,0 +1,1 @@
+hit "npm start" on terminal req nodejs, postcss, tailwindcss and autoprefixer

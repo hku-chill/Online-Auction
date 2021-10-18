@@ -24,7 +24,7 @@ section#login-form-section {
     // login main form container
     #form-container {
         @apply grid grid-cols-2 border rounded-2xl border-beyaz-5 gap-4;
-        width: 100%;
+        width: 60%;
 
         // Left panel and register campain
         #login-left-panel,
