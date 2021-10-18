@@ -23,8 +23,8 @@ section#login-form-section {
 
     // login main form container
     #form-container {
-        @apply flex flex-row border rounded-2xl border-beyaz-5 gap-4 overflow-hidden;
-        max-width: 60%;
+        @apply grid grid-cols-2 border rounded-2xl border-beyaz-5 gap-4;
+        width: 100%;
 
         // Left panel and register campain
         #login-left-panel,
@@ -32,29 +32,63 @@ section#login-form-section {
             @apply p-10;
         }
 
+        // Login form
         #login-left-panel {
+
+
+
+            #login-register-switch{
+                @apply flex flex-row bg-beyaz-10 rounded-lg;
+                padding: 2px;
+
+                a{
+                    flex: 1 1 50%;
+                    font-size: 14px;
+                    text-align: center;
+                    padding: 1rem 0;
+                    border-radius: 10px;
+                    color: theme("colors.siyah.20");
+
+
+                    &.active{
+                        background-color: theme("colors.beyaz.0");
+                    }
+
+
+                    &:not(.active){
+                        color: theme("colors.siyah.5");
+
+                        &:hover{
+                            color: theme("colors.siyah.10");
+                        }
+                    }
+                }
+            }
+
+
         }
 
+        // Register campain
         #register-campain {
             @apply bg-beyaz-5;
 
             #campain-title {
                 h3 {
-                    @apply text-siyah-20 text-base font-semibold;
+                    @apply text-siyah-20 text-base font-semibold mb-4;
                 }
 
                 p {
-                    @apply text-xs text-siyah-20 font-light;
+                    @apply text-sm text-siyah-20 font-light;
                 }
             }
 
             #campain-column {
                 #campain-item {
                     #campain-logo {
-                        min-width: 100px;
-                        height: 100px;
+                        min-width: 84px;
+                        height: 84px;
                         border-radius: 50%;
-                        border: 2px solid theme("colors.beyaz.35");
+                        border: 2px solid inherit;
                     }
                 }
             }
