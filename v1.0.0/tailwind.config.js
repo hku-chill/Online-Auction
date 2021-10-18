@@ -3,7 +3,11 @@ module.exports = {
   purge: ["./public/**/*.html", "./public/**/**.scss"],
   darkMode: false, // or 'media' or 'class'
   theme: {
-    extend: {},
+    extend: {
+      outline: {
+        main_mavi: '2px solid theme("colors.mavi")',
+      }
+    },
     fontFamily: {
       sans: ['Poppins', 'sans-serif']
     },
@@ -27,10 +31,13 @@ module.exports = {
         25: "#1e1e1e",
         30: "#0a0a0a",
       },
+      mavi: "#2EC4B6"
     },
   },
   variants: {
-    extend: {},
+    extend: {
+      outline: ['hover', 'active'],
+    },
   },
   plugins: [],
 };

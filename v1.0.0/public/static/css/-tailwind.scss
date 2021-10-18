@@ -38,7 +38,7 @@ section#login-form-section {
 
 
             #login-register-switch{
-                @apply flex flex-row bg-beyaz-10 rounded-lg;
+                @apply flex flex-row bg-beyaz-10 rounded-xl;
                 padding: 2px;
 
                 a{
@@ -48,6 +48,7 @@ section#login-form-section {
                     padding: 1rem 0;
                     border-radius: 10px;
                     color: theme("colors.siyah.20");
+                    font-weight: 500;
 
 
                     &.active{
@@ -57,9 +58,10 @@ section#login-form-section {
 
                     &:not(.active){
                         color: theme("colors.siyah.5");
+                        font-weight: 400;
 
                         &:hover{
-                            color: theme("colors.siyah.10");
+                            color: theme("colors.siyah.15");
                         }
                     }
                 }
@@ -116,4 +118,32 @@ section#login-form-section {
         color: inherit;
         
     }
+}
+
+
+
+#auth-input-section{
+    
+    input{
+        @apply focus:outline-main_mavi;
+        width: 100%;
+        background-color: theme("colors.beyaz.5");
+        padding: 1rem;
+        border-radius: 8px;
+        color: theme("colors.siyah.20");
+
+
+        &::placeholder{
+            color: theme("colors.beyaz.20");
+        }
+    }
+
+}
+
+#auth-button-section{
+
+    button{
+        @apply bg-mavi w-full py-4 rounded-lg text-beyaz-0 font-medium;
+    }
+
 }
