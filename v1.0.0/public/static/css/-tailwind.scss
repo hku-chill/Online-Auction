@@ -3,27 +3,83 @@
 @tailwind components;
 @tailwind utilities;
 
-
-*{
+* {
     box-sizing: border-box;
 }
 
-html{
+html {
     scroll-behavior: smooth;
     overflow-x: hidden;
-
-
 }
 
-
-@layer base{
-    html{
+@layer base {
+    html {
         @apply font-sans;
     }
 }
 
+section#login-form-section {
+    @apply w-full h-full flex justify-center items-center;
 
+    // login main form container
+    #form-container {
+        @apply flex flex-row border rounded-2xl border-beyaz-5 gap-4 overflow-hidden;
+        max-width: 60%;
 
-#login-form-body{
-    width: fit-content;
+        // Left panel and register campain
+        #login-left-panel,
+        #register-campain {
+            @apply p-10;
+        }
+
+        #login-left-panel {
+        }
+
+        #register-campain {
+            @apply bg-beyaz-5;
+
+            #campain-title {
+                h3 {
+                    @apply text-siyah-20 text-base font-semibold;
+                }
+
+                p {
+                    @apply text-xs text-siyah-20 font-light;
+                }
+            }
+
+            #campain-column {
+                #campain-item {
+                    #campain-logo {
+                        min-width: 100px;
+                        height: 100px;
+                        border-radius: 50%;
+                        border: 2px solid theme("colors.beyaz.35");
+                    }
+                }
+            }
+        }
+    }
+}
+
+// Global components
+
+.logo-attr {
+    position: relative;
+
+    &::after {
+        position: absolute;
+        font-family: "Font Awesome 5 Free";
+        font-weight: 200;
+        content: attr(logo-attr);
+
+        top: 50%;
+        left: 50%;
+
+        transform: translate(-50%, -50%);
+
+        font-size: inherit;
+        color: inherit;
+        
+    }
 }
