@@ -31,7 +31,8 @@ module.exports = {
         25: "#1e1e1e",
         30: "#0a0a0a",
       },
-      mavi: "#2EC4B6"
+      mavi: "#2EC4B6",
+      kirmizi: "#125462"
     },
   },
   variants: {
