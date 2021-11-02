@@ -166,10 +166,66 @@ section#login-form-section {
 
 
 #search-section{
-    flex: 1 1 70%;
+    flex: 1 1 60%;
     text-align: center;
 }
 
 #user-section, #site-logo{
-    flex: 1 1 15%;
+    flex: 1 1 10%;
+}
+
+
+
+#search-section{
+    display: flex;
+    flex-direction: row;
+
+    #input-section{
+        flex: 1 1;
+        input#search__input{
+            width: 100%;
+            background-color: theme('colors.beyaz.10');
+            font-size: 18px;
+            line-height: 1.5;
+            padding: 14px 102px;
+            border-radius: 16px 0 0 16px;
+
+
+            &::placeholder{
+                color: theme('colors.beyaz.15');
+            }
+        }
+
+        &.before-logo{
+            position: relative;
+
+            //search icon
+            &::before{
+                position: absolute;
+                font-family: "Font Awesome 5 Free";
+                font-weight: 200;
+                content: "\f002";
+                font-size: 20px;
+                color: theme("colors.siyah.10");
+                left: 36px;
+                top: 50%;
+                transform: translateY(-50%)
+            }
+        }
+    }
+
+
+    #button-section{
+        button{
+            font-size: 18px;
+            line-height: 1.5;
+            padding: 14px 28px;
+            border-radius: 0 16px 16px 0;
+            background-color: theme("colors.mavi");
+            span{
+                @apply text-beyaz-0;
+            }
+        }
+    }
+
 }
