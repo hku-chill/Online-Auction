@@ -170,8 +170,8 @@ section#login-form-section {
     text-align: center;
 }
 
-#user-section, #site-logo{
-    flex: 1 1 10%;
+#site-logo{
+    flex: 1 1 15%;
 }
 
 
@@ -228,4 +228,37 @@ section#login-form-section {
         }
     }
 
+}
+
+
+#user-section{
+    flex: 1 1 25%;
+
+    #user-section-icon{
+        background-color: theme("colors.beyaz.5");
+        border-radius: 50%;
+        display: inline-flex;
+        justify-content: center;
+        align-items: center;
+        padding: 16px;
+        margin-right: 16px;
+        i{
+            font-size: 28px;
+            color: theme("colors.siyah.20");
+        }
+
+
+    }
+
+    #user-section-text{
+        color: theme("colors.beyaz.20");
+
+        a{
+            color:  theme("colors.siyah.20")
+        }
+    }
+
+    #user-section-icon-base{
+        @apply inline-flex justify-center items-center text-center;
+    }
 }
