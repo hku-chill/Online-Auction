@@ -147,3 +147,29 @@ section#login-form-section {
     }
 
 }
+
+
+
+
+
+
+
+//index page css
+
+
+// Header section
+
+.main-wrapper{
+    max-width: 70%;
+    @apply mx-auto bg-beyaz-0;
+}
+
+
+#search-section{
+    flex: 1 1 70%;
+    text-align: center;
+}
+
+#user-section, #site-logo{
+    flex: 1 1 15%;
+}
