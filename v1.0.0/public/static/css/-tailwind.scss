@@ -161,7 +161,7 @@ section#login-form-section {
 
 .main-wrapper{
     max-width: 70%;
-    @apply mx-auto bg-beyaz-0;
+    @apply mx-auto;
 }
 
 
@@ -261,4 +261,90 @@ section#login-form-section {
     #user-section-icon-base{
         @apply inline-flex justify-center items-center text-center;
     }
+}
+
+
+
+#category-list-wrap{
+    @apply py-2;
+    #category-list-item{
+        @apply px-4 py-2;
+        position: relative;
+        flex: 1 1 auto;
+        text-align: center;
+        font-size: 16px;
+        line-height: 1.5;
+        font-weight: 300;
+        color: theme("colors.siyah.10");
+
+
+        & {
+            border-left: 1.4px solid theme("colors.siyah.5");
+        }
+
+
+        &:first-child{
+            text-align: left;
+            border: none;
+        }
+        
+        &:last-child{
+            text-align: right;
+        }
+    }
+}
+
+
+#start-selling-items{
+    @apply bg-mavi flex flex-row items-center px-7;
+    gap: 1rem;
+
+    h2{
+        font-size: 18px;
+        color: theme("colors.beyaz.0");
+        flex: 1 1 20%;
+    }
+
+    #campain-image{
+        width: 100%;
+        transform: skew(-30deg);
+
+
+        height: 74px;
+        flex: 1 1 30%;
+        overflow: hidden;
+
+
+        &::after{
+            position: absolute;
+            content: "";
+
+            background-image: url("../img/nike_shoes.jpg");
+            background-position: center;
+            background-size: cover;
+            left: -30px;
+            
+            width: 110%;
+            height: 110%;
+            transform: skew(30deg);
+        }
+    }
+
+    #round-redirect-button{
+        margin: 0 2rem;
+    }
+}
+
+
+
+
+.category-item{
+    flex: 1 1 25%;
+    // background-image: linear-gradient(to bottom, theme("colors.beyaz.25"), theme("colors.beyaz.0"));
+}
+
+
+
+.container-x{
+    padding: 18px 24px;
 }
