@@ -32,7 +32,8 @@ module.exports = {
         30: "#0a0a0a",
       },
       mavi: "#2EC4B6",
-      mavi_5: "#59ADFF"
+      mavi_5: "#59ADFF",
+      mor: "#9B5DE5",
     },
   },
   variants: {
