@@ -34,6 +34,7 @@ module.exports = {
       mavi: "#2EC4B6",
       mavi_5: "#59ADFF",
       mor: "#9B5DE5",
+      sari: "#FFC107"
     },
   },
   variants: {
