@@ -498,6 +498,41 @@ section#login-form-section {
     }
 }
 
+
+
+footer{
+    #site-logo{
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        p{
+            font-size: 14px;
+            color: theme("colors.beyaz.25");
+        }
+    }
+
+    .footer-direction{
+
+        .footer-item{
+
+            h3{
+                font-size: 16px;
+                font-weight: 600;
+                color: theme("colors.siyah.15");
+                margin-bottom: 1rem;
+            }
+
+            ul li{
+                font-size: 14px;
+                color: theme("colors.beyaz.25");
+            }
+
+        }
+
+    }
+}
+
+
 .container-x{
     padding: 18px 24px;
 }
