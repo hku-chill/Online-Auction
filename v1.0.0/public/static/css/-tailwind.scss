@@ -184,7 +184,7 @@ section#login-form-section {
         flex: 1 1;
         input#search__input{
             width: 100%;
-            background-color: theme('colors.beyaz.10');
+            background-color: theme('colors.beyaz.5');
             font-size: 18px;
             line-height: 1.5;
             padding: 14px 102px;
@@ -498,6 +498,231 @@ section#login-form-section {
     }
 }
 
+.auction-profile{
+
+    .aution-row{
+
+        @apply flex flex-row;
+
+        .auction-image{
+            @apply  flex-1 px-3 py-6 flex flex-col;
+
+            .main-img{
+                @apply px-2 py-3 border rounded-xl border-opacity-20 border-siyah-15;
+            }
+
+            .alt-img-list{
+                @apply flex flex-row justify-center w-full pt-6 gap-3;
+                
+                img{
+                    width: 54px;
+                    height: 54px;
+
+                    &.selected{
+                        border: 2px solid green;
+                    }
+                }
+            }
+        }
+
+        .auction-data{
+            background: theme("colors.beyaz.10");
+            display: flex;
+            flex-direction: column;
+            padding: 24px 18px;
+
+            .auction-title-rate{
+                display: flex;
+                flex-direction: row;
+                justify-content: space-between;
+
+                .auction-title-contain{
+                    text-align: left;
+                    h1{
+                        font-size: 18px;
+                        font-weight: 500;
+                        color: theme("colors.siyah.15");
+                    }
+                    span{
+                        font-size: 16px;
+                        font-weight: 300;
+                        color: theme("colors.siyah.10");
+                    }
+                }
+
+                .auction-rate-contain{
+                    text-align: right;
+
+                    .auction-rate{
+                        display: flex;
+                        flex-direction: row;
+                        justify-content: center;
+                        align-items: center;
+                        span{
+                            color: theme("colors.siyah.10");
+                            padding-right: 4px;
+                        }
+                        i{
+                            color: theme("colors.sari");
+                        }
+                    }
+                    .auction-rate-count{
+                        color: theme("colors.siyah.10");
+                        font-size: 14px;
+                        font-weight: 500;
+                    }
+                }
+            }
+
+            .user-profile{
+                display: flex;
+                flex-direction: row;
+                background-color: theme("colors.beyaz.0");
+                padding: 6px 12px;
+                border-radius: 8px;
+
+                .user-pic-contain{
+                    border-radius: 50%;
+                    width: 92px;
+                    height: 92px;
+                    overflow: hidden;
+                    background-color: theme("colors.beyaz.0");
+                    
+                    @apply border border-siyah-10 border-opacity-40;
+
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+
+                    .profile-img-bg{
+                        width: calc(100% - 6px);
+                        height: calc(100% - 6px);
+                        border-radius: 50%;
+                        background-image: var(--bg-img);
+                        background-position: center;
+                        background-size: cover;
+                    }
+                }
+
+                .user-title-rate{
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: space-between;
+                    margin-left: 12px;
+
+                    .user-title-contain{
+                        text-align: left;
+                        h3{
+                            font-size: 16px;
+                            font-weight: 500;
+                            color: theme("colors.siyah.20");
+                        }
+                        span{
+                            font-size: 14px;
+                            font-weight: 300;
+                            color: theme("colors.siyah.10");
+                        }
+                    }
+
+                    .user-rate-contain{
+                        text-align: left;
+
+                        .user-rate{
+                            display: flex;
+                            flex-direction: row;
+                            align-items: center;
+                            span{
+                                color: theme("colors.siyah.10");
+                                padding-left: 4px;
+                                font-size: 18px;
+                                line-height: 1.5;
+                            }
+                            i{
+                                color: theme("colors.sari");
+                                font-size: 16px;
+                                line-height: 1.5;
+                            }
+                        }
+                    }
+                }
+
+                .user-data-contain{
+                    margin-left: auto;
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: space-between;
+                    align-items: flex-end;
+                    .user-verified{
+                        color: theme("colors.mavi");
+                        display: flex;
+                        align-items: center;
+                        flex-direction: row;
+                        gap: .5rem;
+                        font-size: 14px;
+                    }
+
+                    .user-links{
+                        font-size: 12px;
+                        color: theme("colors.beyaz.30");
+                        display: flex;
+                        flex-direction: row;
+                        gap: 1rem;
+                    }
+                }
+            }
+
+            .bid-data{
+                .bid-data-contain{
+                    display: flex;
+                    flex-direction: row;
+                    gap: 4rem;
+
+                    .bid-data-alt-title{
+                        font-size: 24px;
+                        line-height: 1.5;
+                        font-weight: 200;
+                    }
+
+                    .bid-data-alt-info{
+                        text-align: right;
+                        font-size: 24px;
+                        font-weight: 600;
+                        line-height: 1.5;
+                    }
+
+                    .starting-bid, .bid-date{
+                        display: flex;
+                        flex-direction: column;
+                    }
+
+                    .starting-bid{
+                        .bid-data-alt-info{
+                            color: theme("colors.siyah.10");
+                        }
+                    }
+
+                    .bid-date{
+                        .bid-data-alt-info{
+                            color: theme("colors.sari");
+                        }
+                    }
+                }
+
+                .bid-data-button{
+                    button{
+                        background-color: theme("colors.turuncu");
+                        padding: 8px 12px;
+                        font-size: 16px;
+                        color: theme("colors.beyaz.0");
+                        border-radius: 8px;
+                    }
+                }
+            }
+        }
+
+    }
+
+}
 
 
 footer{
