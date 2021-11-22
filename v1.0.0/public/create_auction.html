@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Document</title>
+    
+        <link rel="stylesheet" href="./static/css/root.css">
+        <link rel="stylesheet" href="./Fonts/Fontawesome/fontawesome.css">
+        <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700&display=swap" rel="stylesheet">
+        
+    </head>
+    <body>
+        <nav id="header" class="flex flex-col">
+            <div class="flex flex-row justify-between w-3/4 mx-auto h-10">
+                <span id="logo" class="text-mavi">BiDDibs</span>
+                <div id="sc" class="input-group">
+                    <input type="search" id="search-box" class="form-control rounded" placeholder="Search for anything.." aria-label="Search"
+                    aria-describedby="search-addon"/>
+                    <button type="button" id="search-btn" class="btn btn-outline-primary">Search</button>
+                  </div>
+                <div class="flex flex-row justify-between gap-5">
+                    <div><i class="far fa-user text-5xl"></i>
+                        <div id="circle" class="bg-siyah-5"></div>
+                    </div>
+                    <div id="headertxt" >Sign in or Register</div>
+                    <i class="far fa-heart text-5xl"></i>
+                    <div id="headertxt" >My Favorites</div>
+                </div>   
+            </div>
+        </nav>
+        
+        
+        <nav id="menu" class="flex flex-row justify-center bg-beyaz-10 gap-6 text-center">
+            <a href="#">Category</a></li>
+            <a href="#">Category</a></li>
+            <a href="#">Category</a></li>
+            <a href="#">Category</a></li>
+            <a href="#">Category</a></li>
+            <a href="#">Category</a></li>
+        </nav>
+        
+
+        <section><div id="box_2" style="height:1100px; background-color: white; margin-bottom: 50px;">
+            <div style="width: 90%; height: 70px; margin:auto;">
+                <div>
+                    <form style="margin-top:20px;">
+                        <div id="titlebox" style="float:left; margin-top: 30px;">
+                            <input type="text" placeholder="Auction title">
+                        </div>
+                        <div id="titlebox" style="float: right; margin-top: 30px;">
+                            <input type="text" placeholder="İnitialize Bid">
+                        </div>
+                    </form>
+                </div>
+                
+            </div>
+
+            <div class="flex flex-row justify-center gap-4">
+
+                <div style="width: 530px; height: 250px; ">
+                    <div id="ctext">Picture</div>
+                    <div style="width: 470px; height: 170px; border: #d1d1d1 dashed; margin: auto; border-radius: 8px;">
+                        
+                    </div>
+                </div>
+                <div style="width: 530px; height: 250px;">
+                    <div id="ctext">Product Description</div>
+                    <div style="width: 470px; height: 170px; border: #d1d1d1 solid; margin: auto; border-radius: 8px;">
+                        <input type="text"></div>
+                </div>
+            </div>
+
+
+            <div class="flex flex-row justify-center gap-4">
+                <div style="width: 530px; height: 300px; ">
+                    <div id="ctext">Auction Details</div>
+
+                    <div><form action="#">
+                        <div class="block ">
+                            <div>
+                                <span>Auction Start Date<span><br>
+                            <input type="date" id="astart" name="astart">
+                            </div>
+                            <div>
+                                <span>Auction End Date</span><br>
+                                <input type="date" id="aend" name="aend">
+                            </div>
+                            <div>
+                                <span">Ending Createria</span><br>
+                                <input type="listbox" id="ending" name="ending">
+                            </div>
+                            <div>
+                                <span>Auction Method</span><br>
+                                <input type="text" id="method" name="method">
+                            </div>
+                            <div>
+                                <input type="checkbox" id="cb1" name="cb1"><span">Checkbox1</span>
+                                <input type="checkbox" id="cb2" name="cb2"><span>Checkbox2</span>
+                            </div>
+                            <div>
+                                <input type="checkbox" id="cb3" name="cb3"><span>Checkbox1</span>
+                                <input type="checkbox" id="cb4" name="cb4"><span>Checkbox2</span>
+                            </div>
+                        </div>
+
+                    </form></div>
+                </div>
+                <div style="width: 530px; height: 300px;">
+                    <div id="ctext">Product Condition</div>
+                    <div style="width: 470px; height: 170px; border: #d1d1d1 solid; margin: auto; border-radius: 8px;"></div>
+                </div>
+            </div>
+
+
+            <div class="flex flex-row justify-center gap-4">
+                <div style="width: 530px; height: 400px; ">
+                    <div id="ctext">Category</div>
+                    <div class="flex flex-row justify-center gap-0">
+                        <div style="width: 230px; height: 300px; border: #d1d1d1 solid; margin: auto; border-radius: 8px;"></div>
+                        <div style="width: 230px; height: 300px; border: #d1d1d1 solid; margin: auto; border-radius: 8px;"></div>
+                    </div>
+                </div>
+
+                <div style="width: 530px; height: 400px;">
+                    <div id="ctext">Keywords</div>
+                    <div style="width: 470px; height: 250px; border: #d1d1d1 solid; margin: auto; border-radius: 8px;"></div>
+                    <div style="width: 470px; height: 50px; border: #d1d1d1 solid; margin: auto; border-radius: 8px;"></div>
+                </div>
+            </div>
+
+            <div style="width: 1010px; height: 100px; margin:auto;">
+                <div>
+                    <div id="rbtn" style="float: right; text-align: center;">Remove</div>
+                    <div style="float: right; margin-right: 20px;" id="sbtn">Save and Publish</div>
+                    
+                </div>
+            </div>
+        </div>
+
+
+        <div><footer>
+            <div id="footer" class="flex flex-row justify-items-center gap-2 bg-beyaz-0 ">
+                
+                <div style="width: 700px;" id="inner">
+                    <p style="margin-left: 180px;" id="logo">BiDDibs</p>
+                </div>
+                
+                <div id="inner">
+                    <p id="title">Products</p>
+                    <p id="footertxt">Auction</p>
+                    <p id="footertxt">Categories</p>
+                    <p id="footertxt">Log in</p>
+                    <p id="footertxt">Trusted Sellers</p>
+                    <p id="footertxt">Comments</p>
+                </div>
+                <div id="inner">
+                    <p id="title">About Us</p>
+                    <p id="footertxt">About BiDDibs</p>
+                    <p id="footertxt">Contact Us</p>
+                    <p id="footertxt">Features</p>
+                    <p id="footertxt">Careers</p>
+                </div>
+                <div id="inner">
+                    <p id="title">Resources</p>
+                    <p id="footertxt">Help Center</p>
+                    <p id="footertxt">Server Status</p>
+                    <p id="footertxt">Blog</p>
+                </div>
+                <div id="inner">
+                    <p id="title">Get in touch</p>
+                    <p id="footertxt">Questions or Feedback</p>
+                    <p id="footertxt">We'd like to hear from you</p>
+                    
+                </div>
+    
+            </div>
+        </footer></div>
+
+    </body>
+</html>
