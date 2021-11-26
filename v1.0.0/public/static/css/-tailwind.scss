@@ -508,7 +508,38 @@ section#login-form-section {
             @apply  flex-1 px-3 py-6 flex flex-col;
 
             .main-img{
-                @apply px-2 py-3 border rounded-xl border-opacity-20 border-siyah-15;
+                @apply px-2 py-3 border rounded-xl border-opacity-20 border-siyah-15 relative;
+
+                .img-button{
+                    position: absolute;
+                    top: 50%;
+                    font-size: 48px;
+                    line-height: 1;
+                    color: theme("colors.beyaz.0");
+                    opacity: 0;
+                    transition: opacity 0.3s ease-in-out;
+                    cursor: pointer;
+
+                    &.before-button{
+                        left: 0;
+                        transform: translate(50%, -50%);
+                    }
+
+                    &.after-button{
+                        right: 0;
+                        transform: translate(-50%, -50%);
+                    }
+
+                    &:hover{
+                        color: theme("colors.mavi");
+                    }
+                }
+
+                &:hover{
+                    .img-button{
+                        opacity: 1;
+                    }
+                }
             }
 
             .alt-img-list{
@@ -529,6 +560,7 @@ section#login-form-section {
             background: theme("colors.beyaz.10");
             display: flex;
             flex-direction: column;
+            justify-content: space-between;
             padding: 24px 18px;
 
             .auction-title-rate{
@@ -624,26 +656,7 @@ section#login-form-section {
                         }
                     }
 
-                    .user-rate-contain{
-                        text-align: left;
-
-                        .user-rate{
-                            display: flex;
-                            flex-direction: row;
-                            align-items: center;
-                            span{
-                                color: theme("colors.siyah.10");
-                                padding-left: 4px;
-                                font-size: 18px;
-                                line-height: 1.5;
-                            }
-                            i{
-                                color: theme("colors.sari");
-                                font-size: 16px;
-                                line-height: 1.5;
-                            }
-                        }
-                    }
+                    
                 }
 
                 .user-data-contain{
@@ -709,6 +722,7 @@ section#login-form-section {
                 }
 
                 .bid-data-button{
+                    margin-top: 1rem;
                     button{
                         background-color: theme("colors.turuncu");
                         padding: 8px 12px;
@@ -724,6 +738,171 @@ section#login-form-section {
 
 }
 
+.user-rate-contain{
+    text-align: left;
+
+    .user-rate{
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        span{
+            color: theme("colors.siyah.10");
+            padding-left: 4px;
+            font-size: 18px;
+            font-weight: 600;
+            line-height: 1.5;
+        }
+        i{
+            color: theme("colors.sari");
+            font-size: 16px;
+            line-height: 1.5;
+        }
+    }
+}
+
+
+.auction-details{
+    .auction-detail-header{
+        display: grid;
+        grid-template-columns: repeat(5, 1fr);
+
+        .auction-detail-titles{
+            text-align: center;
+            background-color: theme("colors.siyah.5");
+            padding: 12px 0;
+            
+            h2{
+                color: theme("colors.beyaz.0");
+                font-size: 18px;
+                font-weight: 500;
+                border-right: 1px solid white;
+
+                
+            }
+        }
+
+        
+    }
+    .auction-detail-data{
+        padding: 2rem 1rem;
+        width: 100%;
+        min-height: 400px;
+        overflow: auto;
+    }
+}
+
+#user-profile{
+    
+    .user-container-bg{
+        .bg-img{
+            width: 100%;
+            height: 200px;
+            background-image: var(--bg_img);
+            background-position: center;
+            background-size: cover;
+        }
+    }
+
+    .profile-content{
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-start;
+
+        .profile-nav{
+            flex: 1 1 25%;
+
+            .profile-data{
+                background-color: theme("colors.beyaz.0");
+                height: 100%;
+                @apply border-r border-beyaz-20;
+                .profile-data-img{
+                    transform: translateY(-50%);
+                    white-space: nowrap;
+                    margin: 0 auto;
+                    padding: 8px 0;
+                    width: 212px;
+                    background-color: theme("colors.beyaz.0");
+                    border-radius: 50%;
+
+                    border: .5px solid theme("colors.beyaz.20");
+                    
+
+                    overflow: hidden;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+
+                    img{
+                        width: 196px;
+                        height: auto;
+                        border-radius: 50%;
+                    }
+                }
+
+
+                .profile-navigation{
+                    .profile-data-bio{
+                        display: flex;
+                        flex-direction: column;
+                        justify-content: center;
+                        align-items: center;
+                    }
+
+                }
+            }
+
+            .user-navigation-categories{
+                padding: 12px 0;
+                .nav-category-item{
+                    display: grid;
+                    grid-template-columns: 1.5fr 8fr .5fr;
+                    align-items: center;
+                    cursor: pointer;
+                    padding: 12px 36px;
+                    transition: all .9s cubic-bezier(0.19, 1, 0.22, 1);
+                    
+                    &.active{
+                        border-left: 4px solid theme("colors.mavi");
+                        @apply bg-mavi bg-opacity-10;
+
+                        i, #nav-category-item-id{
+                            color: theme("colors.mavi");
+                        }
+                    }
+
+
+                    &:not(.active):hover{
+                        transform: scale(1.05);
+                    }
+
+                    i{
+                        color: theme("colors.beyaz.15");
+                        font-size: 24px;
+                    }
+
+                    #nav-category-item-id{
+                        font-size: 18px;
+                        color: theme("colors.siyah.20");
+                    }
+
+                    #nav-category-item-count{
+                        font-size: 12px;
+                        color: theme("colors.beyaz.20");
+                    }
+                }
+
+                
+            }
+        }
+
+        .profile-content-body{
+            flex: 1 1 75%;
+            min-height: 720px;
+            overflow: auto;
+        }
+    }
+
+}
 
 footer{
     #site-logo{
@@ -760,4 +939,10 @@ footer{
 
 .container-x{
     padding: 18px 24px;
+}
+
+
+hr{
+    border: none;
+    border-top: 0.5px solid theme("colors.beyaz.20");
 }
