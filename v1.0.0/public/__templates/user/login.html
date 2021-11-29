@@ -1,10 +1,12 @@
+{% load static %}
+
 <!DOCTYPE html>
 <html lang="en" class="w-full h-full">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Biddibs Login Page</title>
+    <title>Biddibs | Login Page</title>
 
 
 
@@ -13,11 +15,11 @@
 
 
     <!--? Font awesome 5.15 include -->
-    <link rel="stylesheet" href="./Fonts/Fontawesome/fontawesome.css">
+    <link rel="stylesheet" href="{% static 'Fonts/Fontawesome/fontawesome.css' %}">
 
 
     <!--? Main css include -->
-    <link rel="stylesheet" href="./static/css/root.css">
+    <link rel="stylesheet" href="{% static '/css/root.css' %}">
 
 </head>
 
@@ -25,23 +27,22 @@
     
     <section id="login-form-section">
         <div id="form-container">
-            
 
             <div id="login-left-panel">
                 
                 <!-- *Login and Register switches* -->
                 <div id="login-register-switch" class="mt-4 bg-kirmizi text-center font-light text-kirmizi">
 
-                    <a class="active" href="#" id="login-redirect">Login In</a>
-                    <a href="#"  id="register-redirect">Register</a>
+                    <a class="active" href="{% url 'user_login_url' %}" id="login-redirect">Login In</a>
+                    <a href="{% url 'user_register_url' %}"  id="register-redirect">Register</a>
 
                 </div>
 
 
                 <!--! Login Form -->
                 <div id="form-wrap">
-                    <form action="#" method="get">
-                        
+                    <form method="get">
+
                         <div id="button-list" class="my-14">
                             <div id="auth-input-section" class="my-4">
                                 <input type="email" name="usr__pass" id="usr__pass" placeholder="E-mail">
