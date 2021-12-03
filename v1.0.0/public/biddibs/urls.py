@@ -17,10 +17,12 @@ from django.contrib import admin
 from django.urls import path
 from django.urls.conf import include
 
+from app.views import index
+
 
 urlpatterns = [
     path('', include(('user.urls', 'user'), namespace='user')),
-
+    path('', index, name='main_index'),
 
     path('admin/', admin.site.urls, name="admin_login"),
 ]

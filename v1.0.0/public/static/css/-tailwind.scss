@@ -17,11 +17,12 @@ html {
     overflow-x: hidden;
 }
 
-@layer base {
-    html {
-        @apply font-sans;
-    }
+body{
+    min-height: 100%;
+    display: flex;
+    flex-direction: column;
 }
+
 
 section#login-form-section, section#register-form-section {
     @apply w-full h-full flex justify-center items-center py-8;
@@ -232,16 +233,64 @@ section#register-form-section{
 .main-wrapper{
     max-width: 70%;
     @apply mx-auto;
+
+    @media #{$media-desktop} {
+        max-width: 90%;
+    }
+
+    @media #{$media-tablet} {
+        max-width: 100%;
+    }
+    
 }
 
+.header_nav{
+    @apply flex flex-row py-6 justify-between items-center;
+
+    @media #{$media-tablet}{
+        @apply flex-col py-0 pb-4 gap-y-2;
+
+        #search-section{
+            width: 90%;
+        }
+
+        #site-logo{
+            @apply w-full py-2 bg-mavi ;
+            h1{
+                @apply text-beyaz-0 text-center;
+            }
+        }
+    }
+
+    @media #{$media-mobile} {
+        #search-section{
+            @apply w-full flex-col;
+
+            #input-section{
+                input#search__input{
+                    padding: 14px 8px 14px 36px !important;
+                }
+
+                &.before-logo{
+                    &::before{
+                        left: 8px;
+                    }
+                }
+                
+            }
+
+            #button-section{
+                button{
+                    @apply w-full rounded-none;
+                }
+            }
+        }
+    }
+}
 
 #search-section{
-    flex: 1 1 60%;
+    width: 50%;
     text-align: center;
-}
-
-#site-logo{
-    flex: 1 1 15%;
 }
 
 
@@ -264,6 +313,8 @@ section#register-form-section{
             &::placeholder{
                 color: theme('colors.beyaz.15');
             }
+
+            
         }
 
         &.before-logo{
@@ -301,8 +352,8 @@ section#register-form-section{
 }
 
 
-#user-section{
-    flex: 1 1 25%;
+#user-section-icon-base{
+    @apply inline-flex justify-center items-center text-center;
 
     #user-section-icon{
         background-color: theme("colors.beyaz.5");
@@ -327,16 +378,12 @@ section#register-form-section{
             color:  theme("colors.siyah.20")
         }
     }
-
-    #user-section-icon-base{
-        @apply inline-flex justify-center items-center text-center;
-    }
 }
 
 
 
 #category-list-wrap{
-    @apply py-2;
+    @apply py-2 flex flex-wrap justify-between;
     #category-list-item{
         @apply px-4 py-2;
         position: relative;
@@ -360,6 +407,14 @@ section#register-form-section{
         
         &:last-child{
             text-align: right;
+        }
+    }
+
+    @media #{$media-tablet} {
+        @apply justify-evenly;
+        #category-list-item{
+            @apply border-none font-medium text-mavi_5;
+            text-align: center !important;
         }
     }
 }
@@ -989,6 +1044,7 @@ section#register-form-section{
 }
 
 footer{
+    margin-top: auto;
     #site-logo{
         display: flex;
         flex-direction: column;
@@ -1017,6 +1073,27 @@ footer{
 
         }
 
+    }
+
+
+    @media #{$media-tablet}{
+        .footer-container{
+            @apply flex-col gap-y-4;
+
+
+            #site-logo{
+                justify-content: center;
+                text-align: center;
+            }
+
+            .footer-direction{
+                @apply gap-0 justify-between;
+
+                @media #{$media-mobile}{
+                    @apply flex-wrap;
+                }
+            }
+        }
     }
 }
 
