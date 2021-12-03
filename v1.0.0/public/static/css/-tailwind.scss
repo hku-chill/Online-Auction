@@ -3,6 +3,11 @@
 @tailwind components;
 @tailwind utilities;
 
+$media-desktop: "only screen and (max-width : 1024px)";
+$media-tablet: "only screen and (max-width : 768px)";
+$media-mobile: "only screen and (max-width : 600px)";
+$media-mobile-sm: "only screen and (max-width : 480px)";
+
 * {
     box-sizing: border-box;
 }
@@ -18,11 +23,12 @@ html {
     }
 }
 
-section#login-form-section {
-    @apply w-full h-full flex justify-center items-center;
+section#login-form-section, section#register-form-section {
+    @apply w-full h-full flex justify-center items-center py-8;
 
     // login main form container
     #form-container {
+        
         @apply grid grid-cols-2 border rounded-2xl border-beyaz-5 gap-4;
         width: 60%;
 
@@ -87,14 +93,58 @@ section#login-form-section {
             #campain-column {
                 #campain-item {
                     #campain-logo {
-                        min-width: 84px;
-                        height: 84px;
+                        min-width: 48px;
+                        height: 48px;
+                        font-size: 24px;
                         border-radius: 50%;
                         border: 2px solid inherit;
                     }
                 }
             }
         }
+
+        @media #{$media-desktop} {
+            width: 80% !important;
+            #login-left-panel,
+            #register-campain{
+                padding: 1rem 8px;
+            }
+        }
+
+        @media #{$media-tablet} {
+            width: 100% !important;
+
+            
+        }
+
+        @media #{$media-mobile} {
+            @apply grid-cols-1 grid-rows-2;
+        }
+
+        @media #{$media-mobile-sm} {
+            #login-left-panel #login-register-switch{
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+
+                a{
+                    flex: 1 1 100%;
+                    display: block;
+                    width: 100%;
+                }
+            }
+        }
+
+        
+    }
+
+    
+}
+
+section#register-form-section{
+    #form-container{
+        @apply grid grid-cols-1;
+        width: 60%;
     }
 }
 
@@ -123,7 +173,27 @@ section#login-form-section {
 
 
 #auth-input-section{
-    
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+
+    &.half-inputs{
+        input{
+            width: calc(50% - .5rem);
+
+            
+        }
+        @media #{$media-mobile-sm} {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+
+            input{
+                width: 100%;
+            }
+        }
+    }
+
     input{
         @apply focus:outline-main_mavi;
         width: 100%;
@@ -335,7 +405,21 @@ section#login-form-section {
     }
 }
 
+.django-messages{
+    @apply bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded relative my-2 text-center cursor-pointer;
+    
+    &.error{
+        @apply bg-red-100 border-red-400 text-red-700;
+    }
 
+    &.warning{
+        @apply bg-yellow-100 border-yellow-400 text-yellow-700;
+    }
+
+    &.info{
+        @apply bg-blue-100 border-blue-400 text-blue-700;
+    }
+}
 
 
 .category-item{
@@ -946,3 +1030,8 @@ hr{
     border: none;
     border-top: 0.5px solid theme("colors.beyaz.20");
 }
+
+
+
+
+

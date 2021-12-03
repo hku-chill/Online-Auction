@@ -23,7 +23,7 @@
 
 </head>
 
-<body class="w-full h-full">
+<body class="w-full">
     
     <section id="login-form-section">
         <div id="form-container">
@@ -33,22 +33,35 @@
                 <!-- *Login and Register switches* -->
                 <div id="login-register-switch" class="mt-4 bg-kirmizi text-center font-light text-kirmizi">
 
-                    <a class="active" href="{% url 'user_login_url' %}" id="login-redirect">Login In</a>
-                    <a href="{% url 'user_register_url' %}"  id="register-redirect">Register</a>
+                    <a class="active" href="{% url 'user:user_login_url' %}" id="login-redirect">Login In</a>
+                    <a href="{% url 'user:user_register_url' %}"  id="register-redirect">Register</a>
 
                 </div>
 
 
                 <!--! Login Form -->
                 <div id="form-wrap">
-                    <form method="get">
+                    {% if messages %}
+                        <ul class="messages">
+                            {% for message in messages %}
 
+                                <div class="django-messages {% if message.tags %} {{message.tags}} {%endif%}" role="alert">
+                                    <span>{{ message|escape }}</span>
+
+                                    
+                                </div>
+
+                            {% endfor %}
+                        </ul>
+                    {% endif %}
+                    <form method="post" id="login-form">
+                        {% csrf_token %}
                         <div id="button-list" class="my-14">
                             <div id="auth-input-section" class="my-4">
-                                <input type="email" name="usr__pass" id="usr__pass" placeholder="E-mail">
+                                {{ form.username }}
                             </div>
                             <div id="auth-input-section" class="my-4">
-                                <input type="password" name="usr__pass" id="usr__pass" placeholder="Password">
+                                {{ form.password }}
                             </div>
                         </div>
 
@@ -57,7 +70,15 @@
                                 <span>Login In</span>
                             </button>
                         </div>
-
+                        {% if form.errors %}
+                            {% for field in form %}
+                                {% for error in field.errors %} 
+                                    <div onclick="this.parentNode.removeChild(this)" class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative mt-4 text-center cursor-pointer" role="alert">
+                                        <span>{{ error|escape }}</span>
+                                    </div>
+                                {% endfor %}
+                            {% endfor %}
+                        {% endif %}
                         <p class="text-mavi mt-4 block">Forget you password?</p>
 
                     </form>
@@ -77,34 +98,12 @@
 
 
                     <!-- campain logo list -->
-                    <div id="campain-item" class="flex flex-row gap-6">
-                        
-                        <div class="logo-attr text-5xl text-siyah-15" id="campain-logo" logo-attr="&#xf218"></div>
-
-                        <div id="campain-texts">
-                            <h4 class="text-xl font-medium text-siyah-15">The Inception of Mass Duplication</h4>
-                            <span class="text-xs font-light text-siyah-10">"What is more, the structure of the treatment would facilitate the development of The Limitation of Competitive Manner" </span>
+                    <div id="campain-item" class="flex flex-col gap-2">
+                        <div id="campain-title" class="flex flex-row gap-4 items-center">
+                            <div class="logo-attr text-siyah-15" id="campain-logo" logo-attr="&#xf218"></div>
+                            <h4 class="text-xl font-semibold text-siyah-15">The Inception of Mass Duplication</h4>
                         </div>
-                    </div>
-
-                    <div id="campain-item" class="flex flex-row gap-6">
-                        
-                        <div class="logo-attr text-5xl text-siyah-15" id="campain-logo" logo-attr="&#xf218"></div>
-
-                        <div id="campain-texts">
-                            <h4 class="text-xl font-medium text-siyah-15">The Inception of Mass Duplication</h4>
-                            <span class="text-xs font-light text-siyah-10">"What is more, the structure of the treatment would facilitate the development of The Limitation of Competitive Manner" </span>
-                        </div>
-                    </div>
-
-                    <div id="campain-item" class="flex flex-row gap-6">
-                        
-                        <div class="logo-attr text-5xl text-siyah-15" id="campain-logo" logo-attr="&#xf218"></div>
-
-                        <div id="campain-texts">
-                            <h4 class="text-xl font-medium text-siyah-15">The Inception of Mass Duplication</h4>
-                            <span class="text-xs font-light text-siyah-10">"What is more, the structure of the treatment would facilitate the development of The Limitation of Competitive Manner" </span>
-                        </div>
+                        <span class="text-base font-normal text-siyah-10">"What is more, the structure of the treatment would facilitate the development of The Limitation of Competitive Manner" </span>
                     </div>
 
                 </div>
