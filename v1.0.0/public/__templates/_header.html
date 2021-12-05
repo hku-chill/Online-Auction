@@ -8,7 +8,6 @@
     <title>Biddibs Index Page</title>
 
 
-
     <!--? Poppins google font include -->
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700&display=swap" rel="stylesheet">
 
@@ -20,16 +19,17 @@
     <!--? Main css include -->
     <link rel="stylesheet" href="{% static '/css/root.css' %}">
 
+    {% comment %} Django {% endcomment %}
+    <script async src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 </head>
 <body class="w-full bg-beyaz-0">
     
     <header class="w-full bg-beyaz-0">
         <div class="main-wrapper">
             <nav class="header_nav">
-
-                <div id="site-logo">
+                <a href="/" id="site-logo">
                     <h1 class="text-mavi_5 text-4xl font-medium">BiDDiBs</h1>
-                </div>
+                </a>
 
                 <div id="search-section">
                     
@@ -44,13 +44,18 @@
 
                 <div id="user-section-icon-base">
                     <!-- icon section -->
-                    <div id="user-section-icon">
+                    <!--  -->
+                    
+                    <a href="{% if not user.is_authenticated %} {% url 'user:user_login_url' %} {% else %} {% url 'user:user_self_profile_url' %} {% endif %}" id="user-section-icon">
                         <i class="fal fa-user"></i>
-                    </div>
+                    </a>
 
-                    <p id="user-section-text">
-                        <a href="#signin">Sign in</a> or <br><a href="#register"> Register</a>
-                    </p>
+                    {% if not user.is_authenticated %}
+                        <p id="user-section-text">
+                            <a href="{% url 'user:user_login_url' %}">Sign in</a> or <br><a href="{% url 'user:user_register_url' %}"> Register</a>
+                        </p>
+                    {%endif%}
+                    
                 </div>
 
             </nav>
@@ -58,26 +63,14 @@
         <div id="category-list" class="bg-beyaz-5 shadow border-b">
             <div class="main-wrapper">
                 
-                <div id="category-list-wrap">
 
-                    <div id="category-list-item">
-                        <span>Category 1</span>
-                    </div>
-                    <div id="category-list-item">
-                        <span>Category 1</span>
-                    </div>
-                    <div id="category-list-item">
-                        <span>Category 1</span>
-                    </div>
-                    <div id="category-list-item">
-                        <span>Category 1</span>
-                    </div>
-                    <div id="category-list-item">
-                        <span>Category 1</span>
-                    </div>
-                    <div id="category-list-item">
-                        <span>Category 1</span>
-                    </div>
+                <div id="category-list-wrap">
+                    
+                    {% for c in categories_list %}
+                        <a href="{% url 'auction:category_item_url' slug=c.slug %}" id="category-list-item">
+                            <span>{{c.name|lower|upper}}</span>
+                        </a>
+                    {% endfor %}
 
                 </div>
 

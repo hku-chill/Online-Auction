@@ -1,3 +1,4 @@
+from django.contrib.auth.models import User
 from django.http.response import HttpResponseBadRequest
 from django.shortcuts import render, HttpResponse, redirect, get_object_or_404
 from django.contrib.auth import login, authenticate, logout, get_user_model
@@ -17,6 +18,8 @@ from .helper import auth_user_should_not_access
 def user_logout(request):
     logout(request)
     return redirect('user:user_login_url')
+
+
 
 @auth_user_should_not_access
 def register_user(request):
@@ -62,6 +65,13 @@ def login_user(request):
         return redirect('/')
 
     if request.method == 'POST':
+        try:
+            usr = User.objects.get(username=request.POST['username'])
+        except User.DoesNotExist:
+            messages.add_message(request, messages.ERROR, 'There is not a user with this mail address..')
+            form = LoginForm()
+            return render(request, 'user/login.html', {'form': form})
+
         form = LoginForm(request, data=request.POST)
 
         if form.is_valid():
@@ -90,7 +100,8 @@ def login_user(request):
 @auth_user_should_not_access
 def mail_activate(request, uid64):
     try:
-        _profile = Profile.objects.get( pk=urlsafe_base64_decode(uid64) )
+        _user = User.objects.get( pk=urlsafe_base64_decode(uid64) )
+        _profile = _user.profile
     except Profile.DoesNotExist:
         messages.add_message(request, messages.ERROR, 'User not found')
         return redirect('user:user_login_url')
@@ -110,3 +121,9 @@ def mail_activate(request, uid64):
 
     messages.add_message(request, messages.SUCCESS, "Your account is activated, please login")
     return redirect('user:user_login_url')
+
+
+
+
+def user_profile(request, userid = None):
+    return render(request, 'user/profile.html', {'text': request.user})

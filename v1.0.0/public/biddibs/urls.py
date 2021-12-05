@@ -22,6 +22,7 @@ from app.views import index
 
 urlpatterns = [
     path('', include(('user.urls', 'user'), namespace='user')),
+    path('', include(('auction.urls', 'auction'), namespace='auction')),
     path('', index, name='main_index'),
 
     path('admin/', admin.site.urls, name="admin_login"),

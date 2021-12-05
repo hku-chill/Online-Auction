@@ -6,19 +6,21 @@ from django.utils.translation import gettext_lazy as _
 from django.db.models.signals import post_save
 from django.dispatch import receiver
 
+from django.urls import reverse
+
 
 
 class Profile(models.Model):
     user = models.OneToOneField(User,related_name="profile", on_delete=models.CASCADE)
     birthday = models.DateField(null=True, blank=True)
-    profile_picture = models.ImageField(upload_to='static/img/profile_pics', blank=True)
+    profile_picture = models.ImageField(upload_to='static/img/profile_pics', blank=True, default='static/img/profile_pics/default.png')
     address = models.CharField(max_length=255, null=True, blank=True)
 
     user_rate_1 = models.IntegerField(default=0)
     user_rate_2 = models.IntegerField(default=0)
     user_rate_3 = models.IntegerField(default=0)
     user_rate_4 = models.IntegerField(default=0)
-    user_rate_5 = models.IntegerField(default=0)
+    user_rate_5 = models.IntegerField(default=1)
 
     tc = models.CharField(max_length=11, null=True, blank=True)
     phone = models.CharField(max_length=20, null=True, blank=True)
@@ -35,6 +37,13 @@ class Profile(models.Model):
 
     def total_rate(self):
         return self.user_rate_1 + self.user_rate_2 + self.user_rate_3 + self.user_rate_4 + self.user_rate_5
+
+    def get_full_name(self):
+        return self.user.first_name + " " + self.user.last_name
+
+    def get_absolute_url(self):
+        return reverse("user:user_profile_url", kwargs={"userid": self.pk})
+    
 
     class Meta:
         verbose_name = _('profile')

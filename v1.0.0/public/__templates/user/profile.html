@@ -1,0 +1,104 @@
+{% extends '_base.html' %}
+
+{% load static %}
+
+{% block content %}
+
+    <article id="main-article" class="bg-beyaz-5 py-4">
+
+        <!-- Start selling your items campain -->
+        <section id="user-profile" class="main-wrapper rounded-2xl shadow overflow-hidden">
+            
+            <div class="user-container-bg">
+                <div class="bg-img" style="--bg_img:url('https://mdbootstrap.com/img/Photos/Horizontal/Nature/full%20page/img(11).jpg')"></div>
+            </div>
+
+            <div class="profile-content">
+
+                <div class="profile-nav">
+
+                    <div class="profile-data">
+
+                        <div class="profile-data-img">
+                            <img src="/{{ user.profile.profile_picture }}" alt="profile-img">
+                        </div>
+                        
+                        <div class="profile-navigation">
+                            
+                            <div class="profile-data-bio px-6">
+
+                                <h1 class="font-medium text-2xl text-siyah-15 uppercase">Margaery Tyrell</h1>
+                                <span class="font-light text-base text-beyaz-20">Ered Nimrais, Anorien</span>
+
+                                <div class="user-rate-contain my-4">
+                                    <div class="user-rate">
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <span>4.5</span>
+                                    </div>
+                                </div>
+
+                                <p class="font-light text-sm text-beyaz-20 text-justify">Designer, Director, Mother & Actor. Founding partner of westeros. Fan of the Lord of the Rings. 2 times Oscar winner. wisethesam@mistymountain.com</p>
+
+                            </div>
+
+                            <hr class="mx-5 my-4">
+
+                            <div class="user-navigation-categories">
+                                
+                                <div class="nav-category-item active">
+                                    <i class="fas fa-gavel"></i>
+                                    <span id="nav-category-item-id">Auctions</span>
+                                    <span id="nav-category-item-count">39</span>
+                                </div>
+
+                                <div class="nav-category-item ">
+                                    <i class="fas fa-shopping-cart"></i>
+                                    <span id="nav-category-item-id">Buys</span>
+                                    <span id="nav-category-item-count">2</span>
+                                </div>
+                                <div class="nav-category-item ">
+                                    <i class="fas fa-wallet"></i>
+                                    <span id="nav-category-item-id">Bids</span>
+                                    <span id="nav-category-item-count">208</span>
+                                </div>
+                                <div class="nav-category-item ">
+                                    <i class="fas fa-comment-dots"></i>
+                                    <span id="nav-category-item-id">Comments</span>
+                                    <span id="nav-category-item-count">1.256</span>
+                                </div>
+
+                            </div>
+
+                            {% if user.is_authenticated %}
+                                <a href="" class="edit_profile_btn py-2 w-full bg-mavi bg-opacity-80 block text-beyaz-0 text-center hover:bg-opacity-100">Edit Profile</a>
+                            {% endif %}
+
+                            
+
+                        </div>
+
+                    </div>
+                    
+
+                </div>
+                <div class="profile-content-body m-6">
+
+                    <div class="profile-content-title pb-6 border-b border-beyaz-20 mb-3">
+                        <h2 class="font-medium text-xl text-siyah-10">Margaery Tyrell - Auctions</h2>
+                    </div>
+
+                    {{ user.profile.total_rate }}
+                    {{ text.profile.get_absolute_url }}
+                </div>
+
+            </div>
+
+        </section>
+
+    </article>
+
+{% endblock %}
