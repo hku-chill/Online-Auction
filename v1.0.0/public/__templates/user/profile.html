@@ -20,7 +20,7 @@
                     <div class="profile-data">
 
                         <div class="profile-data-img">
-                            <img src="/{{ user.profile.profile_picture }}" alt="profile-img">
+                            <img src="/{{ profile.profile_picture }}" alt="profile-img">
                         </div>
                         
                         <div class="profile-navigation">
@@ -73,8 +73,9 @@
 
                             </div>
 
-                            {% if user.is_authenticated %}
+                            {% if user.is_authenticated and profile.user == user %}
                                 <a href="" class="edit_profile_btn py-2 w-full bg-mavi bg-opacity-80 block text-beyaz-0 text-center hover:bg-opacity-100">Edit Profile</a>
+                                <a href="/logout" class="edit_profile_btn py-2 mt-2 w-full bg-purple-700 bg-opacity-80 block text-beyaz-0 text-center hover:bg-opacity-100">Logout</a>
                             {% endif %}
 
                             
@@ -91,8 +92,8 @@
                         <h2 class="font-medium text-xl text-siyah-10">Margaery Tyrell - Auctions</h2>
                     </div>
 
-                    {{ user.profile.total_rate }}
-                    {{ text.profile.get_absolute_url }}
+                    {{ profile.total_rate }}
+                    {{ profile.get_absolute_url }}
                 </div>
 
             </div>

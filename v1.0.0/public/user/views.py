@@ -126,4 +126,7 @@ def mail_activate(request, uid64):
 
 
 def user_profile(request, userid = None):
-    return render(request, 'user/profile.html', {'text': request.user})
+    return render(request, 'user/profile.html', {'profile': request.user.profile})
+
+def user_profile_id(request, userid = None):
+    return render(request, 'user/profile.html', {'profile': Profile.objects.get(pk=userid)})

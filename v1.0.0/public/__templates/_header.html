@@ -66,14 +66,14 @@
 
                 <div id="category-list-wrap">
                     
-                    {% for c in categories_list %}
+                    {% for c in categories_list|slice:":6" %}
                         <a href="{% url 'auction:category_item_url' slug=c.slug %}" id="category-list-item">
                             <span>{{c.name|lower|upper}}</span>
                         </a>
                     {% endfor %}
 
                 </div>
-
+                
             </div>
         </div>
     </header>

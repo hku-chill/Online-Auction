@@ -46,5 +46,9 @@ module.exports = {
       outline: ['hover', 'active'],
     },
   },
-  plugins: [],
+  plugins: [
+    require("@tailwindcss/forms")({
+      strategy: 'class',
+    }),
+  ],
 };

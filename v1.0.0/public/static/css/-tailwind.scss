@@ -2,7 +2,8 @@
 @tailwind components;
 @tailwind utilities;
 
-$media-desktop: "only screen and (max-width : 1024px)";
+$media-wide-desktop: "only screen and (max-width : 1440px)";
+$media-laptop: "only screen and (max-width : 1024px)";
 $media-tablet: "only screen and (max-width : 768px)";
 $media-mobile: "only screen and (max-width : 600px)";
 $media-mobile-sm: "only screen and (max-width : 480px)";
@@ -108,7 +109,7 @@ section#login-form-section, section#register-form-section {
             }
         }
 
-        @media #{$media-desktop} {
+        @media #{$media-laptop} {
             width: 80% !important;
             #login-left-panel,
             #register-campain{
@@ -238,7 +239,7 @@ section#register-form-section{
     max-width: 70%;
     @apply mx-auto;
 
-    @media #{$media-desktop} {
+    @media #{$media-laptop} {
         max-width: 90%;
     }
 
@@ -489,165 +490,222 @@ section#register-form-section{
     }
 }
 
+.category-list-contain{
+    width: 100%;
+    display: grid;
+    gap: 1rem;
+    grid-template-columns: repeat(auto-fit, minmax(calc(25% - 1rem), 1fr));
 
-.category-item{
-    flex: 0 1 24%;
-    border-radius: 16px;
-    background-image: linear-gradient(to bottom, theme("colors.beyaz.25"), theme("colors.beyaz.0"));
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    overflow: hidden;
-    cursor: pointer;
-
-    .category-item-image{
-        width: 100%;
-        padding: 2rem 0;
-        display: flex;
-        justify-content: center;
-
-        img{
-            width: 60%;
-            height: auto;
-            transform: rotate(30deg);
-            transition: all 0.3s ease-in-out;
-        }
-    }
-
-    .category-item-text{
-        margin-top: auto;
-        padding: 1rem 0;
-        display: flex;
-        flex-direction: row;
-        justify-content: center;
-        align-items: center;
-        gap: 1rem;
-        transition: all 0.3s ease-in-out;
-
-        h3,p{
-            color: theme("colors.beyaz.0");
-            text-align: center;
-        }
-    }
-
-    &:hover{
-        .category-item-text{
-            gap: 2rem;
-            background-color: theme("colors.mavi");
-        }
-
-        .category-item-image img{
-            transform: scale(1.1) rotate(30deg);
-        }
-    }
-
-}
-
-.auction-item{
-    flex: 0 1 24%;
-    border-radius: 16px;
-    padding: 10px 0;
-    // background-image: linear-gradient(to bottom, theme("colors.beyaz.25"), theme("colors.beyaz.0"));
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    overflow: hidden;
-    cursor: pointer;
-    border: .6px solid theme("colors.beyaz.10");
-    --tw-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
-    box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
-
-
-    .auction-title{
-        text-align: center;
-        font-weight: 500;
-        font-size: 18px;
-        color: theme("colors.siyah.10");
-    }
-
-    img{
-        width: 100%;
-        height: auto;
-        margin: 1rem 0;
-    }
-
-    .auction-rate{
-        display: flex;
-        flex-direction: row;
-        justify-content: flex-start;
-        padding: 0 16px;
-
-        .star-list{
-            display: flex;
-            flex-direction: row;
-
-            .fa-star{
-                color: theme("colors.sari");
-            }
-
-            .fa-star.far{
-                color: theme("colors.beyaz.35");
-            }
-
-            p{
-                font-size: 14px;
-                color: theme("colors.siyah.10");
-            }
-        }
-
-        
-    }
-
-    .auction-info{
-        display: flex;
-        flex-direction: row;
-        justify-content: space-between ;
-        padding: 1rem;
+    .category-item{
+        flex: 0 1 24%;
+        border-radius: 16px;
+        background-image: linear-gradient(to bottom, theme("colors.beyaz.25"), theme("colors.beyaz.0"));
         position: relative;
-
-        .auction-price, .auction-time{
-            font-size: 24px;
-            color: theme("colors.siyah.10");
-            font-weight: 600;
-        }
-
-        .auction-time{
-            color: theme("colors.sari");
-        }
-
-        .join-auction-button{
-            position: absolute;
-            background-color: theme("colors.beyaz.0");
-            height: calc(100% + 10px);
+        display: flex;
+        flex-direction: column;
+        overflow: hidden;
+        cursor: pointer;
+    
+        .category-item-image{
             width: 100%;
-            left: 0;
-            top: 0;
-            transform: translateY(1000px);
+            height: 380px;
+            position: relative;
             display: flex;
             justify-content: center;
             align-items: center;
-
-            @apply transition-transform;
-
-            a{
-                padding: .5rem 2rem;
-                background-color: theme("colors.sari");
-                border-radius: 4px;
-                color: theme("colors.beyaz.0");
-                font-size: 18px;
-                font-weight: 500;
+            overflow: hidden;
+    
+            img{
+                position: absolute;
+                width: 80%;
+                height: auto;
+                transform: rotate(30deg);
+                transition: all 0.3s ease-in-out;
             }
         }
-
-        
+    
+        .category-item-text{
+            margin-top: auto;
+            padding: 1rem 0;
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            align-items: center;
+            gap: 1rem;
+            transition: all 0.3s ease-in-out;
+    
+            h3,p{
+                color: theme("colors.beyaz.0");
+                text-align: center;
+            }
+        }
+    
+        &:hover{
+            .category-item-text{
+                gap: 2rem;
+                background-color: theme("colors.mavi");
+            }
+    
+            .category-item-image img{
+                transform: scale(.8) rotate(0deg);
+            }
+        }
+    
     }
 
-    &:hover{
-        .join-auction-button{
-            transform: translateY(0);
-        }
+    @media #{$media-laptop}{
+        grid-template-columns: repeat(3, minmax(calc(33% - 1rem), 1fr));
+    }
+
+    @media #{$media-tablet}{
+        grid-template-columns: repeat(2, minmax(calc(50% - 1rem), 1fr));
+    }
+
+    @media #{$media-mobile}{
+        grid-template-columns: repeat(1, 1fr);
     }
 }
+
+
+
+.auction-list-contain{
+    width: 100%;
+    display: grid;
+    gap: 1rem;
+    grid-template-columns: repeat(auto-fit, minmax(calc(25% - 1rem), 1fr));
+
+    .auction-item{
+        // repeat(auto-fit, minmax(calc(25% - 1rem), 1fr))
+        border-radius: 16px;
+        padding: 10px 0;
+        // background-image: linear-gradient(to bottom, theme("colors.beyaz.25"), theme("colors.beyaz.0"));
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        overflow: hidden;
+        cursor: pointer;
+        border: .6px solid theme("colors.beyaz.10");
+        --tw-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+        box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
+    
+    
+        .auction-title{
+            text-align: center;
+            font-weight: 500;
+            font-size: 18px;
+            color: theme("colors.siyah.10");
+        }
+    
+        .img_container{
+            width: 100%;
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 380px;
+            overflow: hidden;
+            img{
+                position: absolute;
+                width: 100%;
+                height: auto;
+                margin: 1rem 0;
+            }
+        }
+    
+        
+    
+        .auction-rate{
+            display: flex;
+            flex-direction: row;
+            justify-content: flex-start;
+            padding: 0 16px;
+    
+            .star-list{
+                display: flex;
+                flex-direction: row;
+    
+                .fa-star{
+                    color: theme("colors.sari");
+                }
+    
+                .fa-star.far{
+                    color: theme("colors.beyaz.35");
+                }
+    
+                p{
+                    font-size: 14px;
+                    color: theme("colors.siyah.10");
+                }
+            }
+    
+            
+        }
+    
+        .auction-info{
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between ;
+            padding: 1rem;
+            position: relative;
+    
+            .auction-price, .auction-time{
+                font-size: 24px;
+                color: theme("colors.siyah.10");
+                font-weight: 600;
+            }
+    
+            .auction-time{
+                color: theme("colors.sari");
+            }
+    
+            .join-auction-button{
+                position: absolute;
+                background-color: theme("colors.beyaz.0");
+                height: calc(100% + 10px);
+                width: 100%;
+                left: 0;
+                top: 0;
+                transform: translateY(1000px);
+                display: flex;
+                justify-content: center;
+                align-items: center;
+    
+                @apply transition-transform;
+    
+                a{
+                    padding: .5rem 2rem;
+                    background-color: theme("colors.sari");
+                    border-radius: 4px;
+                    color: theme("colors.beyaz.0");
+                    font-size: 18px;
+                    font-weight: 500;
+                }
+            }
+    
+            
+        }
+    
+        &:hover{
+            .join-auction-button{
+                transform: translateY(0);
+            }
+        }
+    }
+
+    @media #{$media-laptop}{
+        grid-template-columns: repeat(3, minmax(calc(33% - 1rem), 1fr));
+    }
+
+    @media #{$media-tablet}{
+        grid-template-columns: repeat(2, minmax(calc(50% - 1rem), 1fr));
+    }
+
+    @media #{$media-mobile}{
+        grid-template-columns: repeat(1, 1fr);
+    }
+}
+
+
 
 .auction-profile{
 
@@ -966,12 +1024,14 @@ section#register-form-section{
                 background-color: theme("colors.beyaz.0");
                 height: 100%;
                 @apply border-r border-beyaz-20;
+
                 .profile-data-img{
                     transform: translateY(-50%);
                     white-space: nowrap;
                     margin: 0 auto;
                     padding: 8px 0;
                     width: 212px;
+                    height: 212px;
                     background-color: theme("colors.beyaz.0");
                     border-radius: 50%;
 
@@ -982,11 +1042,13 @@ section#register-form-section{
                     display: flex;
                     justify-content: center;
                     align-items: center;
+                    position: relative;
 
                     img{
                         width: 196px;
                         height: auto;
                         border-radius: 50%;
+                        position: absolute;
                     }
                 }
 

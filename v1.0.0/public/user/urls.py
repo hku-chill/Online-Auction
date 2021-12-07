@@ -10,7 +10,7 @@ urlpatterns = [
     path('logout/', user_logout, name="user_logout_url"),
 
     path('profile/', user_profile, name="user_self_profile_url"),
-    path('profile/<int:userid>', user_profile, name="user_profile_url"),
+    path('profile/<int:userid>', user_profile_id, name="user_profile_url"),
     # path('activate/<uidb64>/', activate_mail, name="activate_url"),
 
 

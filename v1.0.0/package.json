@@ -3,7 +3,9 @@
   "version": "1.0.0",
   "description": "chill bitirme",
   "main": "index.js",
-  "dependencies": {},
+  "dependencies": {
+    "@tailwindcss/forms": "^0.3.4"
+  },
   "devDependencies": {
     "autoprefixer": "^10.3.7",
     "postcss": "^8.3.9",
