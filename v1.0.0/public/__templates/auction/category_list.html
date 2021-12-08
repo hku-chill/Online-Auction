@@ -11,11 +11,11 @@
 
 
                 {% for c_item in categories_list %}
-                    <a href="{% url 'auction:category_item_url' slug=c_item.slug %}" class="category-item">
+                    <a href="{% url 'auction:category_item_url' slug=c_item.slug %}" class="category-item {% cycle 'c_mavi' 'c_mor' 'c_turuncu' 'c_yesil' %} ">
                         <div class="category-item-image">
                             <img src="/{{ c_item.image }}" alt="">
                         </div>
-                        <div class="category-item-text {% cycle 'bg-mavi_5' 'bg-green-700' 'bg-turuncu' 'bg-purple-700' %}">
+                        <div class="category-item-text ">
                             <div class="texts">
                                 <h3>{{ c_item.name }}</h3>
                                 <p>{{ c_item.auction_count }} auctions</p>

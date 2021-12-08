@@ -1,8 +1,9 @@
+# encoding:utf-8
 from django.contrib.auth.models import User
-from django.http.response import HttpResponseBadRequest
+from django.http.response import HttpResponseBadRequest, JsonResponse
 from django.shortcuts import render, HttpResponse, redirect, get_object_or_404
 from django.contrib.auth import login, authenticate, logout, get_user_model
-from .forms import SignUpForm, LoginForm
+from .forms import *
 
 from django.contrib import messages
 from .models import Profile
@@ -12,8 +13,8 @@ from .token import account_activation_token
 from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
 from django.utils.encoding import force_bytes, force_text
 
-from .helper import auth_user_should_not_access
-
+from .helper import auth_user_should_not_access, tc_user_should_not_access, tcValidate
+from django.contrib.auth.decorators import login_required
 # Create your views here.
 def user_logout(request):
     logout(request)
@@ -130,3 +131,42 @@ def user_profile(request, userid = None):
 
 def user_profile_id(request, userid = None):
     return render(request, 'user/profile.html', {'profile': Profile.objects.get(pk=userid)})
+
+
+
+
+@login_required(login_url='/login/')
+@tc_user_should_not_access
+def user_tc_validate_view(request):
+    context = {'profile_form': TCForm_Profile(), 'user_form': TCForm_User()}
+    return render(request, 'user/tcvalidate.html', context)
+
+@login_required(login_url='/login/')
+@tc_user_should_not_access
+def user_tc_validate_end(request):
+    if request.method == 'POST':
+        profile_form = TCForm_Profile(request.POST)
+        user_form = TCForm_User(request.POST)
+
+        userr = User.objects.get(pk=request.user.pk)
+        tc_filter = Profile.objects.filter(tc=request.POST['tc'])
+        
+        if tc_filter.exists() and not tc_filter[0] == userr.profile:
+            return JsonResponse({'success': False, 'message': 'This TC number already used by other.'})
+            
+
+        if profile_form.is_valid() and user_form.is_valid():
+            # user_form.save()
+            userr.profile.tc = profile_form.cleaned_data['tc']
+            userr.profile.birthday = profile_form.cleaned_data['birthday']
+            userr.profile.is_tc_verified = True
+            userr.profile.save()
+
+            if tcValidate(request.POST.get('tc', ''), request.POST.get('first_name', ''), request.POST.get('last_name', ''), request.POST.get('birthday_year', '')):
+                return JsonResponse({'success': True, 'message': 'TC validation success'})
+            else:
+                return JsonResponse({'success': False, 'message': 'TC validation failed'})
+        
+        return JsonResponse({'success': False, 'message': 'The informations not valid please check again...'})
+    
+    return HttpResponseBadRequest()

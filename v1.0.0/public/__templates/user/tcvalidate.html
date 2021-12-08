@@ -1,0 +1,46 @@
+{% extends '_base.html' %}
+
+{% load static %}
+
+{% block content %}
+
+<section class="tc-validate-section container-x main-wrapper block w-full bg-beyaz-0 my-4">
+    
+    <div class="form_wrapper">
+
+        <div class="container-title flex flex-row justify-between items-center mb-7">
+            <h3 class=" text-base text-mavi">Validate your Turkish Citizenship</h3>
+        </div>
+        <form class="tc_verify_form" action="{% url 'user:user_tc_validate_url' %}" method="get">
+            {% csrf_token %}
+            <div class="input_container">
+
+                <div class="input_field">
+                    <label for="{{profile_form.tc.id_for_label }}">{{profile_form.tc.label}}</label>
+                    {{profile_form.tc}}
+                </div>
+                <div class="input_field half_input">
+                    <label for="{{user_form.first_name.id_for_label }}">{{user_form.first_name.label}}</label>
+                    {{user_form.first_name}}
+                </div>
+                <div class="input_field half_input">
+                    <label for="{{user_form.last_name.id_for_label }}">{{user_form.last_name.label}}</label>
+                    {{user_form.last_name}}
+                </div>
+                <div class="input_field">
+                    <label for="{{profile_form.fullName.birthday }}">{{profile_form.birthday.label}}</label>
+                    <div class="select_row grid grid-cols-3">
+                        {{profile_form.birthday}}
+                    </div>
+                </div>
+                <button type="submit" class="tc_valide_button">verify</button>
+
+            </div>
+
+        </form>
+
+    </div>
+
+</section>
+
+{% endblock %}

@@ -3,10 +3,10 @@ from .models import Profile
 # Register your models here.
 
 class ProfileAdmin(admin.ModelAdmin):
-    list_display = ('pk', 'user', 'user_is_active', 'is_email_verified', 'is_phone_verified')
-    list_filter = ('is_email_verified', 'is_phone_verified')
-    search_fields = ('is_email_verified', 'is_phone_verified')
-    ordering = ('pk', 'is_email_verified', 'is_phone_verified')
+    list_display = ('pk', 'user', 'user_is_active', 'is_email_verified', 'is_phone_verified', 'is_tc_verified')
+    list_filter = ('is_email_verified', 'is_phone_verified', 'is_tc_verified')
+    search_fields = ('is_email_verified', 'is_phone_verified', 'is_tc_verified')
+    ordering = ('pk', 'is_email_verified', 'is_phone_verified', 'is_tc_verified')
 
 
     def user_is_active(self, x):

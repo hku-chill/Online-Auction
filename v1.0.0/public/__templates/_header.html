@@ -19,6 +19,13 @@
     <!--? Main css include -->
     <link rel="stylesheet" href="{% static '/css/root.css' %}">
 
+
+    {% comment %} Jquery bruh {% endcomment %}
+    <!--? Jquery include -->
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <script defer src="{% static '/js/jquery.min.js' %}"></script>
+    <script defer src="{% static 'js/main.js' %}"></script>
+
     {% comment %} Django {% endcomment %}
     <script async src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 </head>
