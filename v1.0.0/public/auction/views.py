@@ -11,7 +11,11 @@ def get_auction_list(request):
 
 def get_category_list(request):
     list_category = category.objects.all()
-    return render(request, 'auction/category_list.html', {'list_category': list_category})
+    if len(list_category) > 0:
+        return render(request, 'auction/category_list.html', {'list_category': list_category})
+    else:
+        return redirect('/')
+        
 
 
 def get_category(request, slug=None):
@@ -20,7 +24,7 @@ def get_category(request, slug=None):
             category_item = category.objects.get(slug=slug)
             auction_list = auction.objects.filter(category=category_item)
             
-            if len(auction_list) > 0:
+            if len(auction_list) > 1:
                 return render(request, 'auction/auction_list.html', {'auction_list': auction_list, 'category_item': category_item})
             else:
                 return redirect('auction:category_index_url')

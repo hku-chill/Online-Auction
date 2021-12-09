@@ -2,7 +2,7 @@ from django.db import models
 from django.utils.translation import gettext_lazy as _
 
 from django.urls import reverse
-import math
+import math, datetime
 # Create your models here.
 
 class auction(models.Model):
@@ -10,19 +10,31 @@ class auction(models.Model):
         ('hidden','hidden_bid'),
         ('shown', 'shown_bid'),
     )
-
+    
+    # item details
     category = models.ForeignKey('Category', on_delete=models.CASCADE, related_name='auctions')
-    user = models.ForeignKey('auth.User', on_delete=models.CASCADE, related_name='auctions')
-    name = models.CharField(max_length=100, verbose_name=_('Auction Name'))
     slug = models.SlugField(max_length=100, unique=True, verbose_name=_('Auction Slug'), blank=True)
-    description = models.TextField(verbose_name=_('Auction Description'))
-    image = models.ImageField(upload_to='static/img/auction_imgs', verbose_name=_('Auction Image'))
-    start_date = models.DateTimeField(verbose_name=_('Auction Start Date'))
-    end_date = models.DateTimeField(verbose_name=_('Auction End Date'))
-    created_at = models.DateTimeField(auto_now_add=True, verbose_name=_('Created At'))
-    updated_at = models.DateTimeField(auto_now=True, verbose_name=_('Updated At'))
-    initializing_bid = models.DecimalField(max_digits=10, decimal_places=2, default=0, verbose_name=_('Auction Initializing Bid'))
-    is_active = models.BooleanField(default=True, verbose_name=_('Is Auction Active'))
+    user = models.ForeignKey('auth.User', on_delete=models.CASCADE, related_name='auctions')
+    auction_is_active = models.BooleanField(default=True, verbose_name=_('Is Auction Active'))
+
+    item_title = models.CharField(max_length=100, verbose_name=_('Item Name'))
+    item_alt_title = models.CharField(max_length=100, verbose_name=_('Item Alt Name'))
+    item_image = models.ImageField(upload_to='static/img/auction_imgs', verbose_name=_('Item Image'))
+    item_details = models.TextField(verbose_name=_('Item Details'))
+    item_condution = models.TextField(verbose_name=_('Item Condution Details'))
+
+
+
+
+    # auction  details
+    
+    auction_start_date = models.DateTimeField(auto_now_add=True, verbose_name=_('Auction Start Date'))
+    auction_end_date = models.DateTimeField(verbose_name=_('Auction End Date'))
+    auction_updated_at = models.DateTimeField(auto_now=True, verbose_name=_('Updated At'))
+    auction_initializing_bid = models.DecimalField(max_digits=10, decimal_places=2, default=0, verbose_name=_('Auction Initializing Bid'))
+
+    # Auction system details
+    
     auction_type = models.CharField(max_length=10 ,choices=TYPE_CHOICE, default='shown')
 
     auction_rate_1 = models.IntegerField(default=0)
@@ -32,7 +44,7 @@ class auction(models.Model):
     auction_rate_5 = models.IntegerField(default=1)
 
     def __str__(self):
-        return self.name
+        return self.item_title
 
     def get_absolute_url(self):
         return reverse('auction:detail', kwargs={'slug': self.slug})
@@ -58,7 +70,7 @@ class auction(models.Model):
     class Meta:
         verbose_name = _('Auction')
         verbose_name_plural = _('Auctions')
-        ordering = ['-created_at']
+        ordering = ['-auction_start_date']
 
 class category(models.Model):
     name = models.CharField(max_length=100, verbose_name=_('Category'))
@@ -127,13 +139,17 @@ def _category_delete_receiver(sender, instance, *args,  **kwargs):
 @receiver(post_save, sender=auction)
 def _auction_create_receiver(sender, instance, created, *args,  **kwargs):
     if created:
-        instance.slug = slugify(instance.name.lower())
+        instance.slug = slugify(instance.item_title.lower())
         instance.category.auction_count = category.objects.filter(pk=instance.category.pk).count()
         super(auction, instance).save()
 
 @receiver(pre_save, sender=auction)
 def _auction_pre_save_receiver(sender, instance, *args,  **kwargs):
-    old = auction.objects.get(pk=instance.pk)
+    try:
+        old = auction.objects.get(pk=instance.pk)
+    except auction.DoesNotExist:
+        return
+    
 
     if old.category != instance.category:
         old.category.auction_count -= 1
@@ -152,9 +168,7 @@ def _auction_pre_save_receiver(sender, instance, *args,  **kwargs):
 """
 @receiver(post_delete, sender=auction)
 def _auction_delete_receiver(sender, instance, *args,  **kwargs):
-    instance.category.auction_count -= 1
-    instance.image.delete(save=False)
-    instance.category.save()
+    instance.item_image.delete(save=False)
 
 
 

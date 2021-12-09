@@ -15,9 +15,9 @@
             
             {% for auct in  auction_list%}
                 <div class="auction-item">
-                    <p class="auction-title">{{ auct.name }}</p>
+                    <p class="auction-title">{{ auct.item_title }}</p>
                     <div class="img_container">
-                        <img src="/{{ auct.image }}" alt="{{ auct.name }}" class="auction-img">
+                        <img src="/{{ auct.item_image }}" alt="{{ auct.item_title }}" class="auction-img">
                     </div>
                     <div class="auction-rate">
                         <div class="star-list">

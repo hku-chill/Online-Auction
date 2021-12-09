@@ -648,7 +648,7 @@ section#register-form-section{
     width: 100%;
     display: grid;
     gap: 1rem;
-    grid-template-columns: repeat(auto-fit, minmax(calc(25% - 1rem), 1fr));
+    grid-template-columns: repeat(3, minmax(calc(33% - 1rem), 1fr));
 
     .auction-item{
         // repeat(auto-fit, minmax(calc(25% - 1rem), 1fr))
@@ -682,8 +682,9 @@ section#register-form-section{
             overflow: hidden;
             img{
                 position: absolute;
-                width: 100%;
+                width: auto;
                 height: auto;
+                max-width: 100%;
                 margin: 1rem 0;
             }
         }
@@ -769,11 +770,11 @@ section#register-form-section{
     }
 
     @media #{$media-laptop}{
-        grid-template-columns: repeat(3, minmax(calc(33% - 1rem), 1fr));
+        grid-template-columns: repeat(2, minmax(calc(50% - 1rem), 1fr));
     }
 
     @media #{$media-tablet}{
-        grid-template-columns: repeat(2, minmax(calc(50% - 1rem), 1fr));
+        grid-template-columns: repeat(1, 1fr);
     }
 
     @media #{$media-mobile}{
