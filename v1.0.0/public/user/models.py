@@ -25,7 +25,9 @@ class Profile(models.Model):
     user_rate_5 = models.IntegerField(default=1)
 
     tc = models.CharField(max_length=11, null=True, blank=True)
-    phone = models.CharField(max_length=20, null=True, blank=True)
+    phone = models.CharField(max_length=10, null=True, blank=True)
+
+    phone_verification_code = models.CharField(max_length=6, null=True, blank=True)
 
     is_email_verified = models.BooleanField(default=False)
     is_phone_verified = models.BooleanField(default=False)

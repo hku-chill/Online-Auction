@@ -95,3 +95,48 @@ class TCForm_Profile(forms.ModelForm):
     class Meta:
         model = Profile
         fields = ('tc', 'birthday')
+
+class SmsForm(forms.Form):
+    sms_form_hidden = forms.BooleanField(
+        widget=forms.HiddenInput(
+            attrs={'value': 'True'}
+        )
+    )
+
+    sms = forms.CharField(
+        label='SMS Code',
+        help_text='Enter the code sent to your phone.',
+        min_length=6,
+        max_length=6,
+        widget=forms.NumberInput(
+            attrs={
+                'placeholder': 'Enter the code',
+                'class': 'form-input'
+            }
+        )
+    )
+    class Meta:
+        model = Profile
+        fields = ('sms','sms_form_hidden')
+
+class MobileForm_Profile(forms.ModelForm):
+    mobile_form_hidden = forms.BooleanField(
+        widget=forms.HiddenInput(
+            attrs={'value': 'True'}
+        )
+    )
+    phone = forms.CharField(
+        label="Mobile Number",
+        help_text= "Enter your mobile number eg. 5528842333",
+        min_length=10,
+        max_length=10,
+        widget= forms.NumberInput(
+            attrs={
+                'placeholder': '5xxxxxxxxx',
+                'class': 'form-input'
+            }
+        )
+    )
+    class Meta:
+        model = Profile
+        fields = ('phone', 'mobile_form_hidden')

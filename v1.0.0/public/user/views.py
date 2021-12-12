@@ -12,7 +12,7 @@ from django.utils.http import urlsafe_base64_decode, urlsafe_base64_encode
 
 from .forms import *
 from .helper import (auth_user_should_not_access, tc_user_should_not_access,
-                     tcValidate)
+                     tcValidate, phoneValidate)
 from .models import Profile
 from .token import account_activation_token
 
@@ -172,3 +172,55 @@ def user_tc_validate_end(request):
         return JsonResponse({'success': False, 'message': 'The informations not valid please check again...'})
     
     return HttpResponseBadRequest()
+
+
+@login_required(login_url='/login/')
+def user_mobile_validate_view(request):
+    #check if user already verified his mobile
+    if request.user.profile.is_phone_verified:
+        return redirect('/')
+
+    #create form veriables
+    sms_form = None
+    phone_form = None
+
+    if request.method == 'POST':
+        # check if this request came from first input type
+        if request.POST.get('mobile_form_hidden') == 'True' :
+            phone_form = MobileForm_Profile(request.POST)
+            #? check if form is valid then send sms code to user and return sms validatation form
+            if phone_form.is_valid():
+                # send sms code to user
+                validate_sms = phoneValidate(request.user, phone_form.cleaned_data['phone'])
+
+                #if sms code sent to user render sms form
+                if validate_sms:
+                    phone_form = None
+                    sms_form = SmsForm()
+
+        # Check if this request came form code verification form
+        elif request.POST.get('sms_form_hidden') == 'True':
+
+            #! if somehow user's verification code got deleted from db then redirect to sms form
+            if request.user.profile.phone_verification_code == None:
+                sms_form = None
+                phone_form = MobileForm_Profile()
+            else:
+                sms_form = SmsForm(request.POST)
+
+                if sms_form.is_valid():
+                    if request.user.profile.phone_verification_code == sms_form.cleaned_data['sms']:
+                        request.user.profile.phone_verification_code = None
+                        request.user.profile.is_phone_verified = True
+                        request.user.profile.save(update_fields=['phone_verification_code', 'is_phone_verified'])
+                        return redirect('/')
+                    else:
+                        sms_form.add_error('sms', 'SMS code is not valid, please check and try again.')
+                        print(sms_form.errors)
+    else:
+        if request.user.profile.phone_verification_code:
+            sms_form = SmsForm()
+        else:
+            phone_form = MobileForm_Profile()
+
+    return render(request, 'user/mobilevalidate.html', {'mobile_form': phone_form, 'sms_form': sms_form})

@@ -1,0 +1,67 @@
+{% extends '_base.html' %}
+
+{% load static %}
+
+{% block content %}
+
+<section class="tc-validate-section container-x main-wrapper block w-full bg-beyaz-0 my-4">
+    
+    <div class="form_wrapper">
+
+        <div class="container-title flex flex-row justify-between items-center mb-7">
+            <h3 class=" text-base text-mavi">Validate your Mobile Phone...</h3>
+        </div>
+
+        
+        {% if sms_form%}
+            <form class="sms_verify_form" method="post">
+                {% csrf_token %}
+                {{ sms_form.sms_form_hidden}}
+                <div class="input_container">
+                    <div class="input_field">
+                        <label for="{{sms_form.sms.id_for_label }}">{{sms_form.sms.label}}</label>
+                        {{sms_form.sms}}
+                        <span class="pl-2 text-mavi text-sm"> -{{sms_form.sms.help_text }}</span>
+                        {% if sms_form.sms.errors %}<span class="pl-2 text-red-500 text-sm"> -{{sms_form.sms.errors.as_text}}</span>{% endif %}
+                        
+                    </div>
+                    
+                    <button type="submit" class="mobile_validate_form">Check Code</button>
+
+                </div>
+            </form>
+        {% elif  mobile_form%}
+            <form class="mobile_verify_form" method="post">
+                {% csrf_token %}
+                {{ mobile_form.mobile_form_hidden}}
+                <div class="input_container">
+                    <div class="input_field">
+                        <label for="{{mobile_form.phone.id_for_label }}">{{mobile_form.phone.label}}</label>
+                        {{mobile_form.phone}}
+                        <span class="pl-2 text-mavi text-sm"> -{{mobile_form.phone.help_text }}</span>
+                        {% if mobile_form.phone.errors %}<span class="pl-2 text-red-500 text-sm"> -{{mobile_form.phone.errors.as_text}}</span>{% endif %}
+                        
+                    </div>
+                    
+                    <button type="submit" class="mobile_validate_form">Send Code</button>
+
+                </div>
+
+            </form>
+        {% endif %}
+
+        {% if form.errors %}
+            {% for field in form %}
+                {% for error in field.errors %} 
+                    <div onclick="this.parentNode.removeChild(this)" class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative mt-4 text-center cursor-pointer" role="alert">
+                        <span>{{ error|escape }}</span>
+                    </div>
+                {% endfor %}
+            {% endfor %}
+        {% endif %}
+
+    </div>
+
+</section>
+
+{% endblock %}

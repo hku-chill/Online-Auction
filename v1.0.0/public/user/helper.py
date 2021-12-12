@@ -48,6 +48,25 @@ def tcValidate(tc, first_name, last_name, birthday_year):
         return False
 
 
+def phoneValidate(user, phone):
+    """
+        this function will generate random 6 digit number
+        end will send to user's phone number
+        :param user: user object
+        :param phone: user's phone number
+        :return: True if message send it or False if not
+    """
+    import random
+
+    ver_code = random.randint(100000, 999999)
+
+    user.profile.phone_verification_code = ver_code
+    user.save()
+    return True
+
+
+
+
 def check_user(user):
     return not user.is_authenticated
 
@@ -78,3 +97,4 @@ def tc_user_should_not_access(function):
         return actual_decorator(function)
     else:
         return actual_decorator
+

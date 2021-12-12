@@ -12,14 +12,14 @@ urlpatterns = [
     path('profile/', user_profile, name="user_self_profile_url"),
     path('profile/<int:userid>', user_profile_id, name="user_profile_url"),
 
+
+    # Tc verification url's
     path('profile/tc/', user_tc_validate_view, name="user_tc_url"),
+    # Tc verification api end point
     path('profile/tc/validate/', user_tc_validate_end, name="user_tc_validate_url"),
-    # path('activate/<uidb64>/', activate_mail, name="activate_url"),
 
+    path('profile/mobile/', user_mobile_validate_view, name="user_mobile_url"),
 
-    path(
-        'activate/<str:uid64>/',
-        mail_activate,
-        name = "user_mail_activate_url"
-    ),
+    #mail verification end point
+    path('activate/<str:uid64>/',mail_activate,name = "user_mail_activate_url"),
 ]
