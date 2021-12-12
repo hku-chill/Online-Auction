@@ -1,20 +1,22 @@
 # encoding:utf-8
-from django.contrib.auth.models import User
-from django.http.response import HttpResponseBadRequest, JsonResponse
-from django.shortcuts import render, HttpResponse, redirect, get_object_or_404
-from django.contrib.auth import login, authenticate, logout, get_user_model
-from .forms import *
-
 from django.contrib import messages
-from .models import Profile
-from django.contrib.sites.shortcuts import get_current_site
-from django.template.loader import render_to_string
-from .token import account_activation_token
-from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
-from django.utils.encoding import force_bytes, force_text
-
-from .helper import auth_user_should_not_access, tc_user_should_not_access, tcValidate
+from django.contrib.auth import authenticate, get_user_model, login, logout
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.models import User
+from django.contrib.sites.shortcuts import get_current_site
+from django.http.response import HttpResponseBadRequest, JsonResponse
+from django.shortcuts import HttpResponse, get_object_or_404, redirect, render
+from django.template.loader import render_to_string
+from django.utils.encoding import force_bytes, force_text
+from django.utils.http import urlsafe_base64_decode, urlsafe_base64_encode
+
+from .forms import *
+from .helper import (auth_user_should_not_access, tc_user_should_not_access,
+                     tcValidate)
+from .models import Profile
+from .token import account_activation_token
+
+
 # Create your views here.
 def user_logout(request):
     logout(request)

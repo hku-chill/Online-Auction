@@ -1,8 +1,10 @@
+import datetime
+import math
+
 from django.db import models
+from django.urls import reverse
 from django.utils.translation import gettext_lazy as _
 
-from django.urls import reverse
-import math, datetime
 # Create your models here.
 
 class auction(models.Model):
@@ -47,7 +49,7 @@ class auction(models.Model):
         return self.item_title
 
     def get_absolute_url(self):
-        return reverse('auction:detail', kwargs={'slug': self.slug})
+        return reverse("auction:auction_item_url", kwargs={"slug": self.slug})
 
     def calc_rate_floor(self):
         if self.total_rate() == 0:
@@ -101,9 +103,10 @@ class category(models.Model):
 
 
 
-from django.db.models.signals import post_save, pre_save, post_delete
+from django.db.models.signals import post_delete, post_save, pre_save
 from django.dispatch import receiver
 from slugify import slugify
+
 """
     When a new category will created this function will be runned
     
@@ -142,22 +145,22 @@ def _auction_create_receiver(sender, instance, created, *args,  **kwargs):
         instance.slug = slugify(instance.item_title.lower())
         instance.category.auction_count = category.objects.filter(pk=instance.category.pk).count()
         super(auction, instance).save()
+    
+    """
+        Update all categories by using auction list
+    """
+    cList = category.objects.all()
+    for c in cList:
+        c.auction_count = auction.objects.filter(category=c).count()
+        c.save(update_fields=['auction_count'])
 
 @receiver(pre_save, sender=auction)
 def _auction_pre_save_receiver(sender, instance, *args,  **kwargs):
     try:
         old = auction.objects.get(pk=instance.pk)
     except auction.DoesNotExist:
+        print("sa")
         return
-    
-
-    if old.category != instance.category:
-        old.category.auction_count -= 1
-        old.category.save()
-
-        instance.category.auction_count += 1
-        instance.category.save()
-
 
 """
     When a auction deleted, this function will be runned

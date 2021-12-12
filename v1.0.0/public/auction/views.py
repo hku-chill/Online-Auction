@@ -1,5 +1,22 @@
-from django.shortcuts import redirect, render, HttpResponse
-from .models import category, auction
+"""
+ █████   █████ █████  █████ ██████   ██████ ███████████  █████       ██████████   █████  █████ ██████   ██████ ███████████ 
+░░███   ░░███ ░░███  ░░███ ░░██████ ██████ ░░███░░░░░███░░███       ░░███░░░░███ ░░███  ░░███ ░░██████ ██████ ░░███░░░░░███
+ ░███    ░███  ░███   ░███  ░███░█████░███  ░███    ░███ ░███        ░███   ░░███ ░███   ░███  ░███░█████░███  ░███    ░███
+ ░███████████  ░███   ░███  ░███░░███ ░███  ░██████████  ░███        ░███    ░███ ░███   ░███  ░███░░███ ░███  ░██████████ 
+ ░███░░░░░███  ░███   ░███  ░███ ░░░  ░███  ░███░░░░░███ ░███        ░███    ░███ ░███   ░███  ░███ ░░░  ░███  ░███░░░░░░  
+ ░███    ░███  ░███   ░███  ░███      ░███  ░███    ░███ ░███      █ ░███    ███  ░███   ░███  ░███      ░███  ░███        
+ █████   █████ ░░████████   █████     █████ ███████████  ███████████ ██████████   ░░████████   █████     █████ █████       
+░░░░░   ░░░░░   ░░░░░░░░   ░░░░░     ░░░░░ ░░░░░░░░░░░  ░░░░░░░░░░░ ░░░░░░░░░░     ░░░░░░░░   ░░░░░     ░░░░░ ░░░░░        
+                                                                                                                           
+                                                                                                                           
+                                                                                                                           
+"""
+
+
+from django.shortcuts import HttpResponse, redirect, render
+
+from .models import auction, category
+
 
 # Create your views here.
 def index(request):
@@ -24,7 +41,7 @@ def get_category(request, slug=None):
             category_item = category.objects.get(slug=slug)
             auction_list = auction.objects.filter(category=category_item)
             
-            if len(auction_list) > 1:
+            if len(auction_list) > 0:
                 return render(request, 'auction/auction_list.html', {'auction_list': auction_list, 'category_item': category_item})
             else:
                 return redirect('auction:category_index_url')
@@ -33,3 +50,9 @@ def get_category(request, slug=None):
             return redirect('/')
     else:
         return get_category_list(request)
+
+
+def get_auction(request, slug=None):
+    if not slug == None:
+        auction_item = auction.objects.get(slug=slug)
+        return render(request, 'auction/auction_item.html', {'auction_item': auction_item})

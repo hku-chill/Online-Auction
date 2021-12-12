@@ -47,7 +47,7 @@
                         </p>
     
                         <div class="join-auction-button">
-                            <a href="#auction-link">Join Auction</a>
+                            <a href="{% url 'auction:auction_item_url' slug=auct.slug %}">Join Auction</a>
                         </div>
                     </div>
                 </div>

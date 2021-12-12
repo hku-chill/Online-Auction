@@ -1,0 +1,281 @@
+{% extends '_base.html' %}
+
+{% load static %}
+
+{% block content %}
+
+<article id="main-article" class="bg-beyaz-5 py-4">
+
+    <!-- Start selling your items campain -->
+    <section id="start-selling-items" class="main-wrapper rounded-2xl shadow">
+
+        <h2>Start Selling your Items.</h2>
+
+        <!-- staert selling your items image -->
+        <div id="campain-image">
+            
+        </div>
+
+        <div id="round-redirect-button">
+            <i class="fas fa-arrow-circle-right text-4xl text-beyaz-0"></i>
+        </div>
+
+
+    </section>
+
+    <!-- auction profile container -->
+    <section class="auction-profile main-wrapper rounded-2xl shadow bg-beyaz-0 mt-6 overflow-hidden">
+
+        <div class="auction-container">
+
+            <div class="aution-row">
+
+                <!-- Auction item image goes here -->
+                <div class="auction-image">
+
+                    <!-- Big auction image goes here -->
+                    <div class="main-img">
+                        <img src="/{{ auction_item.item_image }}" alt="">
+
+                        <!-- auction image before and after button -->
+                        <div class="img-button before-button"><i class="fas fa-arrow-circle-left"></i></div>
+                        <div class="img-button after-button"><i class="fas fa-arrow-circle-right"></i></div>
+                    </div>
+
+                    <!-- Small auction images goes here -->
+                    <div class="alt-img-list">
+                        <img class="selected" src="/{{ auction_item.item_image }}" alt="">
+                        <img src="/{{ auction_item.item_image }}" alt="">
+                        <img src="/{{ auction_item.item_image }}" alt="">
+                        <img src="/{{ auction_item.item_image }}" alt="">
+                    </div>
+                </div>
+
+
+                <div class="auction-data flex-1">
+                    
+                    <div class="auction-title-rate">
+                        
+                        <div class="auction-title-contain">
+                            <h1>{{ auction_item.item_title }}</h1>
+                            <span>{{ auction_item.item_alt_title }}</span>
+                        </div>
+
+                        <div class="auction-rate-contain">
+                            <div class="auction-rate">
+
+                                <span>{{ auction_item.calc_rate_round }}</span>
+
+                                {% with ''|center:5 as range %}
+                                    {% for _ in range %}
+                                        
+                                        {% if forloop.counter <= auction_item.calc_rate_floor %}
+                                            <i class="fas fa-star"></i>
+                                        {% else %}
+                                            <i class="far fa-star"></i>
+                                        {% endif %}
+                                        
+                                    {% endfor %}
+                                {% endwith %}
+                            </div>
+                            <div class="auction-rate-count">
+                                <span>{{ auction_item.total_rate }} VOTE</span>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="user-profile seller-profile">
+                        
+                        <div class="user-pic-contain">
+                            <div class="profile-img-bg" style="--bg-img:url(/{{ auction_item.user.profile.profile_picture }});"></div>
+                        </div>
+
+                        <div class="user-title-rate">
+
+                            <div class="user-title-contain">
+                                <h3>{{ auction_item.user.profile.get_full_name }}</h3>
+                                <span>Artist and a mother</span>
+                            </div>
+                            <div class="user-rate-contain">
+                                <div class="user-rate">
+                                    {% with ''|center:5 as range %}
+                                        {% for _ in range %}
+                                            
+                                            {% if forloop.counter <= auction_item.user.profile.calc_rate_floor %}
+                                                <i class="fas fa-star"></i>
+                                            {% else %}
+                                                <i class="far fa-star"></i>
+                                            {% endif %}
+                                            
+                                        {% endfor %}
+                                    {% endwith %}
+                                    <span>{{ auction_item.user.profile.calc_rate_round }}</span>
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <div class="user-data-contain">
+
+                            <div class="user-verified">
+                                <i class="fas fa-check-circle"></i>
+                                <p>Verified Seller</p>
+                            </div>
+
+                            <div class="user-links">
+                                <a href="{% url 'user:user_profile_url' userid=auction_item.user.profile.pk %}">
+                                    <i class="fas fa-user"></i>
+                                    User Profile
+                                </a>
+                                <a href="#">
+                                    <i class="fas fa-question"></i>
+                                    Ask to User
+                                </a>
+                            </div>
+
+
+                        </div>
+
+                    </div>
+
+                    <div class="bid-data">
+
+                        <div class="bid-data-contain">
+
+                            <div class="starting-bid">
+                                <span class="bid-data-alt-title">INIATILIZING BID</span>
+                                <span class="bid-data-alt-info">{{ auction_item.auction_initializing_bid }}<small>£</small></span>
+                            </div>
+                            <div class="bid-date">
+                                <span class="bid-data-alt-title">TIME LEFT</span>
+                                <span class="bid-data-alt-info bid-data-enddate" enddate="{{ auction_item.auction_end_date|date:'Y-m-d H:i' }}"></span>
+                            </div>
+
+                        </div>
+
+                        <div class="bid-data-button">
+                            <button>
+                                <i class="fas fa-plus"></i>
+                                Bid Now
+                            </button>
+                            <button>
+                                <i class="fas fa-comment-dots"></i>
+                                Comment
+                            </button>
+                        </div>
+
+                    </div>
+                    
+                    
+
+                    {% if highest_bid %}<div class="highest-bid">
+                        <hr class="my-4">
+                        <h3 class="font-light">HIGHEST BID</h3>
+
+                        <div class="user-profile seller-profile">
+
+                            <div class="user-pic-contain">
+                                <div class="profile-img-bg" style="--bg-img:url(https://www.incimages.com/uploaded_files/image/1920x1080/getty_494346582_2000133020009280104_303351.jpg);"></div>
+                            </div>
+
+                            <div class="user-title-rate">
+
+                                <div class="user-title-contain">
+                                    <h3>Katarine Nachikova</h3>
+                                    <span>Artist and a mother</span>
+                                </div>
+                                <div class="user-rate-contain">
+                                    <div class="user-rate">
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <span>4.5</span>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                            <div class="user-data-contain">
+
+                                <div class="user-verified">
+                                    <i class="fas fa-check-circle"></i>
+                                    <p>Verified Seller</p>
+                                </div>
+
+                                <div class="user-bid-data text-siyah-10 text-xl font-bold">
+                                    <h2>17,456 <small>£</small></h2>
+                                </div>
+
+                                <div class="user-links">
+                                    <a href="#">
+                                        <i class="fas fa-user"></i>
+                                        User Profile
+                                    </a>
+                                    <a href="#">
+                                        <i class="fas fa-question"></i>
+                                        Ask to User
+                                    </a>
+                                </div>
+
+
+                            </div>
+
+                        </div>
+                    </div>{% endif %}
+
+
+                    <div class="aution-links flex flex-row justify-end text-beyaz-30 text-xs gap-2">
+                        <a href="#">
+                            <i class="fas fa-user"></i>
+                            User Profile
+                        </a>
+                        <a href="#">
+                            <i class="fas fa-question"></i>
+                            Ask to User
+                        </a>
+                        <a href="#">
+                            <i class="fas fa-question"></i>
+                            Ask to User
+                        </a>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+    <section class="auction-details main-wrapper rounded-2xl shadow bg-beyaz-0 mt-6 overflow-hidden">
+        
+        <div class="auction-detail-header">
+            
+            <div class="auction-detail-titles">
+                <h2>Product Details</h2>
+            </div>
+            <div class="auction-detail-titles">
+                <h2>Product Details</h2>
+            </div>
+            <div class="auction-detail-titles">
+                <h2>Product Details</h2>
+            </div>
+            <div class="auction-detail-titles">
+                <h2>Product Details</h2>
+            </div>
+            <div class="auction-detail-titles">
+                <h2>Product Details</h2>
+            </div>
+
+        </div>
+        
+        <div class="auction-detail-data">
+            {{ auction_item.item_condution }}
+        </div>
+    </section>
+
+</article>
+
+{% endblock %}

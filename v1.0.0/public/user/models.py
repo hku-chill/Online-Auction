@@ -8,6 +8,8 @@ from django.dispatch import receiver
 
 from django.urls import reverse
 
+import math
+
 
 
 class Profile(models.Model):
@@ -31,9 +33,21 @@ class Profile(models.Model):
 
     def __str__(self):
         return self.user.email
+
+    def calc_rate_floor(self):
+        if self.total_rate() == 0:
+            return 0
+
+        rate = (1*self.user_rate_1 + 2*self.user_rate_2 + 3*self.user_rate_3 + 4*self.user_rate_4 + 5*self.user_rate_5) / self.total_rate()
+
+        return float(math.floor(rate))
     
-    def calc_rate(self):
-        return ('{:.1f}'.format((1*self.user_rate_1 + 2*self.user_rate_2 + 3*self.user_rate_3 + 4*self.user_rate_4 + 5*self.user_rate_5) / self.total_rate()) )
+    def calc_rate_round(self):
+        if self.total_rate() == 0:
+            return 0
+            
+        rate = (1*self.user_rate_1 + 2*self.user_rate_2 + 3*self.user_rate_3 + 4*self.user_rate_4 + 5*self.user_rate_5) / self.total_rate()
+        return float('{:.1f}'.format(rate))
 
     def total_rate(self):
         return self.user_rate_1 + self.user_rate_2 + self.user_rate_3 + self.user_rate_4 + self.user_rate_5
@@ -43,6 +57,9 @@ class Profile(models.Model):
 
     def get_absolute_url(self):
         return reverse("user:user_profile_url", kwargs={"userid": self.pk})
+    
+    def is_user_verified(self):
+        return True
     
 
     class Meta:
