@@ -93,6 +93,17 @@ class category(models.Model):
         verbose_name = _('Category')
         verbose_name_plural = _('Categories')
 
+class bid(models.Model):
+    user = models.ForeignKey('auth.User', on_delete=models.CASCADE, related_name='bids')
+    auction = models.ForeignKey('auction', on_delete=models.CASCADE, related_name='bids')
+    bid_amount = models.DecimalField(max_digits=10, decimal_places=2, default=0, verbose_name=_('Bid Amount'))
+    bid_date = models.DateTimeField(auto_now_add=True, verbose_name=_('Bid Date'))
+    is_bid_highest = models.BooleanField(default=False, verbose_name=_('Is Bid Highest'))
+
+    class Meta:
+        verbose_name = _('Bid')
+        verbose_name_plural = _('Bids')
+        ordering = ['-bid_amount']
 
 
 
@@ -175,6 +186,41 @@ def _auction_delete_receiver(sender, instance, *args,  **kwargs):
 
 
 
+"""
+    When a bid send to auction check if this bid is highest bid or not
+"""
+@receiver(pre_save, sender=bid)
+def _bid_post_save_receiver(sender, instance, *args,  **kwargs):
+
+    bids= bid.objects.filter(auction=instance.auction).order_by('-bid_amount')
+    if bids.filter(is_bid_highest=True).exists():
+        if bids.filter(is_bid_highest=True).count() > 1:
+            bids.filter(is_bid_highest=True).update(is_bid_highest=False)
+        
+        bids.filter(pk=bids.filter(is_bid_highest=True).first().pk).update(is_bid_highest=True)
+
+    else:
+        bid.objects.filter(pk=bids[0].pk).update(is_bid_highest=True)
+            
+            
+        
+
+    return
+
+@receiver(post_delete, sender=bid)
+def _bid_post_delete_receiver(sender, instance, *args,  **kwargs):
+    if instance.is_bid_highest == True:
+        try:
+            bids = bid.objects.filter(auction=instance.auction).order_by('-bid_amount')
+            if bids.count() >= 1:
+                bids[0].is_bid_highest = True
+                print(bids[0].is_bid_highest)
+                super(bid, bids[0]).save()
+        except bid.DoesNotExist:
+            pass
+    
+
+    
 
 
 

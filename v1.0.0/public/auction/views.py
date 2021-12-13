@@ -13,9 +13,11 @@
 """
 
 
-from django.shortcuts import HttpResponse, redirect, render
+from django.shortcuts import HttpResponse, redirect, render, get_object_or_404
 
-from .models import auction, category
+from .models import auction, category, bid
+
+from .forms import BidForm
 
 
 # Create your views here.
@@ -56,3 +58,21 @@ def get_auction(request, slug=None):
     if not slug == None:
         auction_item = auction.objects.get(slug=slug)
         return render(request, 'auction/auction_item.html', {'auction_item': auction_item})
+
+#add bids to auction
+def add_bid_to_auction(request, slug=None):
+    if not slug == None:
+        auction_item = get_object_or_404(auction, slug=slug)
+        if request.method == 'POST':
+            bid_form = BidForm(request.POST)
+            if bid_form.is_valid():
+                bid_obj = bid()
+                bid_obj.auction = auction_item
+                bid_obj.user = request.user
+                bid_obj.bid_amount = bid_form.cleaned_data['bid_amount']
+                bid_obj.save()
+
+        else:
+            bid_form = BidForm()
+    
+    return render(request, 'auction/add_bid.html', {'bid_form': bid_form, 'auction_item': auction_item})
