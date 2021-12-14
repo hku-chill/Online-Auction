@@ -213,26 +213,23 @@ def _bid_create_receiver(sender, *args, **kwargs):
         except bid.DoesNotExist:
             old_highest_bid = None
 
-        if old_highest_bid and old_highest_bid.bid_amount > instance.bid_amount:
-            # instance.is_bid_highest = True
-            # instance.save(update_fields=['is_bid_highest'])
-            return
-        else:
-            instance.is_bid_highest = True
-            instance.save(update_fields=['is_bid_highest'])
-    else:
-        bid_l = bid.objects.filter(auction=instance.auction)
-        if bid_l.exists() and bid_l.count() > 0:
+        if not old_highest_bid == None:
+            bid.objects.filter(auction=instance.auction, is_bid_highest = True).update(is_bid_highest=False)
 
-            if not bid_l.filter(is_bid_highest=True).exists():
-                bid_l.filter(pk=bid_l.order_by('-bid_amount').first().pk).update(is_bid_highest=True)
-            else:
-                bids = bid.objects.filter(auction=instance.auction, is_bid_highest = True).order_by('-bid_amount')
-                bids.exclude(pk=bids.first().pk).update(is_bid_highest=False)
-                
-        else:
-            #there is none bid
-            return
+        highest = bid.objects.filter(auction=instance.auction).order_by('-bid_amount').first()
+        highest.is_bid_highest = True
+        highest.save(update_fields=['is_bid_highest'])
+
+@receiver(post_delete, sender=bid)
+def _bid_delete_receiver(sender, *args, **kwargs):
+    instance = kwargs['instance']
+    if instance.is_bid_highest == True:
+        try:
+            bid_list = bid.objects.filter(auction=instance.auction).order_by('-bid_amount').first()
+            bid_list.is_bid_highest = True
+            bid_list.save(update_fields=['is_bid_highest'])
+        except bid.DoesNotExist:
+            pass
 
 
 

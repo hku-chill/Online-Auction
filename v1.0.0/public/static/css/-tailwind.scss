@@ -794,7 +794,17 @@ section#register-form-section{
             @apply  flex-1 px-3 py-6 flex flex-col;
 
             .main-img{
-                @apply px-2 py-3 border rounded-xl border-opacity-20 border-siyah-15 relative;
+                @apply px-2 py-3 border rounded-xl border-opacity-20 border-siyah-15 relative relative overflow-hidden;
+                height: 560px;
+
+                img{
+                    position: absolute;
+                    top: 50%;
+                    left: 50%;
+                    transform: translate(-50%, -50%);
+                    width: 100%;
+                    height: auto;
+                }
 
                 .img-button{
                     display: none;
@@ -1010,12 +1020,13 @@ section#register-form-section{
 
                 .bid-data-button{
                     margin-top: 1rem;
-                    button{
+                    a{
                         background-color: theme("colors.turuncu");
                         padding: 8px 12px;
                         font-size: 16px;
                         color: theme("colors.beyaz.0");
                         border-radius: 8px;
+                        margin-right: 1rem;
                     }
                 }
             }

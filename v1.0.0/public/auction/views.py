@@ -57,7 +57,14 @@ def get_category(request, slug=None):
 def get_auction(request, slug=None):
     if not slug == None:
         auction_item = auction.objects.get(slug=slug)
-        return render(request, 'auction/auction_item.html', {'auction_item': auction_item})
+
+        try:
+            highest = bid.objects.get(auction=auction_item, is_bid_highest=True)
+        except bid.DoesNotExist:
+            highest = None
+            pass
+
+        return render(request, 'auction/auction_item.html', {'auction_item': auction_item, 'highest_bid':highest})
 
 #add bids to auction
 def add_bid_to_auction(request, slug=None):

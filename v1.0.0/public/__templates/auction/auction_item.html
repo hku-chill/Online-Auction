@@ -159,10 +159,10 @@
                                 <i class="fas fa-plus"></i>
                                 Bid Now
                             </a>
-                            <button>
+                            <a href="#">
                                 <i class="fas fa-comment-dots"></i>
                                 Comment
-                            </button>
+                            </a>
                         </div>
 
                     </div>
@@ -176,23 +176,29 @@
                         <div class="user-profile seller-profile">
 
                             <div class="user-pic-contain">
-                                <div class="profile-img-bg" style="--bg-img:url(https://www.incimages.com/uploaded_files/image/1920x1080/getty_494346582_2000133020009280104_303351.jpg);"></div>
+                                <div class="profile-img-bg" style="--bg-img:url(/{{highest_bid.user.profile.profile_picture}});"></div>
                             </div>
 
                             <div class="user-title-rate">
 
                                 <div class="user-title-contain">
-                                    <h3>Katarine Nachikova</h3>
+                                    <h3>{{ highest_bid.user }}</h3>
                                     <span>Artist and a mother</span>
                                 </div>
                                 <div class="user-rate-contain">
                                     <div class="user-rate">
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <span>4.5</span>
+                                        {% with ''|center:5 as range %}
+                                            {% for _ in range %}
+                                                
+                                                {% if forloop.counter <= highest_bid.user.profile.calc_rate_floor %}
+                                                    <i class="fas fa-star"></i>
+                                                {% else %}
+                                                    <i class="far fa-star"></i>
+                                                {% endif %}
+                                                
+                                            {% endfor %}
+                                        {% endwith %}
+                                        <span>{{ highest_bid.user.profile.calc_rate_round }}</span>
                                     </div>
                                 </div>
 
@@ -202,15 +208,15 @@
 
                                 <div class="user-verified">
                                     <i class="fas fa-check-circle"></i>
-                                    <p>Verified Seller</p>
+                                    <p>Verified User</p>
                                 </div>
 
                                 <div class="user-bid-data text-siyah-10 text-xl font-bold">
-                                    <h2>17,456 <small>£</small></h2>
+                                    <h2>{{highest_bid.bid_amount}}<small>€</small></h2>
                                 </div>
 
                                 <div class="user-links">
-                                    <a href="#">
+                                    <a href="{% url 'user:user_profile_url' userid=highest_bid.user.profile.pk %}">
                                         <i class="fas fa-user"></i>
                                         User Profile
                                     </a>
