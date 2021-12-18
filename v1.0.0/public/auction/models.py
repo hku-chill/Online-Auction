@@ -223,13 +223,15 @@ def _bid_create_receiver(sender, *args, **kwargs):
 @receiver(post_delete, sender=bid)
 def _bid_delete_receiver(sender, *args, **kwargs):
     instance = kwargs['instance']
-    if instance.is_bid_highest == True:
+    if type(instance) == "object" and instance.is_bid_highest == True:
         try:
             bid_list = bid.objects.filter(auction=instance.auction).order_by('-bid_amount').first()
             bid_list.is_bid_highest = True
             bid_list.save(update_fields=['is_bid_highest'])
         except bid.DoesNotExist:
             pass
+    else:
+        pass
 
 
 

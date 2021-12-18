@@ -259,26 +259,45 @@
         
         <div class="auction-detail-header">
             
-            <div class="auction-detail-titles">
+            <a href="?t=details" class="auction-detail-titles">
                 <h2>Product Details</h2>
-            </div>
-            <div class="auction-detail-titles">
-                <h2>Product Details</h2>
-            </div>
-            <div class="auction-detail-titles">
-                <h2>Product Details</h2>
-            </div>
-            <div class="auction-detail-titles">
-                <h2>Product Details</h2>
-            </div>
-            <div class="auction-detail-titles">
-                <h2>Product Details</h2>
-            </div>
+            </a>
+            <a href="?t=condution" class="auction-detail-titles">
+                <h2>Product Condution</h2>
+            </a>
+            <a href="?t=bids" class="auction-detail-titles">
+                <h2>Bid List</h2>
+            </a>
+            <a href="?t=comments" class="auction-detail-titles">
+                <h2>Comment List</h2>
+            </a>
+            <a href="?t=a_details" class="auction-detail-titles">
+                <h2>Auction Details</h2>
+            </a>
 
         </div>
         
         <div class="auction-detail-data">
-            {{ auction_item.item_condution }}
+            {% if block_content.type == "text" %}
+                {{ block_content.value }}
+            {% elif block_content.type == "object_list" %}
+
+                {% if block_content.value_id == "bid_list" %}
+                    <div class="table_item grid grid-cols-3 font-medium mb-2">
+                        <div>Bid Date</div>
+                        <div>Bid Amouth</div>
+                        <div>Bidder Number</div>
+                    </div>
+                {% endif %}
+
+                {% for z in block_content.value %}
+                    <div class="table_item grid grid-cols-3 py-3 px-1">
+                        <div>{{z.bid_date}}</div>
+                        <div>{{z.bid_amount}}£</div>
+                        <div>{{z.user.pk}}</div>
+                    </div>
+                {% endfor %}
+            {% endif %}
         </div>
     </section>
 

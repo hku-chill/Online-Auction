@@ -1089,7 +1089,12 @@ section#register-form-section{
         padding: 2rem 1rem;
         width: 100%;
         min-height: 400px;
+        max-height: 600px;
         overflow: auto;
+
+        .table_item:nth-child(even){
+            background-color: theme("colors.beyaz.10");
+        }
     }
 }
 

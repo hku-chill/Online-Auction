@@ -44,10 +44,19 @@ $(document).on("click",".add_bid_button",function (e) {
             "request_form": true
         },
         success: function (response, textStatus, xhr) {
+            if (typeof response === "object" && response.success === false){
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: response.message,
+                    footer: response.footer ? `<a href="${response.footer.url }">${response.footer.text}</a>` : ''
+                })
+                return false;
+            }
             if(xhr.status == 200){
 
                 Swal.fire({
-                    title: 'Login Form',
+                    title: 'Add bid to auction',
                     html: response,
                     confirmButtonText: 'Send Bid',
                     focusConfirm: false,
@@ -65,7 +74,14 @@ $(document).on("click",".add_bid_button",function (e) {
                         url: request_uri,
                         data: {bid_amount: result.value.bid, csrfmiddlewaretoken: result.value.csrf, addBid_form: true},
                         success: function (response) {
-                            console.log(response);
+                            Swal.fire({
+                                icon: response.success ? 'success' : 'error',
+                                title: 'Humbl Bid',
+                                text: response.message,
+                                footer: response.footer ? `<a href="${response.footer.url }">${response.footer.text}</a>` : ''
+                            }).then(e => location.reload())
+
+                            
                         }
                     });
                   })
@@ -112,3 +128,25 @@ $(document).ready(function () {
     timer = setInterval(e, 1000);
 
 });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+function IsJsonString(str) {
+    try {
+        JSON.parse(str);
+    } catch (e) {
+        return false;
+    }
+    return true;
+}
