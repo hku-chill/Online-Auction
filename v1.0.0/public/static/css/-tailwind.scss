@@ -1095,6 +1095,66 @@ section#register-form-section{
         .table_item:nth-child(even){
             background-color: theme("colors.beyaz.10");
         }
+
+
+
+        .auction-comment-item{
+            display: flex;
+            flex-direction: row;
+            justify-content: flex-start;
+            gap: 12px;
+
+            .user-avatar{
+                overflow: hidden;
+                width: 48px;
+                height: 48px;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                border-radius: 50%;
+
+                img{
+                    width: 48px;
+                    height: 48px;
+                    border-radius: 50%;
+                }
+            }
+
+
+            .comment-content{
+                display: flex;
+                flex-direction: column;
+                gap: 8px;
+                
+                .comment-user-title{
+                    display: flex;
+                    flex-direction: row;
+                }
+
+                .comment-comment{
+                    padding: 18px 20px;
+                    max-width: 600px;
+                    background-color: theme("colors.beyaz.10");
+                    border-radius: 20px;
+                }
+
+                .comment-bottom{
+                    .comment-keyword-list{
+                        display: flex;
+                        flex-direction: row;
+                        gap: 9px;
+
+                        span{
+                            padding: 4px 6px;
+                            border-radius: 6px;
+                            background-color: theme("colors.beyaz.10");
+                            color: theme("colors.beyaz.30");
+                        }
+                    }
+                }
+
+            }
+        }
     }
 }
 
