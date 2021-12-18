@@ -77,7 +77,7 @@ class auction(models.Model):
 class category(models.Model):
     name = models.CharField(max_length=100, verbose_name=_('Category'))
     description = models.TextField(verbose_name=_('Description'))
-    image = models.ImageField(upload_to='public/static/img/category_imgs', verbose_name=_('Image'))
+    image = models.ImageField(upload_to='static/img/category_imgs', verbose_name=_('Image'))
     slug = models.SlugField(unique=True, verbose_name=_('Category Slug'), blank=True)
 
     auction_count = models.PositiveIntegerField(default=0, verbose_name=_('Auction Count'))

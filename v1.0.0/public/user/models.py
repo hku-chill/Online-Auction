@@ -9,14 +9,16 @@ from django.dispatch import receiver
 from django.urls import reverse
 
 import math
-
+from auction.models import auction, bid
 
 
 class Profile(models.Model):
     user = models.OneToOneField(User,related_name="profile", on_delete=models.CASCADE)
     birthday = models.DateField(null=True, blank=True)
     profile_picture = models.ImageField(upload_to='static/img/profile_pics', blank=True, default='static/img/profile_pics/default.png')
+
     address = models.CharField(max_length=255, null=True, blank=True)
+    user_details = models.CharField(max_length=255, null=True, blank=True, default="An awesome who want to be a BATMAN")
 
     user_rate_1 = models.IntegerField(default=0)
     user_rate_2 = models.IntegerField(default=0)
@@ -43,6 +45,13 @@ class Profile(models.Model):
         rate = (1*self.user_rate_1 + 2*self.user_rate_2 + 3*self.user_rate_3 + 4*self.user_rate_4 + 5*self.user_rate_5) / self.total_rate()
 
         return float(math.floor(rate))
+
+
+    def user_total_bid(self):
+        return bid.objects.filter(user=self.user).count()
+
+    def user_total_auction(self):
+        return auction.objects.filter(user=self.user).count()
     
     def calc_rate_round(self):
         if self.total_rate() == 0:

@@ -27,21 +27,27 @@
                             
                             <div class="profile-data-bio px-6">
 
-                                <h1 class="font-medium text-2xl text-siyah-15 uppercase">Margaery Tyrell</h1>
-                                <span class="font-light text-base text-beyaz-20">Ered Nimrais, Anorien</span>
+                                <h1 class="font-medium text-2xl text-siyah-15 uppercase">{{ profile.get_full_name }}</h1>
+                                <span class="font-light text-base text-beyaz-20">{{ profile.user }}</span>
 
                                 <div class="user-rate-contain my-4">
                                     <div class="user-rate">
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <span>4.5</span>
+                                        <span>{{ profile.calc_rate_round }}</span>
+                                        {% with ''|center:5 as range %}
+                                            {% for _ in range %}
+                                                
+                                                {% if forloop.counter <= profile.calc_rate_floor %}
+                                                    <i class="fas fa-star"></i>
+                                                {% else %}
+                                                    <i class="far fa-star"></i>
+                                                {% endif %}
+                                                
+                                            {% endfor %}
+                                        {% endwith %}
                                     </div>
                                 </div>
 
-                                <p class="font-light text-sm text-beyaz-20 text-justify">Designer, Director, Mother & Actor. Founding partner of westeros. Fan of the Lord of the Rings. 2 times Oscar winner. wisethesam@mistymountain.com</p>
+                                <p class="font-light text-sm text-beyaz-20 text-justify">{{ profile.user_details }}</p>
 
                             </div>
 
@@ -52,7 +58,7 @@
                                 <div class="nav-category-item active">
                                     <i class="fas fa-gavel"></i>
                                     <span id="nav-category-item-id">Auctions</span>
-                                    <span id="nav-category-item-count">39</span>
+                                    <span id="nav-category-item-count">{{ profile.user_total_auction }}</span>
                                 </div>
 
                                 <div class="nav-category-item ">
@@ -63,7 +69,7 @@
                                 <div class="nav-category-item ">
                                     <i class="fas fa-wallet"></i>
                                     <span id="nav-category-item-id">Bids</span>
-                                    <span id="nav-category-item-count">208</span>
+                                    <span id="nav-category-item-count">{{ profile.user_total_bid }}</span>
                                 </div>
                                 <div class="nav-category-item ">
                                     <i class="fas fa-comment-dots"></i>
@@ -89,11 +95,10 @@
                 <div class="profile-content-body m-6">
 
                     <div class="profile-content-title pb-6 border-b border-beyaz-20 mb-3">
-                        <h2 class="font-medium text-xl text-siyah-10">Margaery Tyrell - Auctions</h2>
+                        <h2 class="font-medium text-xl text-siyah-10">{{ profile.get_full_name }} - Auctions</h2>
                     </div>
 
-                    {{ profile.total_rate }}
-                    {{ profile.get_absolute_url }}
+                    Blok Content
                 </div>
 
             </div>
