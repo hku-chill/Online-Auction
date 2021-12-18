@@ -105,6 +105,19 @@ class bid(models.Model):
         verbose_name_plural = _('Bids')
         ordering = ['-bid_amount']
 
+class comment(models.Model):
+    
+    user = models.ForeignKey('auth.User', on_delete=models.CASCADE, related_name='comments')
+    name = models.CharField(max_length=100)
+    body = models.TextField()
+    created = models.DateTimeField(auto_now_add=True)
+    updated = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        # return '%s - %s' % (self.post.title, self.name)
+        return f'{self.author.username}\'s Post- {self.title}'
+
+
 
 
 
