@@ -1,34 +1,4 @@
-{% extends '_base.html' %}
 
-{% load static %}
 
-{% block content %}
-
-<section class="tc-validate-section container-x main-wrapper block w-full bg-beyaz-0 my-4">
-    
-    <div class="form_wrapper">
-
-        <div class="container-title flex flex-col justify-start mb-7">
-            <h3 class=" text-base text-mavi">Send bid to {{ auction_item.item_title }}</h3>
-            <h2 class=" text-base text-mavi">Recent highest bid:{{ auction_item.item_alt_title }}</h2>
-        </div>
-        <form class="add_bid_form" action="" method="post">
-            {% csrf_token %}
-            <div class="input_container">
-
-                <div class="input_field">
-                    <label for="{{bid_form.bid_amount.id_for_label }}">{{bid_form.bid_amount.label}}</label>
-                    {{bid_form.bid_amount}}
-                </div>
-
-                <button type="submit" class="add_bid_form">Send Bid</button>
-
-            </div>
-
-        </form>
-
-    </div>
-
-</section>
-
-{% endblock %}
+{% csrf_token %}
+{{bid_form.bid_amount}}

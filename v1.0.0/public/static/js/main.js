@@ -11,13 +11,13 @@ $(".tc_verify_form").submit(function (e) {
         data: $(this).serialize(),
         success: function (response) {
             if (response?.success === true){
-                swal("Success", response?.message, "success").then(e => {
+                Swal.fire("Success", response?.message, "success").then(e => {
                     document.location.href = "../";
                 });
                 $(".tc_valide_button").prop("disabled", false).toggleClass("animate-pulse");
             }
             else{
-                swal("Error", "Your account has not been verified, please check your informations...", "error");
+                Swal.fire("Error", "Your account has not been verified, please check your informations...", "error");
                 $(".tc_valide_button").prop("disabled", false).toggleClass("animate-pulse");
             }
         },
@@ -32,6 +32,55 @@ $(".tc_verify_form").submit(function (e) {
     return false;
 
 });
+
+$(document).on("click",".add_bid_button",function (e) { 
+    e.preventDefault();
+    request_uri = $(this).attr("requ-uri")
+
+    $.ajax({
+        type: "GET",
+        url: request_uri,
+        data: {
+            "request_form": true
+        },
+        success: function (response, textStatus, xhr) {
+            if(xhr.status == 200){
+
+                Swal.fire({
+                    title: 'Login Form',
+                    html: response,
+                    confirmButtonText: 'Send Bid',
+                    focusConfirm: false,
+                    preConfirm: () => {
+                      const csrf = Swal.getPopup().querySelector('[name="csrfmiddlewaretoken"]').value
+                      const bid = Swal.getPopup().querySelector('[name="bid_amount"]').value
+                      if (!csrf || !bid) {
+                        Swal.showValidationMessage(`Please fill all fields!`)
+                      }
+                      return { csrf: csrf, bid: bid }
+                    }
+                  }).then((result) => {
+                    $.ajax({
+                        type: "post",
+                        url: request_uri,
+                        data: {bid_amount: result.value.bid, csrfmiddlewaretoken: result.value.csrf, addBid_form: true},
+                        success: function (response) {
+                            console.log(response);
+                        }
+                    });
+                  })
+
+            }
+        },
+        error: function (response) {
+            alert("something went wrong please contact to admin: "+response).then(e => {
+                document.location.href = "../";
+            })
+        }
+    });
+});
+
+//add bid javascript
 
 
 
