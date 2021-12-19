@@ -1,0 +1,113 @@
+{% extends '_base.html' %}
+
+{% load static %}
+
+{% block content %}
+
+<article id="main-article" class="bg-beyaz-5 py-4">
+
+    <div class="auction-create-form main-wrapper bg-beyaz-0 rounded">
+        
+        <form action="#" method="GET">
+
+            <div class="create-form-inside">
+
+                <div class="auction-title-form flex flex-row justify-between px-4">
+                    <div class="input-element underline-border">
+                        <input type="text" placeholder="Auction Title" class="form-input">
+                    </div>
+                    <div class="input-element underline-border">
+                        <input type="text" placeholder="initializing bid" class="form-input">
+                    </div>
+                </div>
+
+                <hr>
+                
+                <div class="auction-image-form flex flex-row justify-between px-4">
+
+                    <!-- Picture Input -->
+                    <div class="input-element">
+                        <label for="file_test">Picture</label>
+                        <input type="file" name="file_test" id="file_test">
+                    </div>
+
+                    <!-- Description Input -->
+                    <div class="input-element">
+                        <label for="desc_test">Product Description</label>
+                        <textarea class="form-input" placeholder="Enter a clear description for your product" name="desc_test" id="desc_test" cols="30" rows="10"></textarea>
+                    </div>
+                </div>
+
+
+                <div class="auction-image-form flex flex-row justify-between px-4">
+                    <div class="input-element">
+                        <label for="t">Auction Details</label>
+                        
+                        <div class="half-inputs">
+                            <!-- End date Input -->
+                            <div class="input-element">
+                                <label for="end_date">Auction Ending Date</label>
+                                <input type="date" placeholder="Auction Ending Date" class="form-input" id="end_date">
+                            </div>
+                            
+                            <!-- Auction Type Input -->
+                            <div class="input-element">
+                                <label for="desc_test">Product Description</label>
+                                <select name="select_test" id="select_test" class="form-input">
+                                    <option value="selected">sa</option>
+                                    <option value="selected">sa</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Condution Input -->
+                    <div class="input-element">
+                        <label for="desc_test">Product Condution</label>
+                        <textarea class="form-input" placeholder="Enter a clear description for your product" name="desc_test" id="desc_test" cols="30" rows="10"></textarea>
+                    </div>
+                </div>
+
+                <div class="auction-image-form flex flex-row justify-between gap-2 px-4">
+
+                    <!-- Picture Input -->
+                    <div class="input-element">
+                        <label for="file_test">Picture</label>
+                        <input type="hidden" name="hidden_lo" id="category_input">
+                        <div class="category-list">
+                            <div class="item-list">
+                                {% for c in categories_list %}
+                                    <div class="category-item" category-slug="{{ c.slug }}">{{c.name|lower|upper}}</div>
+                                {% endfor %}
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Description Input -->
+                    <div class="input-element">
+                        <label for="desc_test">Keywords</label>
+                        <div class="keyword-list">
+                            <div class="item-list"><!--Keyword List--></div>
+                        </div>
+                        <div class="keyword-input">
+                            <input class="form-input" type="text" name="sad" placeholder="add keyword" id="keyword_input">
+                            <button class="add_keyword_button">+</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="auction-create-buttons">
+                    <button class="btn btn-primary">Create Auction</button>
+                    <button type="reset">Cancel</button>
+                </div>
+
+
+            </div>
+
+        </form>
+
+    </div>
+
+</article>
+
+{% endblock %}

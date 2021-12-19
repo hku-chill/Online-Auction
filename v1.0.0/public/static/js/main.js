@@ -33,6 +33,7 @@ $(".tc_verify_form").submit(function (e) {
 
 });
 
+//add bid javascript
 $(document).on("click",".add_bid_button",function (e) { 
     e.preventDefault();
     request_uri = $(this).attr("requ-uri")
@@ -96,7 +97,7 @@ $(document).on("click",".add_bid_button",function (e) {
     });
 });
 
-//add bid javascript
+
 
 
 
@@ -150,3 +151,43 @@ function IsJsonString(str) {
     }
     return true;
 }
+
+
+
+
+
+
+
+
+//adding new keyword
+$(".add_keyword_button").on("click touch", function (e) {
+    e.preventDefault()
+    const keyword = $(this).parent().find("#keyword_input").val()
+    
+    if(keyword && keyword != null && keyword != ""){
+        $(".keyword-list .item-list").append( $('<div/>',{
+            class: "keyword-item",
+            text: keyword
+        }));
+        $(this).parent().find("#keyword_input").val("")
+    }else{
+        $(this).parent().find("#keyword_input").focus()
+    }
+});
+
+//removing keyword
+$(document).on("click touch",".keyword-list .keyword-item", function (e) {
+    e.preventDefault()
+    $(this).remove()
+})
+
+
+
+//category selection
+$(".category-list .category-item").on("click touch", function (e) {
+    e.preventDefault()
+    $(".category-list .category-item").removeClass("selected")
+    const category_input = $("#category_input")
+    let ss = $(this).toggleClass("selected").attr("category-slug");
+    $(category_input).val(ss);
+})

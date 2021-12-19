@@ -85,6 +85,11 @@ def get_auction(request, slug=None):
 
         return render(request, 'auction/auction_item.html', {'auction_item': auction_item, 'highest_bid':highest, 'block_content': block_content })
 
+
+#create new auction view
+def create_auction(request):
+    return render(request, 'auction/create_auction.html')
+
 #add bids to auction
 def add_bid_to_auction(request, slug=None):
     if not request.user.is_authenticated:
