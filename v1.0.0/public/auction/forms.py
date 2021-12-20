@@ -15,7 +15,7 @@ class CommentForm(forms.ModelForm):
         
         widget=forms.Textarea(
             attrs={
-                'placeholder': '  what is your view?',
+                'placeholder': '  What is your view?',
                 'class': 'form-input comment-name',
                 'cols':70, 
                 'rows':8, 
