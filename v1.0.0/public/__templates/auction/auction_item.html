@@ -159,9 +159,10 @@
                                 <i class="fas fa-plus"></i>
                                 Bid Now
                             </a>
-                            <button><a href="#">
-                                <i class="fas fa-comment-dots"></i>
-                                Comment</a>
+                            <button>
+                                <a href="{% url 'auction:add_comment_url' slug=auction_item.slug %}">
+                                    <i class="fas fa-comment-dots"></i>
+                                </a>Comment
                             </button>
                         </div>
 

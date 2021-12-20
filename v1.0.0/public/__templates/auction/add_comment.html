@@ -1,0 +1,66 @@
+{% extends '_base.html' %}
+
+{% load static %}
+
+{% block content %}
+
+
+<!-- {% if not auction_item.comments.all %}
+No comment yet
+{% else %}
+{% for comment in auction_item.comments.all %}
+    {{ comment.name }} -
+    {{ comment.created }}
+    {{ comment.body }}
+{% endfor %}
+{% endif %} -->
+
+    <div class="auction-details">
+        
+        <div class="auction-detail-data">
+
+            <div class="auction-comment-item">
+
+                
+                <div class="comment-content">
+                    
+                    <div class="form-wrapper">
+                        <p>Leave a Comment..</p>
+                        <form class="add_comment_form" action="" method="post">
+                            {% csrf_token %}
+                            
+                            <!-- <div>
+                                <label for="{{comment_form.comment.id_for_label }}">{{comment_form.comment.label}}</label>
+                            </div> -->
+
+                            <div class="comment-name">
+                                {{comment_form.comment}}
+                            </div>
+                            
+                            <button class="comment-btn bg-beyaz-5" type="submit">Post Comment</button>
+    
+                            <div class="comment-bottom flex flex-row justify-between">
+                                <div class="report-comment">
+                                    <a href="#" class="font-light text-beyaz-20 text-sm">
+                                        <i class="fas fa-flag"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    
+                    
+
+
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+
+    
+
+    
+
+{% endblock %}

@@ -17,7 +17,7 @@ from django.shortcuts import HttpResponse, redirect, render, get_object_or_404
 
 from .models import auction, category, bid
 
-from .forms import BidForm
+from .forms import BidForm, CommentForm
 
 
 # Create your views here.
@@ -34,7 +34,8 @@ def get_category_list(request):
         return render(request, 'auction/category_list.html', {'list_category': list_category})
     else:
         return redirect('/')
-        
+    
+
 
 
 def get_category(request, slug=None):
@@ -59,6 +60,9 @@ def get_auction(request, slug=None):
         auction_item = auction.objects.get(slug=slug)
         return render(request, 'auction/auction_item.html', {'auction_item': auction_item})
 
+
+
+
 #add bids to auction
 def add_bid_to_auction(request, slug=None):
     if not slug == None:
@@ -76,3 +80,21 @@ def add_bid_to_auction(request, slug=None):
             bid_form = BidForm()
     
     return render(request, 'auction/add_bid.html', {'bid_form': bid_form, 'auction_item': auction_item})
+
+
+def add_comment(request, slug=None):
+    if not slug == None:
+        auction_item = get_object_or_404(auction, slug=slug)
+        if request.method == "POST":
+            comment_form = CommentForm(request.POST)
+            if comment_form.is_valid():
+                comment = comment_form.save(commit=False)
+                comment.auction = auction_item
+                comment.user = request.user
+                comment.save()
+                return redirect('auction:auction_item_url', slug=auction_item.slug)
+        else:
+            comment_form = CommentForm()
+        return render(request, 'auction/add_comment.html', {'comment_form': comment_form})
+   
+  
