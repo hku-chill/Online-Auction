@@ -11,7 +11,6 @@ class BidForm(forms.ModelForm):
 
 class CommentForm(forms.ModelForm):
     comment = forms.CharField(
-        label='Message',
         
         widget=forms.Textarea(
             attrs={
@@ -26,7 +25,7 @@ class CommentForm(forms.ModelForm):
     ))
     class Meta:
         model = comment
-        fields = ('name','body')
+        fields = ['body']
 
         
         

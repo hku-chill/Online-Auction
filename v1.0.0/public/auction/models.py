@@ -109,13 +109,12 @@ class comment(models.Model):
 
     auction = models.ForeignKey('auction', on_delete=models.CASCADE)
     user = models.ForeignKey('auth.User', on_delete=models.CASCADE, related_name='comments')
-    name = models.CharField(max_length=100)
     body = models.TextField()
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
 
     def __str__(self):
-        return self.name
+        return self.body
         
 
 

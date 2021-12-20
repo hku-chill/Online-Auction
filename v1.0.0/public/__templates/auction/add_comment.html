@@ -5,16 +5,6 @@
 {% block content %}
 
 
-<!-- {% if not auction_item.comments.all %}
-No comment yet
-{% else %}
-{% for comment in auction_item.comments.all %}
-    {{ comment.name }} -
-    {{ comment.created }}
-    {{ comment.body }}
-{% endfor %}
-{% endif %} -->
-
     <div class="auction-details">
         
         <div class="auction-detail-data">
@@ -37,7 +27,7 @@ No comment yet
                                 {{comment_form.comment}}
                             </div>
                             
-                            <button class="comment-btn bg-beyaz-5" type="submit">Post Comment</button>
+                            <button class="comment-btn bg-beyaz-5" value="submit" type="submit">Post Comment</button>
     
                             <div class="comment-bottom flex flex-row justify-between">
                                 <div class="report-comment">

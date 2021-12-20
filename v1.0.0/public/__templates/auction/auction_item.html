@@ -254,27 +254,95 @@
         
         <div class="auction-detail-header">
             
-            <div class="auction-detail-titles">
+            <a href="?t=details" class="auction-detail-titles">
                 <h2>Product Details</h2>
-            </div>
-            <div class="auction-detail-titles">
-                <h2>Product Details</h2>
-            </div>
-            <div class="auction-detail-titles">
-                <h2>Product Details</h2>
-            </div>
-            <div class="auction-detail-titles">
-                <h2>Comments</h2>
-            </div>
-            <div class="auction-detail-titles">
-                <h2>Product Details</h2>
-            </div>
+            </a>
+            <a href="?t=condution" class="auction-detail-titles">
+                <h2>Product Condution</h2>
+            </a>
+            <a href="?t=bids" class="auction-detail-titles">
+                <h2>Bid List</h2>
+            </a>
+            <a href="?t=comments" class="auction-detail-titles">
+                <h2>Comment List</h2>
+            </a>
+            <a href="?t=a_details" class="auction-detail-titles">
+                <h2>Auction Details</h2>
+            </a>
 
         </div>
         
         <div class="auction-detail-data">
-            {{ auction_item.item_condution }}
-        </div>
+            {% if block_content.type == "text" %}
+                {{ block_content.value }}
+            {% elif block_content.type == "object_list" %}
+
+                {% if block_content.value_id == "bid_list" %}
+                    <div class="table_item grid grid-cols-3 font-medium mb-2">
+                        <div>Bid Date</div>
+                        <div>Bid Amouth</div>
+                        <div>Bidder Number</div>
+                    </div>
+                    {% for z in block_content.value %}
+                    <div class="table_item grid grid-cols-3 py-3 px-1">
+                        <div>{{z.bid_date}}</div>
+                        <div>{{z.bid_amount}}£</div>
+                        <div>{{z.user.pk}}</div>
+                    </div>
+            
+                    {% endfor %}
+
+                {% elif block_content.value_id == "comment_list" %}
+                {% for z in block_content.value %}
+                   
+                <div class="auction-details">
+                    <div class="auction-detail-data">
+                        
+                        <div class="auction-comment-item">
+            
+                            <div class="user-avatar">
+                                <img width="48px" height="48px" src="{{ z.user.profile_image }}" alt="">
+                            </div>
+            
+                            <div class="comment-content">
+                                <div class="comment-user-title">
+                                    <h3 class="font-medium text-siyah-15 uppercase mr-4">{{ z.user.name }}</h3>
+                                    <span class="font-light text-beyaz-20 text-sm">{{ z.comment_date }}</span>
+                                </div>
+            
+                                <div class="comment-comment">
+                                    <p class="text-light font-light text-siyah-10">{{ z.body }}</p>
+                                </div>
+            
+                                <div class="comment-bottom flex flex-row justify-between">
+                                    <div class="report-comment">
+                                        <a href="#" class="font-light text-beyaz-20 text-sm">
+                                            <i class="fas fa-flag"></i>
+                                        </a>
+                                    </div>
+                                </div>
+            
+                                
+                            </div>
+            
+                        </div>
+            
+                    </div>
+                </div>
+
+
+                {% endfor %}
+                {% endif %}
+                
+                
+                    
+
+                
+
+                
+
+
+            {% endif %}
     </section>
 
 </article>

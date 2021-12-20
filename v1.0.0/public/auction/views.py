@@ -15,7 +15,7 @@
 
 from django.shortcuts import HttpResponse, redirect, render, get_object_or_404
 
-from .models import auction, category, bid
+from .models import auction, category, bid, comment
 
 from .forms import BidForm, CommentForm
 
@@ -58,7 +58,34 @@ def get_category(request, slug=None):
 def get_auction(request, slug=None):
     if not slug == None:
         auction_item = auction.objects.get(slug=slug)
-        return render(request, 'auction/auction_item.html', {'auction_item': auction_item})
+        
+        try:
+            highest = bid.objects.get(auction=auction_item, is_bid_highest=True)
+        except bid.DoesNotExist:
+            highest = None
+            pass
+        block_content = {
+            'type': 'text',
+            'value': auction_item.item_details
+        }
+        #auction body details
+        if request.GET and request.GET.get("t"):
+            if request.GET.get("t") == "bids":
+                block_content = {
+                    "type": "object_list",
+                    "value_id": "bid_list",
+                    "value": bid.objects.filter(auction=auction_item).order_by('-bid_date')
+                }
+            elif request.GET.get("t") == "comments":
+                block_content= {
+                    "type": "object_list",
+                    "value_id": "comment_list",
+                    "value": comment.objects.filter(auction=auction_item).order_by('-created')
+                }
+
+
+
+        return render(request, 'auction/auction_item.html', {'auction_item': auction_item, 'highest_bid':highest, 'block_content': block_content, })
 
 
 
