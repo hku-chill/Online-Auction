@@ -10,15 +10,14 @@ class BidForm(forms.ModelForm):
         fields = ['bid_amount']
 
 class CommentForm(forms.ModelForm):
-    comment = forms.CharField(
+    body = forms.CharField(
         
         widget=forms.Textarea(
             attrs={
                 'placeholder': '  What is your view?',
                 'class': 'form-input comment-name',
                 'cols':70, 
-                'rows':8, 
-                     
+                'rows':8,           
             }
         
         

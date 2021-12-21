@@ -24,7 +24,7 @@
                             </div> -->
 
                             <div class="comment-name">
-                                {{comment_form.comment}}
+                                {{comment_form.body}}
                             </div>
                             
                             <button class="comment-btn bg-beyaz-5" value="submit" type="submit">Post Comment</button>
@@ -48,7 +48,15 @@
 
         </div>
     </div>
-
+    {% if form.errors %}
+    {% for field in form %}
+        {% for error in field.errors %} 
+            <div onclick="this.parentNode.removeChild(this)" class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative mt-4 text-center cursor-pointer" role="alert">
+                <span>{{ error|escape }}</span>
+            </div>
+        {% endfor %}
+    {% endfor %}
+{% endif %}
     
 
     
