@@ -1,0 +1,57 @@
+{% extends '_base.html' %}
+
+{% load static %}
+
+{% block content %}
+
+
+    <div class="auction-details">
+        
+        <div class="auction-detail-data">
+
+            <div class="auction-comment-item">
+
+                
+                <div class="comment-content">
+                    
+                    <div class="form-wrapper">
+                        <p>Leave a Comment..</p>
+                        <form class="add_comment_form" action="" method="post">
+                            {% csrf_token %}
+
+                            <div class="comment-name">
+                                {{comment_form.body}}
+                            </div>
+                            
+                            <button class="comment-btn bg-beyaz-5" value="submit" type="submit">Post Comment</button>
+    
+                            <div class="comment-bottom flex flex-row justify-between">
+                                <div class="report-comment">
+                                    <a href="#" class="font-light text-beyaz-20 text-sm">
+                                        <i class="fas fa-flag"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    
+                    
+
+
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+    {% if form.errors %}
+        {% for field in form %}
+            {% for error in field.errors %} 
+                <div onclick="this.parentNode.removeChild(this)" class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative mt-4 text-center cursor-pointer" role="alert">
+                    <span>{{ error|escape }}</span>
+                </div>
+            {% endfor %}
+        {% endfor %}
+    {% endif %}
+
+{% endblock %}

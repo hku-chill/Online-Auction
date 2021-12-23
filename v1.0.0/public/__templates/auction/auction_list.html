@@ -4,11 +4,11 @@
 
 {% block content %}
     
-<section id="auction-list" class="container-x bg-beyaz-0 my-4 rounded-2xl shadow">
+<section id="auction-list" class="container-x bg-beyaz-0 my-4 rounded-2xl">
 
     <div class="main-wrapper">
         <div class="container-title flex flex-row justify-between items-center mb-7">
-            <h3 class=" text-base text-siyah-15">Active Auctions</h3>
+            <h3 class=" text-base text-mavi">Active Auctions</h3>
         </div>
     
         <div class="auction-list-contain">
@@ -40,10 +40,9 @@
                     </div>
                     <div class="auction-info">
                         <p class="auction-price">
-                            16,455 BIDS
+                            {{auct.get_bid_count}} BIDS
                         </p>
-                        <p class="auction-time">
-                            3:12:00
+                        <p class="auction-time calculate_rest" enddate="{{ auct.auction_end_date|date:'Y-m-d H:i' }}">
                         </p>
     
                         <div class="join-auction-button">

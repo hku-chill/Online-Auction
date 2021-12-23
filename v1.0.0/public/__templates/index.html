@@ -1,519 +1,147 @@
-<!DOCTYPE html>
-<html lang="en" class="w-full h-full">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Biddibs Index Page</title>
+{% extends '_base.html' %}
 
+{% load static %}
 
+{% block content %}
 
-    <!--? Poppins google font include -->
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700&display=swap" rel="stylesheet">
+<article id="main-article" class="bg-beyaz-5 py-4">
 
+    <!-- Start selling your items campain -->
+    <section id="start-selling-items" class="main-wrapper rounded-2xl shadow">
+        <h2>Start Selling your Items.</h2>
 
-    <!--? Font awesome 5.15 include -->
-    <link rel="stylesheet" href="./Fonts/Fontawesome/fontawesome.css">
-
-
-    <!--? Main css include -->
-    <link rel="stylesheet" href="./static/css/root.css">
-
-</head>
-<body class="w-full bg-beyaz-0">
-    
-    <header class="w-full bg-beyaz-0">
-        <div class="main-wrapper">
-            <nav class="flex flex-row py-6 gap-6 items-center">
-
-                <div id="site-logo">
-                    <h1 class="text-mavi_5 text-4xl font-medium">BiDDiBs</h1>
-                </div>
-
-                <div id="search-section">
-                    
-                    <div id="input-section" class="before-logo">
-                        <input type="text" name="search__input" id="search__input" placeholder="search for anything">
-                    </div>
-                    <div id="button-section">
-                        <button><span>search</span></button>
-                    </div>
-
-                </div>
-
-                <div id="user-section" class="flex flex-row justify-between">
-                    
-                    <div id="user-section-icon-base">
-                        <!-- icon section -->
-                        <div id="user-section-icon">
-                            <i class="fal fa-user"></i>
-                        </div>
-
-                        <p id="user-section-text">
-                            <a href="#signin">Sign in</a> or <br><a href="#register"> Register</a>
-                        </p>
-                    </div>
-
-                    <div id="user-section-icon-base">
-                        <!-- icon section -->
-                        <div id="user-section-icon">
-                            <i class="fal fa-heart"></i>
-                        </div>
-
-                        <p id="user-section-text">
-                            <a href="#signin">My<br>Favorites</a>
-                        </p>
-                    </div>
-
-                </div>
-
-            </nav>
-            <div id="category-list">
-
-            </div>
-        </div>
-        <div id="category-list" class="bg-beyaz-5 shadow border-b">
-            <div class="main-wrapper">
-                
-                <div id="category-list-wrap" class="flex flex-wrap justify-between">
-
-                    <div id="category-list-item">
-                        <span>Category 1</span>
-                    </div>
-                    <div id="category-list-item">
-                        <span>Category 1</span>
-                    </div>
-                    <div id="category-list-item">
-                        <span>Category 1</span>
-                    </div>
-                    <div id="category-list-item">
-                        <span>Category 1</span>
-                    </div>
-                    <div id="category-list-item">
-                        <span>Category 1</span>
-                    </div>
-                    <div id="category-list-item">
-                        <span>Category 1</span>
-                    </div>
-
-                </div>
-
-            </div>
-        </div>
-    </header>
-
-    <article id="main-article" class="bg-beyaz-5 py-4">
-
-        <!-- Start selling your items campain -->
-        <section id="start-selling-items" class="main-wrapper rounded-2xl shadow">
-            <h2>Start Selling your Items.</h2>
-
-            <!-- staert selling your items image -->
-            <div id="campain-image">
-                
-            </div>
-
-            <div id="round-redirect-button">
-                <i class="fas fa-arrow-circle-right text-4xl text-beyaz-0"></i>
-            </div>
-
-
-        </section>
-
-        <!-- popular categories list -->
-        <section id="popular-category" class="container-x main-wrapper bg-beyaz-0 my-4 rounded-2xl shadow">
-
-            <div class="container-title flex flex-row justify-between items-center mb-7">
-                <h3 class=" text-base text-siyah-15">Popular Categories</h3>
-                <div id="arrow-redirect" class="text-mavi text-sm">
-                    <span>Check out other categories</span>
-                    <i class="fal fa-arrow-right"></i>
-                </div>
-            </div>
-
-
-            <div class="category-list-contain flex flex-wrap flex-row gap-4">
-
-                <div class="category-item">
-                    <div class="category-item-image">
-                        <img src="./static/img/category_item_1.png" alt="">
-                    </div>
-                    <div class="category-item-text">
-                        <div class="texts">
-                            <h3>Smarth Phone</h3>
-                            <p>5.400 auctions</p>
-                        </div>
-                        <div id="round-redirect-button">
-                            <i class="fas fa-arrow-circle-right text-2xl text-beyaz-0"></i>
-                        </div>
-                    </div>
-                </div>
-                <div class="category-item">
-                    <div class="category-item-image">
-                        <img src="./static/img/category_item_2.png" alt="">
-                    </div>
-                    <div class="category-item-text">
-                        <div class="texts">
-                            <h3>Shoes</h3>
-                            <p>5.400 auctions</p>
-                        </div>
-                        <div id="round-redirect-button">
-                            <i class="fas fa-arrow-circle-right text-2xl text-beyaz-0"></i>
-                        </div>
-                    </div>
-                </div>
-                <div class="category-item">
-                    <div class="category-item-image">
-                        <img src="./static/img/category_item_1.png" alt="">
-                    </div>
-                    <div class="category-item-text">
-                        <div class="texts">
-                            <h3>Smarth Phone</h3>
-                            <p>5.400 auctions</p>
-                        </div>
-                        <div id="round-redirect-button">
-                            <i class="fas fa-arrow-circle-right text-2xl text-beyaz-0"></i>
-                        </div>
-                    </div>
-                </div>
-                <div class="category-item">
-                    <div class="category-item-image">
-                        <img src="./static/img/category_item_2.png" alt="">
-                    </div>
-                    <div class="category-item-text">
-                        <div class="texts">
-                            <h3>Shoes</h3>
-                            <p>5.400 auctions</p>
-                        </div>
-                        <div id="round-redirect-button">
-                            <i class="fas fa-arrow-circle-right text-2xl text-beyaz-0"></i>
-                        </div>
-                    </div>
-                </div>
-                
-
-            </div>
-
-        </section>
-
-        <!-- stay at home campain -->
-        <!-- <section id="hes-campain" class="main-wrapper bg-beyaz-0 my-4 rounded-2xl shadow">
-            <div class="hes-texts">
-                <h3>Stay at home</h3>
-                <p>Stay at home and stay safe</p>
-                <div class="svg">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="#0099ff" fill-opacity="1" d="M0,0L1440,288L1440,320L0,320Z"></path></svg>
-                </div>
-            </div>
-            <img src="./static/img/woman_computer.jpg" alt="">
-        </section> -->
-
-        <!-- auction list example -->
-        <section id="auction-list" class="container-x main-wrapper bg-beyaz-0 my-4 rounded-2xl shadow">
-
-            <div class="container-title flex flex-row justify-between items-center mb-7">
-                <h3 class=" text-base text-siyah-15">Active Auctions</h3>
-                <div id="arrow-redirect" class="text-mavi text-sm">
-                    <span>Check out other auctions</span>
-                    <i class="fal fa-arrow-right"></i>
-                </div>
-            </div>
-
-            <div class="auction-list-contain flex flex-wrap flex-row gap-4">
-                
-                <div class="auction-item">
-                    <p class="auction-title">Iphone 12 pro 128 gb</p>
-                    <img src="./static/img/iphone.jpg" alt="Iphone 12 pro 128 gb" class="auction-img">
-                    <div class="auction-rate">
-                        <div class="star-list">
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="far fa-star"></i>
-                        </div>
-                        <p>(35.120)</p>
-                    </div>
-                    <div class="auction-info">
-                        <p class="auction-price">
-                            16,455 BIDS
-                        </p>
-                        <p class="auction-time">
-                            3:12:00
-                        </p>
-
-                        <div class="join-auction-button">
-                            <a href="#auction-link">Join Auction</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="auction-item">
-                    <p class="auction-title">Iphone 12 pro 128 gb</p>
-                    <img src="./static/img/iphone.jpg" alt="Iphone 12 pro 128 gb" class="auction-img">
-                    <div class="auction-rate">
-                        <div class="star-list">
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="far fa-star"></i>
-                        </div>
-                        <p>(35.120)</p>
-                    </div>
-                    <div class="auction-info">
-                        <p class="auction-price">
-                            16,455 BIDS
-                        </p>
-                        <p class="auction-time">
-                            3:12:00
-                        </p>
-
-                        <div class="join-auction-button">
-                            <a href="#auction-link">Join Auction</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="auction-item">
-                    <p class="auction-title">Iphone 12 pro 128 gb</p>
-                    <img src="./static/img/iphone.jpg" alt="Iphone 12 pro 128 gb" class="auction-img">
-                    <div class="auction-rate">
-                        <div class="star-list">
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="far fa-star"></i>
-                        </div>
-                        <p>(35.120)</p>
-                    </div>
-                    <div class="auction-info">
-                        <p class="auction-price">
-                            16,455 BIDS
-                        </p>
-                        <p class="auction-time">
-                            3:12:00
-                        </p>
-
-                        <div class="join-auction-button">
-                            <a href="#auction-link">Join Auction</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="auction-item">
-                    <p class="auction-title">Iphone 12 pro 128 gb</p>
-                    <img src="./static/img/iphone.jpg" alt="Iphone 12 pro 128 gb" class="auction-img">
-                    <div class="auction-rate">
-                        <div class="star-list">
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="far fa-star"></i>
-                        </div>
-                        <p>(35.120)</p>
-                    </div>
-                    <div class="auction-info">
-                        <p class="auction-price">
-                            16,455 BIDS
-                        </p>
-                        <p class="auction-time">
-                            3:12:00
-                        </p>
-
-                        <div class="join-auction-button">
-                            <a href="#auction-link">Join Auction</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="auction-item">
-                    <p class="auction-title">Iphone 12 pro 128 gb</p>
-                    <img src="./static/img/iphone.jpg" alt="Iphone 12 pro 128 gb" class="auction-img">
-                    <div class="auction-rate">
-                        <div class="star-list">
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="far fa-star"></i>
-                        </div>
-                        <p>(35.120)</p>
-                    </div>
-                    <div class="auction-info">
-                        <p class="auction-price">
-                            16,455 BIDS
-                        </p>
-                        <p class="auction-time">
-                            3:12:00
-                        </p>
-
-                        <div class="join-auction-button">
-                            <a href="#auction-link">Join Auction</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="auction-item">
-                    <p class="auction-title">Iphone 12 pro 128 gb</p>
-                    <img src="./static/img/iphone.jpg" alt="Iphone 12 pro 128 gb" class="auction-img">
-                    <div class="auction-rate">
-                        <div class="star-list">
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="far fa-star"></i>
-                        </div>
-                        <p>(35.120)</p>
-                    </div>
-                    <div class="auction-info">
-                        <p class="auction-price">
-                            16,455 BIDS
-                        </p>
-                        <p class="auction-time">
-                            3:12:00
-                        </p>
-
-                        <div class="join-auction-button">
-                            <a href="#auction-link">Join Auction</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="auction-item">
-                    <p class="auction-title">Iphone 12 pro 128 gb</p>
-                    <img src="./static/img/iphone.jpg" alt="Iphone 12 pro 128 gb" class="auction-img">
-                    <div class="auction-rate">
-                        <div class="star-list">
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="far fa-star"></i>
-                        </div>
-                        <p>(35.120)</p>
-                    </div>
-                    <div class="auction-info">
-                        <p class="auction-price">
-                            16,455 BIDS
-                        </p>
-                        <p class="auction-time">
-                            3:12:00
-                        </p>
-
-                        <div class="join-auction-button">
-                            <a href="#auction-link">Join Auction</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="auction-item">
-                    <p class="auction-title">Iphone 12 pro 128 gb</p>
-                    <img src="./static/img/iphone.jpg" alt="Iphone 12 pro 128 gb" class="auction-img">
-                    <div class="auction-rate">
-                        <div class="star-list">
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="far fa-star"></i>
-                        </div>
-                        <p>(35.120)</p>
-                    </div>
-                    <div class="auction-info">
-                        <p class="auction-price">
-                            16,455 BIDS
-                        </p>
-                        <p class="auction-time">
-                            3:12:00
-                        </p>
-
-                        <div class="join-auction-button">
-                            <a href="#auction-link">Join Auction</a>
-                        </div>
-                    </div>
-                </div>
-
-            </div>
-        </section>
-
-        <!-- Start selling your items campain -->
-        <section id="start-selling-items" class="main-wrapper rounded-2xl shadow">
-
-            <h2>Start Selling your Items.</h2>
-
-            <!-- staert selling your items image -->
-            <div id="campain-image">
-                
-            </div>
-
-            <div id="round-redirect-button">
-                <i class="fas fa-arrow-circle-right text-4xl text-beyaz-0"></i>
-            </div>
-
-
-        </section>
-    </article>
-
-    <footer class="w-full bg-beyaz-0 py-12">
-        <div class="main-wrapper">
+        <!-- staert selling your items image -->
+        <div id="campain-image">
             
-            <div class="footer-container flex flex-row">
+        </div>
 
-                <div id="site-logo">
-                    <h2 class="text-mavi_5 text-4xl font-medium">BiDDiBs</h2>
-                    <div class="p-list">
-                        <p>© 2021 biddibs, by Chill</p>
-                        <p>Terms of Services | Privacy Policy</p>
-                    </div>
-                </div>
-                <div class="footer-direction flex flex-row gap-16">
+        <div id="round-redirect-button">
+            <i class="fas fa-arrow-circle-right text-4xl text-beyaz-0"></i>
+        </div>
 
-                    <div class="footer-item">
-                        <h3>Company</h3>
-                        <ul>
-                            <li>About Us</li>
-                            <li>Contact Us</li>
-                            <li>Careers</li>
-                            <li>Press</li>
-                            <li>Blog</li>
-                        </ul>
-                    </div>
 
-                    <div class="footer-item">
-                        <h3>Help</h3>
-                        <ul>
-                            <li>Help Center</li>
-                            <li>How it works</li>
-                            <li>Payments</li>
-                            <li>Refunds</li>
-                            <li>Sell on BiDDiBs</li>
-                        </ul>
-                    </div>
+    </section>
 
-                    <div class="footer-item">
-                        <h3>Account</h3>
-                        <ul>
-                            <li>Sign In</li>
-                            <li>Register</li>
-                            <li>Saved Items</li>
-                            <li>Watchlist</li>
-                            <li>Bidders</li>
-                        </ul>
-                    </div>
+    <!-- popular categories list -->
+    <section id="popular-category" class="container-x main-wrapper bg-beyaz-0 my-4 rounded-2xl shadow">
 
-                    <div class="footer-item">
-                        <h3>Policy</h3>
-                        <ul>
-                            <li>Terms of Services</li>
-                            <li>Privacy Policy</li>
-                            <li>Community Guidelines</li>
-                            <li>Cookies Policy</li>
-                            <li>Copyright Policy</li>
-                        </ul>
-                    </div>
-
-                </div>
-
+        <div class="container-title flex flex-row justify-between items-center mb-7">
+            <h3 class=" text-base text-siyah-15">Popular Categories</h3>
+            <div id="arrow-redirect" class="text-mavi text-sm">
+                <span>Check out other categories</span>
+                <i class="fal fa-arrow-right"></i>
             </div>
+        </div>
+
+
+        <div class="category-list-contain">
+
+
+            {% for c_item in categories_list|slice:":4" %}
+                <a href="{% url 'auction:category_item_url' slug=c_item.slug %}" class="category-item {% cycle 'c_mavi' 'c_mor' 'c_turuncu' 'c_yesil' %} ">
+                    <div class="category-item-image">
+                        <img src="/{{ c_item.image }}" alt="">
+                    </div>
+                    <div class="category-item-text ">
+                        <div class="texts">
+                            <h3>{{ c_item.name }}</h3>
+                            <p>{{ c_item.auction_count }} auctions</p>
+                        </div>
+                        <div id="round-redirect-button">
+                            <i class="fas fa-arrow-circle-right text-2xl text-beyaz-0"></i>
+                        </div>
+                    </div>
+                </a>
+            {% endfor %}
+            
+            
 
         </div>
-    </footer>
-</body>
-</html>
+
+    </section>
+
+    <!-- stay at home campain -->
+    <!-- <section id="hes-campain" class="main-wrapper bg-beyaz-0 my-4 rounded-2xl shadow">
+        <div class="hes-texts">
+            <h3>Stay at home</h3>
+            <p>Stay at home and stay safe</p>
+            <div class="svg">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="#0099ff" fill-opacity="1" d="M0,0L1440,288L1440,320L0,320Z"></path></svg>
+            </div>
+        </div>
+        <img src="./static/img/woman_computer.jpg" alt="">
+    </section> -->
+
+    <!-- auction list example -->
+    <section id="auction-list" class="container-x main-wrapper bg-beyaz-0 my-4 rounded-2xl shadow">
+
+        <div class="container-title flex flex-row justify-between items-center mb-7">
+            <h3 class=" text-base text-siyah-15">Active Auctions</h3>
+            <div id="arrow-redirect" class="text-mavi text-sm">
+                <span>Check out other auctions</span>
+                <i class="fal fa-arrow-right"></i>
+            </div>
+        </div>
+
+        <div class="auction-list-contain">
+            
+            {% for auct in  all_auction_list%}
+                <div class="auction-item">
+                    <p class="auction-title">{{ auct.item_title }}</p>
+                    <div class="img_container">
+                        <img src="/{{ auct.item_image }}" alt="{{ auct.item_title }}" class="auction-img">
+                    </div>
+                    <div class="auction-rate">
+                        <div class="star-list">
+                            {% with ''|center:5 as range %}
+                                {% for _ in range %}
+                                    
+                                    {% if forloop.counter <= auct.calc_rate_floor %}
+                                        <i class="fas fa-star"></i>
+                                    {% else %}
+                                        <i class="far fa-star"></i>
+                                    {% endif %}
+                                    
+
+                                {% endfor %}
+                            {% endwith %}
+                        </div>
+                        <p> ({{ auct.calc_rate_round }}) ({{ auct.total_rate }})</p>
+                        
+
+                    </div>
+                    <div class="auction-info">
+                        <p class="auction-price">
+                            {{auct.get_bid_count}} BIDS
+                        </p>
+                        <p class="auction-time calculate_rest" enddate="{{ auct.auction_end_date|date:'Y-m-d H:i' }}">
+                        </p>
+    
+                        <div class="join-auction-button">
+                            <a href="{% url 'auction:auction_item_url' slug=auct.slug %}">Join Auction</a>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </section>
+
+    <!-- Start selling your items campain -->
+    <section id="start-selling-items" class="main-wrapper rounded-2xl shadow">
+
+        <h2>Start Selling your Items.</h2>
+
+        <!-- staert selling your items image -->
+        <div id="campain-image">
+            
+        </div>
+
+        <div id="round-redirect-button">
+            <i class="fas fa-arrow-circle-right text-4xl text-beyaz-0"></i>
+        </div>
+
+
+    </section>
+</article>
+
+{% endblock %}

@@ -8,16 +8,19 @@
 
     <div class="auction-create-form main-wrapper bg-beyaz-0 rounded">
         
-        <form action="#" method="GET">
-
+        <form action="#" method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
             <div class="create-form-inside">
 
                 <div class="auction-title-form flex flex-row justify-between px-4">
                     <div class="input-element underline-border">
-                        <input type="text" placeholder="Auction Title" class="form-input">
+                        {{ form.item_title }}
                     </div>
                     <div class="input-element underline-border">
-                        <input type="text" placeholder="initializing bid" class="form-input">
+                        {{ form.item_alt_title }}
+                    </div>
+                    <div class="input-element underline-border">
+                        {{ form.initializing_bid }}
                     </div>
                 </div>
 
@@ -26,15 +29,34 @@
                 <div class="auction-image-form flex flex-row justify-between px-4">
 
                     <!-- Picture Input -->
-                    <div class="input-element">
-                        <label for="file_test">Picture</label>
-                        <input type="file" name="file_test" id="file_test">
+                    <div class="input-element w-full">
+                        
+                        <div class="input-element file_input">
+                            <label for="{{form.item_image.id_for_label }}">
+                                {{form.item_image.label}}
+                                <div class="file_input_container">
+                                    
+                                    <div class="img_list">
+                                        <img alt="" class="target_img">
+                                    </div>
+                                    <div class="text_list flex flex-col justify-center items-center text-center">
+                                        <i class="fas fa-cloud-upload-alt"></i>
+                                        <b>Select and Upload Image</b>
+                                        <p>Click to select an image</p>
+                                        <p>(15 MB)</p>
+                                    </div>
+
+                                </div>
+                            </label>
+                            {{ form.item_image }}
+                        </div>
+
                     </div>
 
                     <!-- Description Input -->
                     <div class="input-element">
-                        <label for="desc_test">Product Description</label>
-                        <textarea class="form-input" placeholder="Enter a clear description for your product" name="desc_test" id="desc_test" cols="30" rows="10"></textarea>
+                        <label for="{{form.item_details.id_for_label }}">{{form.item_details.label}}</label>
+                        {{ form.item_details }}
                     </div>
                 </div>
 
@@ -46,25 +68,22 @@
                         <div class="half-inputs">
                             <!-- End date Input -->
                             <div class="input-element">
-                                <label for="end_date">Auction Ending Date</label>
-                                <input type="date" placeholder="Auction Ending Date" class="form-input" id="end_date">
+                                <label for="{{form.auction_end_date.id_for_label }}">{{form.auction_end_date.label}}</label>
+                                {{ form.auction_end_date }}
                             </div>
                             
                             <!-- Auction Type Input -->
                             <div class="input-element">
-                                <label for="desc_test">Product Description</label>
-                                <select name="select_test" id="select_test" class="form-input">
-                                    <option value="selected">sa</option>
-                                    <option value="selected">sa</option>
-                                </select>
+                                <label for="{{form.auction_type.id_for_label }}">{{form.auction_type.label}}</label>
+                                {{ form.auction_type }}
                             </div>
                         </div>
                     </div>
 
                     <!-- Condution Input -->
                     <div class="input-element">
-                        <label for="desc_test">Product Condution</label>
-                        <textarea class="form-input" placeholder="Enter a clear description for your product" name="desc_test" id="desc_test" cols="30" rows="10"></textarea>
+                        <label for="{{form.item_condution.id_for_label }}">{{form.item_condution.label}}</label>
+                        {{ form.item_condution }}
                     </div>
                 </div>
 
@@ -73,7 +92,7 @@
                     <!-- Picture Input -->
                     <div class="input-element">
                         <label for="file_test">Picture</label>
-                        <input type="hidden" name="hidden_lo" id="category_input">
+                        {{ form.category }}
                         <div class="category-list">
                             <div class="item-list">
                                 {% for c in categories_list %}
@@ -96,15 +115,24 @@
                     </div>
                 </div>
 
-                <div class="auction-create-buttons">
-                    <button class="btn btn-primary">Create Auction</button>
-                    <button type="reset">Cancel</button>
+                <div class="auction-create-buttons ml-auto mr-4">
+                    <button id="create_auction_btn" class="bg-blue-100 border border-blue-500 text-blue-700 px-4 py-3 font-medium rounded-md">Create Auction</button>
+                    <button class="bg-red-100 border border-red-500 text-red-700 px-4 py-3 font-medium rounded-md" type="reset">Cancel</button>
                 </div>
 
 
             </div>
 
         </form>
+        {% if form.errors %}
+            {% for field in form %}
+                {% for error in field.errors %} 
+                    <div onclick="this.parentNode.removeChild(this)" class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative mt-4 text-center cursor-pointer" role="alert">
+                        <span>{{ error|escape }}</span>
+                    </div>
+                {% endfor %}
+            {% endfor %}
+        {% endif %}
 
     </div>
 

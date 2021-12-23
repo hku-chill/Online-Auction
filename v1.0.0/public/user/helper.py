@@ -95,9 +95,9 @@ def tc_user_should_not_access(function):
 def is_user_validated(user):
     if user.is_authenticated:
         if not user.profile.is_tc_verified:
-            return {'validate': False, 'message': 'Only TC number validated user can send bid to auctions.', 'url': '/profile/tc/', 'url_text': 'TC number validation'}
+            return {'validate': False, 'message': 'Only TC number validated users can bid or create auctions..', 'url': '/profile/tc/', 'url_text': 'TC number validation'}
         elif not user.profile.is_phone_verified:
-            return {'validate': False, 'message': 'Only Mobile number validated user can send bid to auctions.', 'url': '/profile/mobile/', 'url_text': 'Mobile number validation'}
+            return {'validate': False, 'message': 'Only Mobile number validated users can bid or create auctions..', 'url': '/profile/mobile/', 'url_text': 'Mobile number validation'}
         elif not user.profile.is_email_verified:
             return False
         else:

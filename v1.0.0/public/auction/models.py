@@ -21,7 +21,9 @@ class auction(models.Model):
 
     item_title = models.CharField(max_length=100, verbose_name=_('Item Name'))
     item_alt_title = models.CharField(max_length=100, verbose_name=_('Item Alt Name'))
-    item_image = models.ImageField(upload_to='static/img/auction_imgs', verbose_name=_('Item Image'), blank=True, default='static/img/profile_pics/default.png')
+
+    item_image = models.ImageField(upload_to='static/img/auction_imgs', verbose_name=_('Item Image'))
+
     item_details = models.TextField(verbose_name=_('Item Details'))
     item_condution = models.TextField(verbose_name=_('Item Condution Details'))
 
@@ -69,6 +71,12 @@ class auction(models.Model):
     def total_rate(self):
         return self.auction_rate_1 + self.auction_rate_2 + self.auction_rate_3 + self.auction_rate_4 + self.auction_rate_5
 
+    def get_bid_count(self):
+        return bid.objects.filter(auction=self).count()
+
+    def get_comment_count(self):
+        return comment.objects.filter(auction=self).count()
+        
     class Meta:
         verbose_name = _('Auction')
         verbose_name_plural = _('Auctions')
@@ -105,9 +113,27 @@ class bid(models.Model):
         verbose_name_plural = _('Bids')
         ordering = ['-bid_amount']
 
+class comment(models.Model):
+    
+    auction = models.ForeignKey('auction', on_delete=models.CASCADE)
+    user = models.ForeignKey('auth.User', on_delete=models.CASCADE, related_name='comments')
+    body = models.TextField()
+    created = models.DateTimeField(auto_now_add=True)
+    updated = models.DateTimeField(auto_now=True)
 
+    def __str__(self):
+        return self.body
 
+class rates(models.Model):
+    user = models.ForeignKey('auth.User', on_delete=models.CASCADE, related_name='rates')
+    auction = models.ForeignKey('auction', on_delete=models.CASCADE, related_name='rates')
+    rate = models.IntegerField(default=0)
+    rate_date = models.DateTimeField(auto_now_add=True, verbose_name=_('Rate Date'))
 
+    class Meta:
+        verbose_name = _('Rate')
+        verbose_name_plural = _('Rates')
+        ordering = ['-rate_date']
 
 
 

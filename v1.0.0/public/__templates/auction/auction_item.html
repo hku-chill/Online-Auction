@@ -24,7 +24,7 @@
     </section>
 
     <!-- auction profile container -->
-    <section class="auction-profile main-wrapper rounded-2xl shadow bg-beyaz-0 mt-6 overflow-hidden">
+    <section class="auction-profile main-wrapper rounded-2xl shadow bg-beyaz-0 mt-6 overflow-hidden" auction-slug="{{ auction_item.slug }}">
 
         <div class="auction-container">
 
@@ -70,7 +70,7 @@
                                     {% for _ in range %}
                                         
                                         {% if forloop.counter <= auction_item.calc_rate_floor %}
-                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star added"></i>
                                         {% else %}
                                             <i class="far fa-star"></i>
                                         {% endif %}
@@ -159,7 +159,7 @@
                                 <i class="fas fa-plus"></i>
                                 Bid Now
                             </a>
-                            <a href="#">
+                            <a href="{% url 'auction:add_comment_url' slug=auction_item.slug %}">
                                 <i class="fas fa-comment-dots"></i>
                                 Comment
                             </a>
@@ -266,10 +266,10 @@
                 <h2>Product Condution</h2>
             </a>
             <a href="?t=bids" class="auction-detail-titles">
-                <h2>Bid List</h2>
+                <h2>Bid List({{ auction_item.get_bid_count }})</h2>
             </a>
             <a href="?t=comments" class="auction-detail-titles">
-                <h2>Comment List</h2>
+                <h2>Comment List({{ auction_item.get_comment_count }})</h2>
             </a>
             <a href="?t=a_details" class="auction-detail-titles">
                 <h2>Auction Details</h2>
@@ -288,15 +288,56 @@
                         <div>Bid Amouth</div>
                         <div>Bidder Number</div>
                     </div>
-                {% endif %}
 
-                {% for z in block_content.value %}
-                    <div class="table_item grid grid-cols-3 py-3 px-1">
-                        <div>{{z.bid_date}}</div>
-                        <div>{{z.bid_amount}}£</div>
-                        <div>{{z.user.pk}}</div>
+                    {% for z in block_content.value %}
+                        <div class="table_item grid grid-cols-3 py-3 px-1">
+                            <div>{{z.bid_date}}</div>
+                            <div>{{z.bid_amount}}£</div>
+                            <div>{{z.user.pk}}</div>
+                        </div>
+                    {% endfor %}
+
+                {% elif block_content.value_id == "comment_list"%}
+                    <div class="auction_comment_list flex flex-col gap-4">
+                        {% for comment in block_content.value %}
+                            <div class="auction-comment-item">
+
+                                <div class="user-avatar">
+                                    <img width="48px" height="48px" src="/{{ comment.user.profile.profile_picture }}" alt="">
+                                </div>
+                
+                                <div class="comment-content">
+                                    <div class="comment-user-title">
+                                        <h3 class="font-medium text-siyah-15 uppercase mr-4">{{ comment.user }}</h3>
+                                        <span class="font-light text-beyaz-20 text-sm">{{ comment.created }}</span>
+                                    </div>
+                
+                                    <div class="comment-comment">
+                                        <p class="text-light font-light text-siyah-10">
+                                            {{ comment.body }}
+                                        </p>
+                                    </div>
+                
+                                    <div class="comment-bottom flex flex-row justify-between">
+                                        <div class="comment-keyword-list">
+                                            <a target="_blank" href="{% url 'user:user_profile_url' userid=comment.user.pk %}" class="font-light text-beyaz-20 text-sm">Visit Profile</a>
+                                        </div>
+                
+                                        <div class="report-comment">
+                                            <a href="#" class="font-light text-beyaz-20 text-sm">
+                                                <i class="fas fa-flag"></i>
+                                            </a>
+                                        </div>
+                                    </div>
+                
+                                    
+                                </div>
+                
+                            </div>
+                        {% endfor %}
                     </div>
-                {% endfor %}
+                {% endif %}
+            
             {% endif %}
         </div>
     </section>

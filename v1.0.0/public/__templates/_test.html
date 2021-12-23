@@ -4,47 +4,40 @@
 
 {% block content %}
 
-    <div class="auction-details">
-        <div class="auction-detail-data">
-            
-            <div class="auction-comment-item">
-
-                <div class="user-avatar">
-                    <img width="48px" height="48px" src="https://ui-avatars.com/api/?background=0D8ABC&color=fff" alt="">
-                </div>
-
-                <div class="comment-content">
-                    <div class="comment-user-title">
-                        <h3 class="font-medium text-siyah-15 uppercase mr-4">Mahir Tekin Erdensan</h3>
-                        <span class="font-light text-beyaz-20 text-sm">25 dec 2021</span>
-                    </div>
-
-                    <div class="comment-comment">
-                        <p class="text-light font-light text-siyah-10">
-                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Atque, assumenda quam dicta cum sed recusandae numquam suscipit. Nisi, vitae. Suscipit maxime culpa vero, dolorem dicta nam voluptas dolorum impedit a?
-                        </p>
-                    </div>
-
-                    <div class="comment-bottom flex flex-row justify-between">
-                        <div class="comment-keyword-list">
-                            <span class="font-light text-beyaz-20 text-sm">#kırmızı</span>
-                            <span class="font-light text-beyaz-20 text-sm">#mavi</span>
-                            <span class="font-light text-beyaz-20 text-sm">#siyah</span>
-                        </div>
-
-                        <div class="report-comment">
-                            <a href="#" class="font-light text-beyaz-20 text-sm">
-                                <i class="fas fa-flag"></i>
-                            </a>
-                        </div>
-                    </div>
-
-                    
-                </div>
-
-            </div>
-
+<div class="report_container">
+    <div class="report_block">
+        
+        <div class="report_title flex flex-row justify-between mx-6 items-center">
+            <h2 class="text-lg text-siyah-5 font-medium">Submit a report.</h2>
+            <i class="text-lg text-siyah-5 fas fa-times cursor-pointer hover:text-mavi_5"></i>
         </div>
+
+        <hr class="my-6">
+        
+        <div class="report_body mx-6 flex flex-col gap-6">
+            <p class="text-siyah-5 mx-">Thank you for looking out our fairly rules and fellow of our boundy by reporthing things that break the rules. Let us know what's wrong with this auction, and we'll look into it. Dont worry!</p>
+            <div class="reason_list">
+                <div class="reason_item">Reason_1</div>
+                <div class="reason_item">Reason_1</div>
+                <div class="reason_item">Reason_1</div>
+                <div class="reason_item">Reason_1</div>
+                <div class="reason_item">Reason_1</div>
+                <div class="reason_item">Reason_1</div>
+                <div class="reason_item">Reason_1</div>
+                <div class="reason_item">Reason_1</div>
+                <div class="reason_item">Reason_1</div>
+            </div>
+            <div class="report_information flex flex-row gap-3 items-center p-6 bg-beyaz-10 rounded-xl">
+                <i class="far fa-info-circle"></i>
+                <p>Not sure if is this auction breaking our rules? You can chekout our rules at <a href="#">Rules</a> & <a href="#">Privacy Policy</a> pages</p>
+            </div>
+            <button class="bg-red-100 border border-red-500 text-red-700 px-4 py-3 font-medium rounded-md" type="submit">
+                Submit Report
+            </button>
+        </div>
+
+        
     </div>
+</div>
 
 {% endblock %}

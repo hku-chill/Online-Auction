@@ -4,4 +4,7 @@ from django.http import HttpResponse, HttpResponseRedirect
 
 
 def index(request):
+    return render(request, 'index.html')
+
+def test(request):
     return render(request, '_test.html')

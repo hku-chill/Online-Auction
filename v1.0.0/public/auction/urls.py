@@ -13,4 +13,7 @@ urlpatterns = [
 
 
     path('auction/u/create', create_auction, name="auction_create_url"),
+
+    path('auction/comment/<str:slug>/', add_comment, name="add_comment_url"),
+    path('auction/rate-auction', rate_auction, name="rate_auction_url"),
 ]

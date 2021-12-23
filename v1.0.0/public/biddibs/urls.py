@@ -17,13 +17,14 @@ from django.contrib import admin
 from django.urls import path
 from django.urls.conf import include
 
-from app.views import index
+from app.views import index,test
 
 
 urlpatterns = [
     path('', include(('user.urls', 'user'), namespace='user')),
     path('', include(('auction.urls', 'auction'), namespace='auction')),
-    path('', index, name='main_index'),
 
+    path('', index, name='main_index'),
+    path('test/', test, name='test'),
     path('admin/', admin.site.urls, name="admin_login"),
 ]

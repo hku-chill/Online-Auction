@@ -18,7 +18,7 @@ class Profile(models.Model):
     profile_picture = models.ImageField(upload_to='static/img/profile_pics', blank=True, default='static/img/profile_pics/default.png')
 
     address = models.CharField(max_length=255, null=True, blank=True)
-    user_details = models.CharField(max_length=255, null=True, blank=True, default="An awesome who want to be a BATMAN")
+    user_details = models.CharField(max_length=255, null=True, blank=True, default="An awesome user who want to be a BATMAN")
 
     user_rate_1 = models.IntegerField(default=0)
     user_rate_2 = models.IntegerField(default=0)

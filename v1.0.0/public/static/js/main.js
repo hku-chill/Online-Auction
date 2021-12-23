@@ -98,8 +98,71 @@ $(document).on("click",".add_bid_button",function (e) {
 });
 
 
+$(document).on({
+    mouseenter: function (e) {
+        //over
+        $(".auction-rate .fas").removeClass("fas").addClass("far");
+        for (const i of $(".auction-rate i")) {
+            
 
+            $(i).removeClass("far").addClass("fas");
+            if (i === this){
+                return
+            }
+        }
+    },
+    mouseleave: function (e) {
+        for (const i of $(".auction-rate i")) {
+            $(i).hasClass("added") ? $(i).removeClass("far").addClass("fas") : $(i).removeClass("fas").addClass("far");
+        }
+    }
+},".auction-profile .auction-rate i");
 
+$(document).on("click",".auction-profile .auction-rate i", function (e) {
+    e.preventDefault()
+    let it = 1;
+    const slug = $("section.auction-profile").attr("auction-slug")
+    if(!slug) return
+
+    for (const i of $(".auction-rate i")) {
+            
+        if (i === this){
+            break
+        }
+
+        it++
+    }
+    
+    $.ajax({
+        type: "GET",
+        url: "/auction/rate-auction",
+        data: {
+            "rate": it,
+            "auction-slug": slug
+        },
+        success: function (response) {
+            if (response?.success === true){
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Success',
+                    text: response.message
+                }).then(e => {
+                    location.reload()
+                })
+                
+            }
+            else{
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: response.message,
+                    footer: response.footer ? `<a href="${response.footer.url }">${response.footer.text}</a>` : ''
+                })
+                return false;
+            }
+        }
+    })
+});
 
 $(document).ready(function () {
     
@@ -108,11 +171,21 @@ $(document).ready(function () {
         return false;
     }
 
-    function e(){
-        const endDateTime = new Date(endDate.attr("enddate"))
+    
+
+    function e(isrest= false, isrest_in = null){
+        const endDateTime = new Date(isrest_in || endDate.attr("enddate"))
         const now = new Date();
         const distance = endDateTime - now;
         var timer;
+
+        if(isrest){
+            if(distance < 0 ) return "Ended"
+            const days = Math.floor(distance / (1000 * 60 * 60));
+            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+
+            return `${days >= 10 ? days : "0"+days }:${minutes >= 10 ? minutes : "0"+minutes}`
+        }
 
         if (distance < 0) {
             endDate.html("<span class='text-danger'>Bid is ended</span>");
@@ -124,6 +197,11 @@ $(document).ready(function () {
             
             $(endDate).html(`${days}:${minutes}:${seconds}`);
         }
+    }
+
+    var static_calc = $(".calculate_rest")
+    for (const i of static_calc) {
+        $(i).html(e(true, $(i).attr("enddate")))
     }
 
     timer = setInterval(e, 1000);
@@ -187,7 +265,28 @@ $(document).on("click touch",".keyword-list .keyword-item", function (e) {
 $(".category-list .category-item").on("click touch", function (e) {
     e.preventDefault()
     $(".category-list .category-item").removeClass("selected")
-    const category_input = $("#category_input")
+    const category_input = $("#id_category")
     let ss = $(this).toggleClass("selected").attr("category-slug");
     $(category_input).val(ss);
 })
+
+
+function readURL(input) {
+    if (input.files && input.files[0]) {
+        var reader = new FileReader();
+
+        reader.onload = function (e) {
+            $('img.target_img').attr('src', e.target.result);
+        }
+
+        reader.readAsDataURL(input.files[0]);
+    }
+}
+
+
+//auction createin on image selected
+
+$("#id_item_image").change(function (e) { 
+    e.preventDefault();
+    readURL(this)
+});

@@ -68,6 +68,7 @@ TEMPLATES = [
                 'django.contrib.messages.context_processors.messages',
 
                 'biddibs.context_processors.category_context_processor',
+                'biddibs.context_processors.auction_context_processor',
             ],
         },
     },
