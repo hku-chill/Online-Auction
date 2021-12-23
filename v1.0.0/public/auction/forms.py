@@ -1,7 +1,7 @@
 from django import forms
 from django.contrib.auth.models import User
 from django.forms import fields, widgets
-from .models import auction, bid, comment
+from .models import auction, bid, comment, report
 
 
 class BidForm(forms.ModelForm):
@@ -25,6 +25,16 @@ class CommentForm(forms.ModelForm):
     class Meta:
         model = comment
         fields = ['body']
+
+
+class ReportForm(forms.ModelForm):
+    text=forms.Charfield()
+
+    class Meta:
+        model = report
+        fields = ['text']
+
+    
 
         
         

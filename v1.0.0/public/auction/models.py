@@ -115,6 +115,26 @@ class comment(models.Model):
 
     def __str__(self):
         return self.body
+
+class report(models.Model):
+
+    TYPE_CHOICE = (
+        ('auction','auction_report'),
+        ('user', 'user_report'),
+        ('comment', 'comment_report'),
+    )
+
+    auction = models.ForeignKey('auction', on_delete=models.CASCADE, blank=True)
+    user = models.ForeignKey('auth.User', on_delete=models.CASCADE, related_name='reports', blank=True)
+    comment = models.ForeignKey('comment',on_delete=models.CASCADE, blank=True)
+    text = models.TextField()
+    report_date = models.DateTimeField(auto_now_add=True)
+    report_type = models.CharField(max_length=30 ,choices=TYPE_CHOICE, default='auction')
+
+    def __str__(self):
+        return self.text
+
+
         
 
 
