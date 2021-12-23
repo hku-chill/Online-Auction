@@ -22,4 +22,7 @@ urlpatterns = [
 
     #mail verification end point
     path('activate/<str:uid64>/',mail_activate,name = "user_mail_activate_url"),
+
+    #report end point
+    path("report/", report_view, name="report_end_point")
 ]

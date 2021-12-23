@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Profile
+from .models import Profile,Report
 # Register your models here.
 
 class ProfileAdmin(admin.ModelAdmin):
@@ -20,3 +20,4 @@ class ProfileAdmin(admin.ModelAdmin):
     user_is_active.user_is_active = 'is_active'
 
 admin.site.register(Profile, ProfileAdmin)
+admin.site.register(Report)

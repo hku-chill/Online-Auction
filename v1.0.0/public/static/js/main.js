@@ -290,3 +290,67 @@ $("#id_item_image").change(function (e) {
     e.preventDefault();
     readURL(this)
 });
+
+
+
+
+
+//report section
+
+$(document).on("click","div.report_container", function (e) {
+    var block = $(".report_block");
+    if (!block.is(e.target) && block.has(e.target).length === 0 || $(".report_close_button").is(e.target)) 
+    {
+        $(".report_container").toggleClass("hidden")
+    }
+
+
+
+    //check if input clicks
+    if($(".reason_item").is(e.target)){
+        $(e.target).addClass("selected").siblings().removeClass("selected")
+        $(".report_container #hidden_input_reason").val($(e.target).html())
+    }
+});
+
+
+$(document).on("click","a.report_it_button", function (e) {
+    e.preventDefault()
+    //$(this).attr("report-type")
+    $(".report_container").toggleClass("hidden")
+
+    //set values for inputs
+    $(".report_container #hidden_input_type").val($(this).attr("report-type"))
+    $(".report_container #hidden_input_id").val($(this).attr("report-id"))
+});
+
+
+$(document).on("submit","form.report_form", function (e) {
+    e.preventDefault()
+    $.ajax({
+        type: "POST",
+        url: $(this).attr("action"),
+        data: $(this).serialize(),
+        success: function (response) {
+            if (response?.success === true){
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Success',
+                    text: response.message
+                }).then(e => {
+                    location.reload()
+                })
+                
+            }
+            else{
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: response.message,
+                    footer: response.footer ? `<a href="${response.footer.url }">${response.footer.text}</a>` : ''
+                })
+                return false;
+            }
+        }
+    });
+});

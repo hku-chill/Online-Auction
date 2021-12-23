@@ -9,7 +9,7 @@ from django.dispatch import receiver
 from django.urls import reverse
 
 import math
-from auction.models import auction, bid
+from auction.models import auction, bid, comment
 
 
 class Profile(models.Model):
@@ -77,7 +77,29 @@ class Profile(models.Model):
         verbose_name = _('profile')
         verbose_name_plural = _('profiles')
 
+class Report(models.Model):
+    REPORT_TYPE = (
+        ('user', 'report_user'),
+        ('auction', 'report_auction'),
+        ('comment', 'report_comment'),
+    )
 
+    user = models.ForeignKey('auth.User', on_delete=models.CASCADE)
+
+    report_auction = models.ForeignKey(auction, on_delete=models.CASCADE, blank=True, null=True, related_name="report_auction")
+    report_comment = models.ForeignKey(comment, on_delete=models.CASCADE, blank=True, null=True, related_name="report_comment")
+    report_user = models.ForeignKey(User, on_delete=models.CASCADE, blank=True, null=True, related_name="report_user")
+
+    report_type = models.CharField(max_length=20, choices=REPORT_TYPE, default="user")
+    report_text = models.CharField(max_length=255, null=True, blank=True)
+    report_date = models.DateTimeField(default=timezone.now)
+
+    def __str__(self):
+        return self.user.email
+
+    class Meta:
+        verbose_name = _('report')
+        verbose_name_plural = _('reports')
 
 
 

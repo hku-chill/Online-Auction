@@ -128,9 +128,9 @@
                                     <i class="fas fa-user"></i>
                                     User Profile
                                 </a>
-                                <a href="#">
-                                    <i class="fas fa-question"></i>
-                                    Ask to User
+                                <a class="report_it_button" report-type="user" report-id="{{ auction_item.user.pk }}" href="#">
+                                    <i class="fas fa-info-square"></i>
+                                    Report User
                                 </a>
                             </div>
 
@@ -220,7 +220,7 @@
                                         <i class="fas fa-user"></i>
                                         User Profile
                                     </a>
-                                    <a href="#">
+                                    <a class="report_it_button" report-type="user" report-id="{{ highest_bid.user.pk }}" href="#">
                                         <i class="fas fa-question"></i>
                                         Ask to User
                                     </a>
@@ -234,17 +234,13 @@
 
 
                     <div class="aution-links flex flex-row justify-end text-beyaz-30 text-xs gap-2">
-                        <a href="#">
-                            <i class="fas fa-user"></i>
-                            User Profile
+                        <a class="report_it_button" report-type="auction" report-id="{{auction_item.pk}}" href="#">
+                            <i class="fas fa-info-square"></i>
+                            Report Auction
                         </a>
                         <a href="#">
-                            <i class="fas fa-question"></i>
-                            Ask to User
-                        </a>
-                        <a href="#">
-                            <i class="fas fa-question"></i>
-                            Ask to User
+                            <i class="fas fa-share-alt"></i>
+                            Share Auction
                         </a>
                     </div>
                 </div>
@@ -324,7 +320,7 @@
                                         </div>
                 
                                         <div class="report-comment">
-                                            <a href="#" class="font-light text-beyaz-20 text-sm">
+                                            <a class="report_it_button" report-type="comment" report-id="{{comment.pk}}" href="#" class="font-light text-beyaz-20 text-sm">
                                                 <i class="fas fa-flag"></i>
                                             </a>
                                         </div>

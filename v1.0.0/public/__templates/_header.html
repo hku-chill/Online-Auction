@@ -30,7 +30,49 @@
     <script async src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 </head>
 <body class="w-full bg-beyaz-0">
+    <div class="report_container hidden">
+        <div class="report_block">
+            
+            <div class="report_title flex flex-row justify-between mx-6 items-center">
+                <h2 class="text-lg text-siyah-5 font-medium">Submit a report.</h2>
+                <i class="report_close_button text-lg text-siyah-5 fas fa-times cursor-pointer hover:text-mavi_5"></i>
+            </div>
     
+            <hr class="my-6">
+    
+            <form class="report_form" action="/report/" method="POST">
+                {% csrf_token %}
+                <div class="report_body mx-6 flex flex-col gap-6">
+                    <p class="text-siyah-5 mx-">Thank you for looking out our fairly rules and fellow of our boundy by reporthing things that break the rules. Let us know what's wrong with this auction, and we'll look into it. Dont worry!</p>
+                    <div class="reason_list">
+
+                        <input type="hidden" name="input_type" id="hidden_input_type">
+                        <input type="hidden" name="input_id" id="hidden_input_id">
+                        <input type="hidden" name="input_reason" id="hidden_input_reason">
+
+                        <div class="reason_item">Reason_1</div>
+                        <div class="reason_item">Reason_1</div>
+                        <div class="reason_item">Reason_1</div>
+                        <div class="reason_item">Reason_1</div>
+                        <div class="reason_item">Reason_1</div>
+                        <div class="reason_item">Reason_1</div>
+                        <div class="reason_item">Reason_1</div>
+                        <div class="reason_item">Reason_1</div>
+                        <div class="reason_item">Reason_1</div>
+                    </div>
+                    <div class="report_information flex flex-row gap-3 items-center p-6 bg-beyaz-10 rounded-xl">
+                        <i class="far fa-info-circle"></i>
+                        <p>Not sure if is this auction breaking our rules? You can chekout our rules at <a href="#">Rules</a> & <a href="#">Privacy Policy</a> pages</p>
+                    </div>
+                    <button class="bg-red-100 border border-red-500 text-red-700 px-4 py-3 font-medium rounded-md" type="submit">
+                        Submit Report
+                    </button>
+                </div>
+            </form>
+    
+            
+        </div>
+    </div>
     <header class="w-full bg-beyaz-0">
         <div class="main-wrapper">
             <nav class="header_nav">

@@ -1579,8 +1579,12 @@ hr{
 
 
 
-
+// Report Card
 div.report_container{
+    &.hidden{
+        display: none;
+    }
+
     position: fixed;
     z-index: 100;
     top: 0;
@@ -1629,7 +1633,7 @@ div.report_container{
                 }
 
                 &.selected{
-                    border: none;
+                    border-color: theme("colors.mavi_5");
                     background-color: theme("colors.mavi_5");
                     color: theme("colors.beyaz.0");
                 }

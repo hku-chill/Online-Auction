@@ -12,8 +12,8 @@ from django.utils.http import urlsafe_base64_decode, urlsafe_base64_encode
 
 from .forms import *
 from .helper import (auth_user_should_not_access, tc_user_should_not_access,
-                     tcValidate, phoneValidate)
-from .models import Profile
+                     tcValidate, phoneValidate, is_user_validated)
+from .models import Profile, Report
 from .token import account_activation_token
 
 
@@ -224,3 +224,45 @@ def user_mobile_validate_view(request):
             phone_form = MobileForm_Profile()
 
     return render(request, 'user/mobilevalidate.html', {'mobile_form': phone_form, 'sms_form': sms_form})
+
+
+
+from auction.models import auction, comment
+
+def report_view(request):
+    if not request.user.is_authenticated:
+        return JsonResponse({"success": False, "message": "You need to authenticated to send report something.", "footer": {"url": "/login/", "text": "Login Url"} })
+
+    user_validate= is_user_validated(request.user)
+    if not user_validate == True:
+        if type(user_validate) == dict:
+            return JsonResponse({"success": False, "message": user_validate['message'], "footer": {"url": user_validate['url'], "text": user_validate['url_text']} })
+
+    if request.method == 'POST':
+        report_obj = Report()
+        report_obj.user = request.user
+
+        #set report type
+        report_obj.report_type = request.POST.get("input_type")
+
+        if request.POST.get("input_type") == "auction":
+            report_obj.report_auction = auction.objects.get(pk=request.POST.get("input_id"))
+        elif request.POST.get("input_type") == "user":
+            report_obj.report_user = get_user_model().objects.get(pk=request.POST.get("input_id"))
+        elif request.POST.get("input_type") == "comment":
+            report_obj.report_comment = comment.objects.get(pk=request.POST.get("input_id"))
+
+        if request.POST.get("input_reason") == "":
+            return JsonResponse({"success": False, "message": "Please select a reason for report."})
+
+        else:
+            report_obj.report_text = request.POST.get("input_reason")
+            report_obj.save()
+
+            response_data = {"success": True, "message": "Your report successfult send it..."}
+    else:
+        return HttpResponseBadRequest()
+
+
+
+    return JsonResponse(response_data)
