@@ -1,0 +1,67 @@
+
+{
+    "results": [
+      {
+        "gender": "female",
+        "name": {
+          "title": "Ms",
+          "first": "Arwen",
+          "last": "Undómiel"
+        },
+        "location": {
+          "street": {
+            "number": 104,
+            "name": "W Gray St"
+          },
+          "city": "Coffs Harbour",
+          "state": "New South Wales",
+          "country": "Australia",
+          "postcode": 1100,
+          "coordinates": {
+            "latitude": "-88.3804",
+            "longitude": "161.1401"
+          },
+          "timezone": {
+            "offset": "-7:00",
+            "description": "Mountain Time (US & Canada)"
+          }
+        },
+        "email": "maqueen@gmail.com",
+        "login": {
+          "uuid": "fdf20e43-2d49-4c98-83a6-20fec6c4b5ae",
+          "username": "happycat143",
+          "password": "partner",
+          "salt": "2rMYLGFo",
+          "md5": "81890258df3a2338b6f3e1b279e6fa9f",
+          "sha1": "096b778a08c1547fe65259ffde1c775cc3f0914e",
+          "sha256": "570121be451cbd281626b18538a16f45db7adfd033ccde003db383b136e03f74"
+        },
+        "dob": {
+          "date": "1996-01-31T02:53:07.130Z",
+          "age": 25
+        },
+        "registered": {
+          "date": "2018-08-09T02:27:17.378Z",
+          "age": 3
+        },
+        "phone": "03-7273-6979",
+        "cell": "0490-837-789",
+        "id": {
+          "name": "TFN",
+          "value": "479461505"
+        },
+        "picture": {
+          "large": "https://randomuser.me/api/portraits/women/75.jpg",
+          "medium": "https://randomuser.me/api/portraits/med/women/75.jpg",
+          "thumbnail": "https://randomuser.me/api/portraits/thumb/women/75.jpg"
+        },
+        "nat": "AU"
+      }
+    ],
+    "info": {
+      "seed": "0a69210ad538c0f5",
+      "results": 1,
+      "page": 1,
+      "version": "1.3"
+    }
+  }

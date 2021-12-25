@@ -1,5 +1,6 @@
 # encoding:utf-8
 from django.contrib import messages
+from django.contrib import auth
 from django.contrib.auth import authenticate, get_user_model, login, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
@@ -15,14 +16,26 @@ from .helper import (auth_user_should_not_access, tc_user_should_not_access,
                      tcValidate, phoneValidate, is_user_validated)
 from .models import Profile, Report
 from .token import account_activation_token
+from auction.models import auction, comment, bid
+from django.conf import settings
+import threading
 
+
+class EmailThread(threading.Thread):
+
+    def __init__(self, email):
+        self.email = email
+        threading.Thread.__init__(self)
+
+    def run(self):
+        self.email.send()
 
 # Create your views here.
 def user_logout(request):
     logout(request)
     return redirect('user:user_login_url')
 
-
+from django.core.mail import EmailMessage
 
 @auth_user_should_not_access
 def register_user(request):
@@ -48,12 +61,30 @@ def register_user(request):
             user = form.save()
             user.is_active = False
             user.save()
+            current_site = get_current_site(request)
+            mail_body = render_to_string('user/mailactivate.html',{
+                'user': user,
+                'domain': current_site.domain,
+                'uid': urlsafe_base64_encode(force_bytes(user.pk)),
+                'token': account_activation_token.make_token(Profile.objects.get(user=user)),
+            })
+
+            email = EmailMessage(
+                subject="Activate your account",
+                body=mail_body,
+                from_email="mahirtekin@indiryo.com",
+                to=[user.email],
+            )
+            email.content_subtype = 'html'
+            
+            EmailThread(email).start()
+
 
             # Generate token for mail activation
-            current_site = get_current_site(request)
-            messages.add_message(request, messages.INFO, str("http://%s/activate/%s?token=%s" % (current_site.domain, urlsafe_base64_encode(force_bytes(user.pk)), account_activation_token.make_token(Profile.objects.get(user=user)) ) ) )
+            
+            # messages.add_message(request, messages.INFO, str("http://%s/activate/%s?token=%s" % (current_site.domain, urlsafe_base64_encode(force_bytes(user.pk)), account_activation_token.make_token(Profile.objects.get(user=user)) ) ) )
 
-            # messages.add_message(request, messages.INFO, 'Registration is now complete, please check your mail address for activation.')
+            messages.add_message(request, messages.INFO, 'Registration is now complete, please check your mail address for activation.')
             return redirect('user:user_login_url')
         else:
             messages.add_message(request, messages.ERROR, 'Form is not valid')
@@ -101,7 +132,8 @@ def login_user(request):
         #     messages.add_message(request, messages.ERROR, 'Invalid username or password')
 
 @auth_user_should_not_access
-def mail_activate(request, uid64):
+def mail_activate(request, uid64, token):
+    print(token)
     try:
         _user = User.objects.get( pk=urlsafe_base64_decode(uid64) )
         _profile = _user.profile
@@ -109,7 +141,7 @@ def mail_activate(request, uid64):
         messages.add_message(request, messages.ERROR, 'User not found')
         return redirect('user:user_login_url')
     
-    if not account_activation_token.check_token(_profile, request.GET.get('token')):
+    if not account_activation_token.check_token(_profile, token):
         messages.add_message(request, messages.ERROR, 'Invalid activation token or might be expired')
         return redirect('user:user_login_url')
 
@@ -129,10 +161,35 @@ def mail_activate(request, uid64):
 
 
 def user_profile(request, userid = None):
-    return render(request, 'user/profile.html', {'profile': request.user.profile})
+    # return render(request, 'user/profile.html', {'profile': request.user.profile})
+    return user_profile_id(request, request.user.pk)
 
 def user_profile_id(request, userid = None):
-    return render(request, 'user/profile.html', {'profile': Profile.objects.get(pk=userid)})
+    r_user = get_object_or_404(User, pk=userid)
+    block_content = {
+        'object': None,
+        'list': None,
+        'type': 'text',
+    }
+    if request.GET.get('b'):
+        block_content['object'] = request.GET.get('b')
+        if block_content['object'] == "comments":
+            block_content['list'] = comment.objects.filter(user=r_user)
+        elif block_content['object'] == "bids":
+            block_content['list'] = bid.objects.filter(user=r_user)
+        else:
+            block_content['list'] = auction.objects.filter(user=r_user)
+    else:
+        block_content['object'] = 'auctions'
+        block_content['list'] = auction.objects.filter(user=r_user)
+
+    if block_content['list'].count() > 0:
+        block_content['type'] = 'list'
+    else:
+        block_content['type'] = 'text'
+        block_content['list'] = f"There is no {block_content['object']} posted by this user"
+
+    return render(request, 'user/profile.html', {'profile': r_user.profile, 'block_content': block_content})
 
 
 
@@ -227,7 +284,7 @@ def user_mobile_validate_view(request):
 
 
 
-from auction.models import auction, comment
+
 
 def report_view(request):
     if not request.user.is_authenticated:

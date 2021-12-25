@@ -1,0 +1,67 @@
+
+{
+    "results": [
+      {
+        "gender": "female",
+        "name": {
+          "title": "Ms",
+          "first": "Arya",
+          "last": "Stark"
+        },
+        "location": {
+          "street": {
+            "number": 4393,
+            "name": "Vatan Cd"
+          },
+          "city": "Tunceli",
+          "state": "Iğdır",
+          "country": "Turkey",
+          "postcode": 85296,
+          "coordinates": {
+            "latitude": "76.4468",
+            "longitude": "114.5276"
+          },
+          "timezone": {
+            "offset": "-7:00",
+            "description": "Mountain Time (US & Canada)"
+          }
+        },
+        "email": "new.kingslayer@gotham.com",
+        "login": {
+          "uuid": "48f27fcf-d087-4b39-a773-c46cd141d454",
+          "username": "brownpeacock365",
+          "password": "joecool",
+          "salt": "aICToKAE",
+          "md5": "77dfe6f9355ad2ad5f31087d5769939f",
+          "sha1": "167047ed28129526bf62da7ddd15aa44dcc89b53",
+          "sha256": "156aacbc7f14955874018624b0e6157e96fb3a955a92447c5c48873bae266f87"
+        },
+        "dob": {
+          "date": "1966-11-24T18:10:44.230Z",
+          "age": 55
+        },
+        "registered": {
+          "date": "2015-11-21T20:24:46.399Z",
+          "age": 6
+        },
+        "phone": "(031)-833-2130",
+        "cell": "(205)-085-9459",
+        "id": {
+          "name": "",
+          "value": null
+        },
+        "picture": {
+          "large": "https://randomuser.me/api/portraits/women/83.jpg",
+          "medium": "https://randomuser.me/api/portraits/med/women/83.jpg",
+          "thumbnail": "https://randomuser.me/api/portraits/thumb/women/83.jpg"
+        },
+        "nat": "TR"
+      }
+    ],
+    "info": {
+      "seed": "5569626c771f51eb",
+      "results": 1,
+      "page": 1,
+      "version": "1.3"
+    }
+  }

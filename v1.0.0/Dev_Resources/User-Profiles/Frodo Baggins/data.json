@@ -1,0 +1,66 @@
+{
+    "results": [
+      {
+        "gender": "male",
+        "name": {
+          "title": "Mr",
+          "first": "Frodo",
+          "last": "Baggins"
+        },
+        "location": {
+          "street": {
+            "number": 576,
+            "name": "Avenida de Salamanca"
+          },
+          "city": "Zaragoza",
+          "state": "País Vasco",
+          "country": "Spain",
+          "postcode": 68375,
+          "coordinates": {
+            "latitude": "-20.3247",
+            "longitude": "-0.0482"
+          },
+          "timezone": {
+            "offset": "+4:30",
+            "description": "Kabul"
+          }
+        },
+        "email": "frodo.islame@gmail.com",
+        "login": {
+          "uuid": "5da02fea-e5d5-4bab-99de-fb42cac1d039",
+          "username": "ticklishtiger962",
+          "password": "monty",
+          "salt": "3u1vROTu",
+          "md5": "d6fef165004b72bea47b1a921f91d45b",
+          "sha1": "dc5c75d6c7c6ef91c862f8bc4d1ee1f0b9b8e1f9",
+          "sha256": "a7319e4b6b95b8ab0939d1cbad8ba1f7b76748bfa29b7041c1785630df954862"
+        },
+        "dob": {
+          "date": "1982-04-12T14:12:30.793Z",
+          "age": 39
+        },
+        "registered": {
+          "date": "2007-01-08T14:33:25.798Z",
+          "age": 14
+        },
+        "phone": "976-718-025",
+        "cell": "679-624-544",
+        "id": {
+          "name": "DNI",
+          "value": "74441136-M"
+        },
+        "picture": {
+          "large": "https://randomuser.me/api/portraits/men/16.jpg",
+          "medium": "https://randomuser.me/api/portraits/med/men/16.jpg",
+          "thumbnail": "https://randomuser.me/api/portraits/thumb/men/16.jpg"
+        },
+        "nat": "ES"
+      }
+    ],
+    "info": {
+      "seed": "f8e0f643fa5633b1",
+      "results": 1,
+      "page": 1,
+      "version": "1.3"
+    }
+  }

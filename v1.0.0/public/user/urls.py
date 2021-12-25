@@ -21,7 +21,7 @@ urlpatterns = [
     path('profile/mobile/', user_mobile_validate_view, name="user_mobile_url"),
 
     #mail verification end point
-    path('activate/<str:uid64>/',mail_activate,name = "user_mail_activate_url"),
+    path('activate/<str:uid64>/<str:token>',mail_activate,name = "user_mail_activate_url"),
 
     #report end point
     path("report/", report_view, name="report_end_point")

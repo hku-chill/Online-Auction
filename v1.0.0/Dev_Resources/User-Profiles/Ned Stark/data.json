@@ -1,0 +1,67 @@
+
+{
+    "results": [
+      {
+        "gender": "male",
+        "name": {
+          "title": "Mr",
+          "first": "Ned",
+          "last": "Stark"
+        },
+        "location": {
+          "street": {
+            "number": 1892,
+            "name": "South Street"
+          },
+          "city": "Galway",
+          "state": "Galway City",
+          "country": "Ireland",
+          "postcode": 21206,
+          "coordinates": {
+            "latitude": "25.0596",
+            "longitude": "-167.4954"
+          },
+          "timezone": {
+            "offset": "-10:00",
+            "description": "Hawaii"
+          }
+        },
+        "email": "dieatfirst@gmail.com",
+        "login": {
+          "uuid": "8313c651-5250-4bb0-be81-9f09d60fdf06",
+          "username": "lazybutterfly629",
+          "password": "test1",
+          "salt": "uitaRSc8",
+          "md5": "4b33f527d9b202c5ffac82593a823131",
+          "sha1": "1884e744441e5b95ae888695224402cc0c259ddf",
+          "sha256": "1af95b536380ac8661b176c4b025da7763ed81cd9addd689960dafeff4e6353e"
+        },
+        "dob": {
+          "date": "1997-10-17T04:01:19.748Z",
+          "age": 24
+        },
+        "registered": {
+          "date": "2002-11-06T11:30:04.801Z",
+          "age": 19
+        },
+        "phone": "061-309-8904",
+        "cell": "081-354-0157",
+        "id": {
+          "name": "PPS",
+          "value": "5121194T"
+        },
+        "picture": {
+          "large": "https://randomuser.me/api/portraits/men/60.jpg",
+          "medium": "https://randomuser.me/api/portraits/med/men/60.jpg",
+          "thumbnail": "https://randomuser.me/api/portraits/thumb/men/60.jpg"
+        },
+        "nat": "IE"
+      }
+    ],
+    "info": {
+      "seed": "206fff8e81d33f0d",
+      "results": 1,
+      "page": 1,
+      "version": "1.3"
+    }
+  }

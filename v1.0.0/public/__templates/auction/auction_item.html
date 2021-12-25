@@ -221,8 +221,8 @@
                                         User Profile
                                     </a>
                                     <a class="report_it_button" report-type="user" report-id="{{ highest_bid.user.pk }}" href="#">
-                                        <i class="fas fa-question"></i>
-                                        Ask to User
+                                        <i class="fas fa-info-square"></i>
+                                        Report User
                                     </a>
                                 </div>
 
@@ -304,7 +304,7 @@
                 
                                 <div class="comment-content">
                                     <div class="comment-user-title">
-                                        <h3 class="font-medium text-siyah-15 uppercase mr-4">{{ comment.user }}</h3>
+                                        <h3 class="font-medium text-siyah-15 uppercase mr-4">{{ comment.user.profile.get_full_name }}</h3>
                                         <span class="font-light text-beyaz-20 text-sm">{{ comment.created }}</span>
                                     </div>
                 
@@ -314,7 +314,7 @@
                                         </p>
                                     </div>
                 
-                                    <div class="comment-bottom flex flex-row justify-between">
+                                    <div class="comment-bottom flex flex-row gap-4">
                                         <div class="comment-keyword-list">
                                             <a target="_blank" href="{% url 'user:user_profile_url' userid=comment.user.pk %}" class="font-light text-beyaz-20 text-sm">Visit Profile</a>
                                         </div>

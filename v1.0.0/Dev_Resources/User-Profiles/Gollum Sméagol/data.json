@@ -1,0 +1,67 @@
+
+{
+    "results": [
+      {
+        "gender": "female",
+        "name": {
+          "title": "Ms",
+          "first": "Gollum",
+          "last": "Sméagol"
+        },
+        "location": {
+          "street": {
+            "number": 5835,
+            "name": "Samaritan Dr"
+          },
+          "city": "Wollongong",
+          "state": "New South Wales",
+          "country": "Australia",
+          "postcode": 7242,
+          "coordinates": {
+            "latitude": "-89.4461",
+            "longitude": "131.6195"
+          },
+          "timezone": {
+            "offset": "+5:45",
+            "description": "Kathmandu"
+          }
+        },
+        "email": "myprecious@hotmail.com",
+        "login": {
+          "uuid": "7ceb9bf3-b23a-4f28-b021-55e96465b01d",
+          "username": "beautifulfrog394",
+          "password": "bigpoppa",
+          "salt": "jmQ8jFQd",
+          "md5": "d133a3f53bddf248bb4928ce1035eee0",
+          "sha1": "5ff442b47aacc090c4d99cd415f1de7c45ac6b42",
+          "sha256": "13ec1852a7302d5797dcc278521d39eaafdc7aa8964bffe4c72a5372e2530fe2"
+        },
+        "dob": {
+          "date": "1994-02-05T14:20:13.463Z",
+          "age": 27
+        },
+        "registered": {
+          "date": "2012-03-05T01:18:56.762Z",
+          "age": 9
+        },
+        "phone": "02-3370-0854",
+        "cell": "0494-066-756",
+        "id": {
+          "name": "TFN",
+          "value": "940523241"
+        },
+        "picture": {
+          "large": "https://randomuser.me/api/portraits/women/39.jpg",
+          "medium": "https://randomuser.me/api/portraits/med/women/39.jpg",
+          "thumbnail": "https://randomuser.me/api/portraits/thumb/women/39.jpg"
+        },
+        "nat": "AU"
+      }
+    ],
+    "info": {
+      "seed": "f42a8a819053a570",
+      "results": 1,
+      "page": 1,
+      "version": "1.3"
+    }
+  }

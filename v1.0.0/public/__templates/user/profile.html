@@ -20,7 +20,9 @@
                     <div class="profile-data">
 
                         <div class="profile-data-img">
-                            <img src="/{{ profile.profile_picture }}" alt="profile-img">
+                            <div class="img_circle">
+                                <img src="/{{ profile.profile_picture }}" alt="profile-img">
+                            </div>
                         </div>
                         
                         <div class="profile-navigation">
@@ -55,27 +57,27 @@
 
                             <div class="user-navigation-categories">
                                 
-                                <div class="nav-category-item active">
+                                <a href="?b=auctions" class="nav-category-item {% if block_content.object == 'auctions' %}active{% endif %}">
                                     <i class="fas fa-gavel"></i>
                                     <span id="nav-category-item-id">Auctions</span>
                                     <span id="nav-category-item-count">{{ profile.user_total_auction }}</span>
-                                </div>
+                                </a>
 
-                                <div class="nav-category-item ">
+                                <a href="?b=buys" class="nav-category-item {% if block_content.object == 'buys' %}active{% endif %}">
                                     <i class="fas fa-shopping-cart"></i>
                                     <span id="nav-category-item-id">Buys</span>
                                     <span id="nav-category-item-count">2</span>
-                                </div>
-                                <div class="nav-category-item ">
+                                </a>
+                                <a href="?b=bids" class="nav-category-item {% if block_content.object == 'bids' %}active{% endif %}">
                                     <i class="fas fa-wallet"></i>
                                     <span id="nav-category-item-id">Bids</span>
                                     <span id="nav-category-item-count">{{ profile.user_total_bid }}</span>
-                                </div>
-                                <div class="nav-category-item ">
+                                </a>
+                                <a  href="?b=comments"class="nav-category-item {% if block_content.object == 'comments' %}active{% endif %}">
                                     <i class="fas fa-comment-dots"></i>
                                     <span id="nav-category-item-id">Comments</span>
-                                    <span id="nav-category-item-count">1.256</span>
-                                </div>
+                                    <span id="nav-category-item-count">{{ profile.user_total_comment }}</span>
+                                </a>
 
                             </div>
 
@@ -92,13 +94,17 @@
                     
 
                 </div>
-                <div class="profile-content-body m-6">
+                <div class="profile-content-body">
 
-                    <div class="profile-content-title pb-6 border-b border-beyaz-20 mb-3">
-                        <h2 class="font-medium text-xl text-siyah-10">{{ profile.get_full_name }} - Auctions</h2>
+                    <div class="profile-content-title">
+                        <h2>{{ profile.get_full_name }} - Auctions</h2>
                     </div>
 
-                    Blok Content
+                    {% comment %} {% include 'user/profile_block.html' with content=block_content %} {% endcomment %}
+
+                    <div class="user_block_content">
+                        {% include 'user/profile_block.html' with content=block_content %}
+                    </div>
                 </div>
 
             </div>

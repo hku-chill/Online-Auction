@@ -1,0 +1,67 @@
+
+{
+    "results": [
+      {
+        "gender": "male",
+        "name": {
+          "title": "Mr",
+          "first": "Gimli",
+          "last": "Glóin"
+        },
+        "location": {
+          "street": {
+            "number": 7055,
+            "name": "Waipuna Road"
+          },
+          "city": "Dunedin",
+          "state": "Tasman",
+          "country": "New Zealand",
+          "postcode": 84158,
+          "coordinates": {
+            "latitude": "59.0108",
+            "longitude": "-17.7252"
+          },
+          "timezone": {
+            "offset": "+5:00",
+            "description": "Ekaterinburg, Islamabad, Karachi, Tashkent"
+          }
+        },
+        "email": "elfs.bestfriend@pm.me",
+        "login": {
+          "uuid": "d3bbf2cd-cea7-425f-80db-b00e7699140d",
+          "username": "ticklishpanda756",
+          "password": "1956",
+          "salt": "X6NBkw7b",
+          "md5": "665a1535951e2534786bd60eaf40cbe6",
+          "sha1": "97ff2af88fdd3f6f815423d615b3cb078302183d",
+          "sha256": "fc7f368a445a704e10e5ca720b696c277cf1b7232677a17a98fd4f5c8fa02567"
+        },
+        "dob": {
+          "date": "1944-12-23T04:07:01.634Z",
+          "age": 77
+        },
+        "registered": {
+          "date": "2003-02-14T14:04:49.678Z",
+          "age": 18
+        },
+        "phone": "(435)-512-0838",
+        "cell": "(838)-402-6831",
+        "id": {
+          "name": "",
+          "value": null
+        },
+        "picture": {
+          "large": "https://randomuser.me/api/portraits/men/91.jpg",
+          "medium": "https://randomuser.me/api/portraits/med/men/91.jpg",
+          "thumbnail": "https://randomuser.me/api/portraits/thumb/men/91.jpg"
+        },
+        "nat": "NZ"
+      }
+    ],
+    "info": {
+      "seed": "b317a0b63779d5b1",
+      "results": 1,
+      "page": 1,
+      "version": "1.3"
+    }
+  }

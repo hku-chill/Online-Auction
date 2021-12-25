@@ -1,0 +1,67 @@
+
+{
+    "results": [
+      {
+        "gender": "male",
+        "name": {
+          "title": "Mr",
+          "first": "Samwise",
+          "last": "Gamgee"
+        },
+        "location": {
+          "street": {
+            "number": 2609,
+            "name": "Shady Ln Dr"
+          },
+          "city": "Stamford",
+          "state": "Indiana",
+          "country": "United States",
+          "postcode": 64538,
+          "coordinates": {
+            "latitude": "83.2106",
+            "longitude": "-141.8494"
+          },
+          "timezone": {
+            "offset": "+7:00",
+            "description": "Bangkok, Hanoi, Jakarta"
+          }
+        },
+        "email": "sam.the.wise@outlook.com",
+        "login": {
+          "uuid": "98d4bd49-9ce3-46d2-85de-81ea35812e56",
+          "username": "ticklishtiger598",
+          "password": "easter",
+          "salt": "LW5nBYiX",
+          "md5": "eccddd694039031985e7a3ce7c03dd11",
+          "sha1": "5dcdef1b44ecf9cdfc95ebbfaca961b6b619d009",
+          "sha256": "cc2c208fd1fad90fcadda37968bedcc34757150a54fac82c62d692fb69ffbac9"
+        },
+        "dob": {
+          "date": "1949-11-03T13:40:15.685Z",
+          "age": 72
+        },
+        "registered": {
+          "date": "2018-04-16T23:53:06.289Z",
+          "age": 3
+        },
+        "phone": "(235)-018-3444",
+        "cell": "(721)-057-4898",
+        "id": {
+          "name": "SSN",
+          "value": "418-56-8119"
+        },
+        "picture": {
+          "large": "https://randomuser.me/api/portraits/men/64.jpg",
+          "medium": "https://randomuser.me/api/portraits/med/men/64.jpg",
+          "thumbnail": "https://randomuser.me/api/portraits/thumb/men/64.jpg"
+        },
+        "nat": "US"
+      }
+    ],
+    "info": {
+      "seed": "a659c3fbbc08ecc1",
+      "results": 1,
+      "page": 1,
+      "version": "1.3"
+    }
+  }

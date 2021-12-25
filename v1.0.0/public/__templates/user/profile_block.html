@@ -1,0 +1,107 @@
+{% if content.type == 'text' %}
+    <div class="bg-blue-100 border-l-4 border-blue-500 text-blue-700 p-4" role="alert">
+        <p class="font-bold">Is this emptiness?</p>
+        <p>{{ content.list }}</p>
+    </div>
+{% else %}
+    {% if content.object == 'auctions' %}
+        <div class="auction-list-contain">
+                
+            {% for auct in  content.list%}
+                <div class="auction-item">
+                    <p class="auction-title">{{ auct.item_title }}</p>
+                    <div class="img_container">
+                        <img src="/{{ auct.item_image }}" alt="{{ auct.item_title }}" class="auction-img">
+                    </div>
+                    <div class="auction-rate">
+                        <div class="star-list">
+                            {% with ''|center:5 as range %}
+                                {% for _ in range %}
+                                    
+                                    {% if forloop.counter <= auct.calc_rate_floor %}
+                                        <i class="fas fa-star"></i>
+                                    {% else %}
+                                        <i class="far fa-star"></i>
+                                    {% endif %}
+                                    
+
+                                {% endfor %}
+                            {% endwith %}
+                        </div>
+                        <p> ({{ auct.calc_rate_round }}) ({{ auct.total_rate }})</p>
+                        
+
+                    </div>
+                    <div class="auction-info">
+                        <p class="auction-price">
+                            {{auct.get_bid_count}} BIDS
+                        </p>
+                        <p class="auction-time calculate_rest" enddate="{{ auct.auction_end_date|date:'Y-m-d H:i' }}">
+                        </p>
+
+                        <div class="join-auction-button">
+                            <a href="{% url 'auction:auction_item_url' slug=auct.slug %}">Join Auction</a>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    {% elif content.object == 'bids' %}
+        <div class="auction-details">
+            <div class="auction-detail-data">
+                <div class="table_item grid grid-cols-3 font-medium mb-2">
+                    <div>Bid Date</div>
+                    <div>Bid Amouth</div>
+                    <div>Auction</div>
+                </div>
+    
+                {% for z in content.list %}
+                    <div class="table_item grid grid-cols-3 py-3 px-1">
+                        <div>{{z.bid_date}}</div>
+                        <div>{{z.bid_amount}}£</div>
+                        <a target="_blank" rel="noopener noreferrer" href="{% url 'auction:auction_item_url' slug=z.auction.slug %}">Check Auction</a>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    {% elif content.object == 'comments' %}
+        <div class="auction-details">
+            <div class="auction-detail-data">
+                <div class="auction_comment_list flex flex-col gap-4">
+                    {% for comment in content.list %}
+                        <div class="auction-comment-item">
+
+                            <div class="user-avatar">
+                                <img width="48px" height="48px" src="/{{ comment.user.profile.profile_picture }}" alt="">
+                            </div>
+
+                            <div class="comment-content">
+                                <div class="comment-user-title">
+                                    <h3 class="font-medium text-siyah-15 uppercase mr-4">{{ comment.user }}</h3>
+                                    <span class="font-light text-beyaz-20 text-sm">{{ comment.created }}</span>
+                                </div>
+
+                                <div class="comment-comment">
+                                    <p class="text-light font-light text-siyah-10">
+                                        {{ comment.body }}
+                                    </p>
+                                </div>
+
+                                <div class="comment-bottom flex flex-row justify-between">
+                                    <div class="comment-keyword-list">
+                                        <a target="_blank" href="{% url 'auction:auction_item_url' slug=comment.auction.slug %}" class="font-light text-beyaz-20 text-sm">Visit Auction</a>
+                                    </div>
+                                </div>
+
+                                
+                            </div>
+
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>  
+        </div>
+    {% endif %}
+
+
+{% endif %}

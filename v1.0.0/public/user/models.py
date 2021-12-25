@@ -46,13 +46,18 @@ class Profile(models.Model):
 
         return float(math.floor(rate))
 
-
+    #return total bid of user
     def user_total_bid(self):
         return bid.objects.filter(user=self.user).count()
 
+    #return total auction of user
     def user_total_auction(self):
         return auction.objects.filter(user=self.user).count()
     
+    #return total comment of user
+    def user_total_comment(self):
+        return comment.objects.filter(user=self.user).count()
+
     def calc_rate_round(self):
         if self.total_rate() == 0:
             return 0
