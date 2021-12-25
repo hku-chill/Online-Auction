@@ -1606,7 +1606,69 @@ hr{
     border-top: 0.5px solid theme("colors.beyaz.20");
 }
 
+.edit-profile{
+    background-color: theme("colors.beyaz.0");
+    border-radius: 16px;
+    display: flex;
+    min-height: 720px;
+    flex-direction: row;
 
+
+    .edit-links{
+        border-right: 1px solid theme("colors.beyaz.20");
+        padding: 32px 0;
+        .profile-data-img{
+            white-space: nowrap;
+
+            margin: 0 16px;
+            width: 212px;
+            height: 212px;
+            background-color: theme("colors.beyaz.0");
+            border: .5px solid theme("colors.beyaz.20");
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            .img_circle{
+                width: calc(100% - 16px);
+                height: calc(100% - 16px);
+                position: relative;
+                overflow: hidden;
+                border-radius: 50%;
+
+                img{
+                    display: inline;
+                    margin: auto;
+                    height: 100%;
+                    width: auto;
+                }
+            }
+        }
+        .edit-links-nav{
+            display: flex;
+            flex-direction: column;
+            
+    
+            a{
+                padding: 20px 40px;
+                display: flex;
+                align-items: center;
+                flex-direction: row;
+                gap: 8px;
+    
+    
+    
+                &.active{
+                    background-color: theme("colors.mavi_5");
+                    color: theme("colors.beyaz.0");
+                }
+            }
+        }
+    }
+
+    
+}
 
 
 

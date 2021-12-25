@@ -24,5 +24,6 @@ urlpatterns = [
     path('activate/<str:uid64>/<str:token>',mail_activate,name = "user_mail_activate_url"),
 
     #report end point
-    path("report/", report_view, name="report_end_point")
+    path("report/", report_view, name="report_end_point"),
+    path("profile/edit/", edit_test, name="edit_profile_url")
 ]

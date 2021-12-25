@@ -46,6 +46,7 @@ INSTALLED_APPS = [
     'auction',
 ]
 
+
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',

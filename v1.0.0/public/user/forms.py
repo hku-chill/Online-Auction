@@ -1,7 +1,8 @@
 from django import forms
+from .models import Profile
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
-
+from django.views import generic
 
 from .models import Profile
 
@@ -44,6 +45,10 @@ class SignUpForm(UserCreationForm):
         model = User
         fields = ('first_name','last_name', 'email', 'password1', 'password2', 'username')
 
+class AuthorUpdateView(forms.ModelForm):
+    class Meta:
+        model = Profile
+        fields = ('birthday', 'phone','profile_picture', 'tc')
 
 
 class LoginForm(AuthenticationForm):

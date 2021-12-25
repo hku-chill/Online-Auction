@@ -1,0 +1,39 @@
+{% extends '_base.html' %}
+
+{% load static %}
+
+{% block content %}
+
+    <article id="main-article" class="bg-beyaz-5 py-4">
+
+        <div class="edit-profile main-wrapper">
+            
+            <div class="edit-links">
+                <div class="profile-data-img">
+                    <div class="img_circle">
+                        <img src="/{{ request.user.profile.profile_picture }}" alt="">
+                    </div>
+                </div>
+
+                <div class="edit-links-nav mt-6">
+                    <a class="active" href="?b=home">
+                        <i class="far fa-home"></i>
+                        <span>Profile Settings</span>
+                    </a>
+                    <a href="?b=pass">
+                        <i class="far fa-lock"></i>
+                        <span>Password Settings</span>
+                    </a>
+                    <a href="?b=bids">
+                        <i class="far fa-plus"></i>
+                        <span>Bids</span>
+                    </a>
+                </div>
+            </div>
+            <div class="edit-body">sa</div>
+
+        </div>
+
+    </article>
+
+{% endblock %}

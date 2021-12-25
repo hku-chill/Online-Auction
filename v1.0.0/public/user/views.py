@@ -8,7 +8,7 @@ from django.contrib.sites.shortcuts import get_current_site
 from django.http.response import HttpResponseBadRequest, JsonResponse
 from django.shortcuts import HttpResponse, get_object_or_404, redirect, render
 from django.template.loader import render_to_string
-from django.utils.encoding import force_bytes, force_text
+from django.utils.encoding import force_bytes
 from django.utils.http import urlsafe_base64_decode, urlsafe_base64_encode
 
 from .forms import *
@@ -157,7 +157,9 @@ def mail_activate(request, uid64, token):
     messages.add_message(request, messages.SUCCESS, "Your account is activated, please login")
     return redirect('user:user_login_url')
 
-
+def edit_test(request):
+    testform = AuthorUpdateView(None, instance=request.user.profile)
+    return render(request, 'user/edittest.html', {'form': testform})
 
 
 def user_profile(request, userid = None):
@@ -191,7 +193,8 @@ def user_profile_id(request, userid = None):
 
     return render(request, 'user/profile.html', {'profile': r_user.profile, 'block_content': block_content})
 
-
+def edit_profile(requst):
+    return render(requst, 'user/editprofile.html')
 
 
 @login_required(login_url='/login/')

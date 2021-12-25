@@ -1,2 +1,3 @@
 six
 python-slugify
+django-background-tasks
