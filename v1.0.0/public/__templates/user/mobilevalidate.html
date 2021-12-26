@@ -11,7 +11,19 @@
         <div class="container-title flex flex-row justify-between items-center mb-7">
             <h3 class=" text-base text-mavi">Validate your Mobile Phone...</h3>
         </div>
+        {% if messages %}
+            <ul class="messages">
+                {% for message in messages %}
 
+                    <div onclick="this.parentNode.removeChild(this)" class="django-messages {% if message.tags %} {{message.tags}} {%endif%}" role="alert">
+                        <span>{{ message|escape }}</span>
+
+                        
+                    </div>
+
+                {% endfor %}
+            </ul>
+        {% endif %}
         
         {% if sms_form%}
             <form class="sms_verify_form" method="post">

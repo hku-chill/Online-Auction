@@ -28,6 +28,14 @@
                         <i class="far fa-plus"></i>
                         <span>Bids</span>
                     </a>
+                    <a class="" href="{% url 'user:user_tc_url' %}">
+                        <i class="far fa-plus"></i>
+                        <span>Validate TC</span>
+                    </a>
+                    <a class="" href="{% url 'user:user_mobile_url' %}">
+                        <i class="far fa-plus"></i>
+                        <span>Validate Mobile</span>
+                    </a>
                     <a href="{% url 'user:user_self_profile_url' %}">
                         <i class="far fa-user"></i>
                         <span>Your Profile</span>
@@ -107,7 +115,58 @@
                     </form>
                     
                     {% elif data.type == "password_settings" %}
-                        {{data.p_form}}
+                    <form action="#" method="post">
+                        
+                        <div class="input-list">
+                            {% csrf_token %}
+                            <div class="input_container full">
+                                <label for="{{data.p_form.old_password.id_for_label }}">{{data.p_form.old_password.label}}</label>
+                                {{data.p_form.old_password}}
+                                {% if data.p_form.old_password.errors %}<span class="pl-2 text-red-500 text-sm"> -{{data.p_form.old_password.errors.as_text}}</span>{% endif %}
+                            </div>
+
+                            <div class="input_container full">
+                                <label for="{{data.p_form.new_password1.id_for_label }}">{{data.p_form.new_password1.label}}</label>
+                                {{data.p_form.new_password1}}
+                                {% if data.p_form.new_password1.errors %}<span class="pl-2 text-red-500 text-sm"> -{{data.p_form.new_password1.errors.as_text}}</span>{% endif %}
+                            </div>
+
+                            <div class="input_container full">
+                                <label for="{{data.p_form.new_password2.id_for_label }}">{{data.p_form.new_password2.label}}</label>
+                                {{data.p_form.new_password2}}
+                                {% if data.p_form.new_password2.errors %}<span class="pl-2 text-red-500 text-sm"> -{{data.p_form.new_password2.errors.as_text}}</span>{% endif %}
+                            </div>
+                            
+                        </div>
+                        <div class="button-list">
+                            <button id="save_profile_button" class="bg-blue-100 border border-blue-500 text-blue-700 px-4 py-3 font-medium rounded-md">Save</button>
+                            <button class="bg-red-100 border border-red-500 text-red-700 px-4 py-3 font-medium rounded-md" type="reset">Cancel</button>
+                        </div>
+
+
+                    </form>
+                    {% elif data.type == "bid_list" %}
+                    <div class="user_block_content">
+                        <div class="auction-details">
+                            <div class="auction-detail-data">
+                                <div class="table_item grid grid-cols-4 font-medium mb-2">
+                                    <div>Bid Date</div>
+                                    <div>Bid Amouth</div>
+                                    <div>Auction</div>
+                                    <div>Delete Bid</div>
+                                </div>
+                    
+                                {% for z in data.bids_list %}
+                                    <div class="table_item grid grid-cols-4 py-3 px-1">
+                                        <div>{{z.bid_date}}</div>
+                                        <div>{{z.bid_amount}}£</div>
+                                        <a target="_blank" rel="noopener noreferrer" href="{% url 'auction:auction_item_url' slug=z.auction.slug %}">Check Auction</a>
+                                        <a href="{% url 'auction:auction_delete_bid_url' id=z.pk %}">Delete Bid</a>
+                                    </div>
+                                {% endfor %}
+                            </div>
+                        </div>
+                    </div>
                     {% endif %}
                 </div>
 

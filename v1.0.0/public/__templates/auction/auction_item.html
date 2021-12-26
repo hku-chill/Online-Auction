@@ -95,7 +95,7 @@
 
                             <div class="user-title-contain">
                                 <h3>{{ auction_item.user.profile.get_full_name }}</h3>
-                                <span>Artist and a mother</span>
+                                <span>{{ auction_item.user.profile.user_details }}</span>
                             </div>
                             <div class="user-rate-contain">
                                 <div class="user-rate">
@@ -183,7 +183,7 @@
 
                                 <div class="user-title-contain">
                                     <h3>{{ highest_bid.user }}</h3>
-                                    <span>Artist and a mother</span>
+                                    <span>{{ highest_bid.user.profile.user_details }}</span>
                                 </div>
                                 <div class="user-rate-contain">
                                     <div class="user-rate">

@@ -13,7 +13,6 @@ $media-mobile-sm: "only screen and (max-width : 480px)";
 }
 
 html {
-    scroll-behavior: smooth;
     overflow-x: hidden;
 }
 
@@ -508,6 +507,13 @@ section#register-form-section{
             width: 110%;
             height: 110%;
             transform: skew(30deg);
+        }
+
+
+        &.car-img{
+            &::after{
+                background-image: url("../img/car.jpg");
+            }
         }
     }
 
@@ -1750,7 +1756,7 @@ div.report_container{
     .report_block{
         background-color: theme("colors.beyaz.0");
         padding: 24px 0;
-        width: 40%;
+        width: 50%;
         border-radius: 16px;
 
 
@@ -1771,6 +1777,9 @@ div.report_container{
                 font-weight: 500;
                 color: theme("colors.beyaz.20");
                 cursor: pointer;
+                display: flex;
+                justify-content: center;
+                align-items: center;
 
 
 

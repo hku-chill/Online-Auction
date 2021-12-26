@@ -7,7 +7,19 @@
 <section class="tc-validate-section container-x main-wrapper block w-full bg-beyaz-0 my-4">
     
     <div class="form_wrapper">
+        {% if messages %}
+            <ul class="messages">
+                {% for message in messages %}
 
+                    <div onclick="this.parentNode.removeChild(this)" class="django-messages {% if message.tags %} {{message.tags}} {%endif%}" role="alert">
+                        <span>{{ message|escape }}</span>
+
+                        
+                    </div>
+
+                {% endfor %}
+            </ul>
+        {% endif %}
         <div class="container-title flex flex-row justify-between items-center mb-7">
             <h3 class=" text-base text-mavi">Validate your Turkish Citizenship</h3>
         </div>

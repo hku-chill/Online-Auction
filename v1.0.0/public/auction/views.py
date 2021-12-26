@@ -13,10 +13,12 @@
 """
 
 
+from django.conf.urls import url
+from django.contrib import messages
 from django.http import response
-from django.http.response import HttpResponseBadRequest, HttpResponseNotAllowed, HttpResponseNotFound, JsonResponse
+from django.http.response import HttpResponseBadRequest, HttpResponseRedirect, HttpResponseNotFound, JsonResponse
 from django.shortcuts import HttpResponse, redirect, render, get_object_or_404
-
+from django.urls import reverse,reverse_lazy
 from .models import auction, category, bid, comment,rates
 
 from .forms import BidForm, CreateAuctionForm, CommentForm
@@ -102,6 +104,7 @@ def create_auction(request):
     user_validate= is_user_validated(request.user)
     if not user_validate == True:
         if type(user_validate) == dict:
+            messages.add_message(request, messages.ERROR, user_validate['message'])
             return redirect(user_validate['url'])
 
     if request.method == 'POST':
@@ -222,7 +225,8 @@ def add_comment(request, slug=None):
         return render(request, 'auction/add_comment.html', {'comment_form': comment_form})
 
 
-
+def delete_bid_from_auction(request, id):
+    return HttpResponseRedirect(reverse_lazy('user:edit_profile_url'))
 
 def rate_auction(request):
     if not request.user.is_authenticated:

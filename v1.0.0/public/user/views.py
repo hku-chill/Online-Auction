@@ -3,7 +3,7 @@ import threading
 
 from auction.models import auction, bid, comment
 from django.contrib import messages
-from django.contrib.auth import authenticate, get_user_model, login, logout
+from django.contrib.auth import update_session_auth_hash, get_user_model, login, logout
 from django.contrib.auth.forms import PasswordChangeForm
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
@@ -35,7 +35,7 @@ def user_logout(request):
     logout(request)
     return redirect('user:user_login_url')
 
-from django.core.mail import EmailMessage
+from django.core.mail import EmailMessage, message
 
 
 @auth_user_should_not_access
@@ -213,15 +213,15 @@ def user_tc_validate_end(request):
 
         if profile_form.is_valid() and user_form.is_valid():
             # user_form.save()
-            userr.profile.tc = profile_form.cleaned_data['tc']
-            userr.profile.birthday = profile_form.cleaned_data['birthday']
-            userr.profile.is_tc_verified = True
-            userr.profile.save()
 
             if tcValidate(request.POST.get('tc', ''), request.POST.get('first_name', ''), request.POST.get('last_name', ''), request.POST.get('birthday_year', '')):
+                userr.profile.tc = profile_form.cleaned_data['tc']
+                userr.profile.birthday = profile_form.cleaned_data['birthday']
+                userr.profile.is_tc_verified = True
+                userr.profile.save()
                 return JsonResponse({'success': True, 'message': 'TC validation success'})
             else:
-                return JsonResponse({'success': False, 'message': 'TC validation failed'})
+                return JsonResponse({'success': False, 'message': 'TC validation failed, your informations are incorrect'})
         
         return JsonResponse({'success': False, 'message': 'The informations not valid please check again...'})
     
@@ -232,6 +232,7 @@ def user_tc_validate_end(request):
 def user_mobile_validate_view(request):
     #check if user already verified his mobile
     if request.user.profile.is_phone_verified:
+        messages.add_message(request, messages.WARNING, 'You already validate your phone number!')
         return redirect('/')
 
     #create form veriables
@@ -245,12 +246,15 @@ def user_mobile_validate_view(request):
             #? check if form is valid then send sms code to user and return sms validatation form
             if phone_form.is_valid():
                 # send sms code to user
-                validate_sms = phoneValidate(request.user, phone_form.cleaned_data['phone'])
+                if Profile.objects.filter(phone=phone_form.cleaned_data['phone']).exists():
+                    messages.add_message(request, messages.ERROR, 'This phone number already used by other.')
+                else:
+                    validate_sms = phoneValidate(request.user, phone_form.cleaned_data['phone'])
 
-                #if sms code sent to user render sms form
-                if validate_sms:
-                    phone_form = None
-                    sms_form = SmsForm()
+                    #if sms code sent to user render sms form
+                    if validate_sms:
+                        phone_form = None
+                        sms_form = SmsForm()
 
         # Check if this request came form code verification form
         elif request.POST.get('sms_form_hidden') == 'True':
@@ -267,6 +271,7 @@ def user_mobile_validate_view(request):
                         request.user.profile.phone_verification_code = None
                         request.user.profile.is_phone_verified = True
                         request.user.profile.save(update_fields=['phone_verification_code', 'is_phone_verified'])
+                        messages.add_message(request, messages.SUCCESS, 'Your phone number is validated!')
                         return redirect('/')
                     else:
                         sms_form.add_error('sms', 'SMS code is not valid, please check and try again.')
@@ -324,9 +329,10 @@ def edit_profile(request):
     rqg = request.GET.get('b')
     context['type'] = "profile_settings" if rqg == "home" else "password_settings" if rqg == "pass" else "bid_list" if rqg == "bids" else "profile_settings"
     
+    post_data = request.POST or None
+    file_data = request.FILES or None
+
     if context['type'] == "profile_settings":
-        post_data = request.POST or None
-        file_data = request.FILES or None
 
         user_update_form = UserUpdateForm(post_data, instance=request.user)
         profile_update_form = ProfileUpdateForm(post_data, file_data, instance=request.user.profile)
@@ -339,7 +345,16 @@ def edit_profile(request):
         context['u_form'] = user_update_form
         context['p_form'] = profile_update_form
     elif (context['type'] == "password_settings"):
-        password_form = PasswordChangeForm(request.user)
+        password_form = PasswordChangeForm(request.user, post_data)
+
+        if password_form.is_valid():
+            user = password_form.save()
+            update_session_auth_hash(request, user)
+            messages.add_message(request, messages.SUCCESS, 'Your password was successfully updated!')
+
         context['p_form'] = password_form
+    elif (context['type'] == "bid_list"):
+        context['bids_list'] = bid.objects.filter(user=request.user)
+
 
     return render(request, 'user/editprofile.html', {'data':context})

@@ -17,7 +17,7 @@ $(".tc_verify_form").submit(function (e) {
                 $(".tc_valide_button").prop("disabled", false).toggleClass("animate-pulse");
             }
             else{
-                Swal.fire("Error", "Your account has not been verified, please check your informations...", "error");
+                Swal.fire("Error", "Your account has not been verified, "+response.message, "error");
                 $(".tc_valide_button").prop("disabled", false).toggleClass("animate-pulse");
             }
         },
