@@ -41,6 +41,7 @@
 
                 <!--! Login Form -->
                 <div id="form-wrap">
+
                     {% if messages %}
                         <ul class="messages">
                             {% for message in messages %}
@@ -54,6 +55,7 @@
                             {% endfor %}
                         </ul>
                     {% endif %}
+
                     <form method="post" id="login-form">
                         {% csrf_token %}
                         <div id="button-list" class="my-14">

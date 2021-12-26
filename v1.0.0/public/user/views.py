@@ -1,26 +1,26 @@
 # encoding:utf-8
+import threading
+
+from auction.models import auction, bid, comment
 from django.contrib import messages
-from django.contrib import auth
 from django.contrib.auth import authenticate, get_user_model, login, logout
+from django.contrib.auth.forms import PasswordChangeForm
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from django.contrib.sites.shortcuts import get_current_site
 from django.http.response import HttpResponseBadRequest, JsonResponse
-from django.shortcuts import HttpResponse, get_object_or_404, redirect, render
+from django.shortcuts import get_object_or_404, redirect, render
 from django.template.loader import render_to_string
 from django.utils.encoding import force_bytes
 from django.utils.http import urlsafe_base64_decode, urlsafe_base64_encode
 
 from .forms import *
-from .helper import (auth_user_should_not_access, tc_user_should_not_access,
-                     tcValidate, phoneValidate, is_user_validated)
+from .helper import (auth_user_should_not_access, is_user_validated,
+                     phoneValidate, tc_user_should_not_access, tcValidate)
 from .models import Profile, Report
 from .token import account_activation_token
-from auction.models import auction, comment, bid
-from django.conf import settings
-import threading
 
-
+#add backgroud job for sending email
 class EmailThread(threading.Thread):
 
     def __init__(self, email):
@@ -36,6 +36,7 @@ def user_logout(request):
     return redirect('user:user_login_url')
 
 from django.core.mail import EmailMessage
+
 
 @auth_user_should_not_access
 def register_user(request):
@@ -157,10 +158,6 @@ def mail_activate(request, uid64, token):
     messages.add_message(request, messages.SUCCESS, "Your account is activated, please login")
     return redirect('user:user_login_url')
 
-def edit_test(request):
-    testform = AuthorUpdateView(None, instance=request.user.profile)
-    return render(request, 'user/edittest.html', {'form': testform})
-
 
 def user_profile(request, userid = None):
     # return render(request, 'user/profile.html', {'profile': request.user.profile})
@@ -192,9 +189,6 @@ def user_profile_id(request, userid = None):
         block_content['list'] = f"There is no {block_content['object']} posted by this user"
 
     return render(request, 'user/profile.html', {'profile': r_user.profile, 'block_content': block_content})
-
-def edit_profile(requst):
-    return render(requst, 'user/editprofile.html')
 
 
 @login_required(login_url='/login/')
@@ -286,9 +280,6 @@ def user_mobile_validate_view(request):
     return render(request, 'user/mobilevalidate.html', {'mobile_form': phone_form, 'sms_form': sms_form})
 
 
-
-
-
 def report_view(request):
     if not request.user.is_authenticated:
         return JsonResponse({"success": False, "message": "You need to authenticated to send report something.", "footer": {"url": "/login/", "text": "Login Url"} })
@@ -326,3 +317,29 @@ def report_view(request):
 
 
     return JsonResponse(response_data)
+
+
+def edit_profile(request):
+    context = {}
+    rqg = request.GET.get('b')
+    context['type'] = "profile_settings" if rqg == "home" else "password_settings" if rqg == "pass" else "bid_list" if rqg == "bids" else "profile_settings"
+    
+    if context['type'] == "profile_settings":
+        post_data = request.POST or None
+        file_data = request.FILES or None
+
+        user_update_form = UserUpdateForm(post_data, instance=request.user)
+        profile_update_form = ProfileUpdateForm(post_data, file_data, instance=request.user.profile)
+
+        if user_update_form.is_valid() and profile_update_form.is_valid():
+            user_update_form.save()
+            profile_update_form.save()
+            messages.add_message(request, messages.SUCCESS, 'Your profile has been updated.')
+        
+        context['u_form'] = user_update_form
+        context['p_form'] = profile_update_form
+    elif (context['type'] == "password_settings"):
+        password_form = PasswordChangeForm(request.user)
+        context['p_form'] = password_form
+
+    return render(request, 'user/editprofile.html', {'data':context})

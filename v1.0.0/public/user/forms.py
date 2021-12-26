@@ -45,10 +45,40 @@ class SignUpForm(UserCreationForm):
         model = User
         fields = ('first_name','last_name', 'email', 'password1', 'password2', 'username')
 
-class AuthorUpdateView(forms.ModelForm):
+
+class UserUpdateForm(forms.ModelForm):
+    first_name = forms.CharField(
+        max_length=30, required=True, label='First Name',
+        widget=forms.TextInput(attrs={'placeholder': 'Enter First Name'})
+    )
+    last_name = forms.CharField(
+        max_length=30, required=True, label='Last Name',
+        widget=forms.TextInput(attrs={'placeholder': 'Enter Last Name'})
+    )
+    class Meta:
+        model = User
+        fields = ['first_name', 'last_name']
+
+class ProfileUpdateForm(forms.ModelForm):
+    address = forms.CharField(
+        max_length=240, required=True, label='Address',
+        widget=forms.Textarea(attrs={'placeholder': 'Enter Address','rows':'4'})
+    )
+    user_details = forms.CharField(
+        max_length=120, required=True, label='About You',
+        widget=forms.Textarea(attrs={'placeholder': 'Enter User Details','rows':'4'})
+    )
+    profile_picture = forms.ImageField(
+        label='Profile Picture',
+        widget=forms.FileInput(attrs={'placeholder': 'Upload Profile Picture'})
+    )
+    birthday = forms.DateField(
+        widget=forms.DateInput(attrs={'placeholder': 'Enter Birthday'})
+    )
     class Meta:
         model = Profile
-        fields = ('birthday', 'phone','profile_picture', 'tc')
+        fields = ['address', 'user_details','birthday', 'profile_picture']
+
 
 
 class LoginForm(AuthenticationForm):

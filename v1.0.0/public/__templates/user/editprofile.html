@@ -16,21 +16,103 @@
                 </div>
 
                 <div class="edit-links-nav mt-6">
-                    <a class="active" href="?b=home">
+                    <a class="{% if data.type == "profile_settings" %}active{% endif %}" href="?b=home">
                         <i class="far fa-home"></i>
                         <span>Profile Settings</span>
                     </a>
-                    <a href="?b=pass">
+                    <a class="{% if data.type == "password_settings" %}active{% endif %}" href="?b=pass">
                         <i class="far fa-lock"></i>
                         <span>Password Settings</span>
                     </a>
-                    <a href="?b=bids">
+                    <a class="{% if data.type == "bid_list" %}active{% endif %}" href="?b=bids">
                         <i class="far fa-plus"></i>
                         <span>Bids</span>
                     </a>
+                    <a href="{% url 'user:user_self_profile_url' %}">
+                        <i class="far fa-user"></i>
+                        <span>Your Profile</span>
+                    </a>
                 </div>
             </div>
-            <div class="edit-body">sa</div>
+            <div class="edit-body flex-grow flex-shrink">
+                <div class="contain-title border-b border-beyaz-20">
+                    <h2 class="p-4 text-lg font-medium text-siyah-15">Change your Profile</h2>
+                </div>
+
+                <div class="messages px-6 py-4">
+                    {% if messages %}
+                        <ul class="messages">
+                            {% for message in messages %}
+
+                                <div onclick="this.parentNode.removeChild(this)" class="django-messages {% if message.tags %} {{message.tags}} {%endif%}" role="alert">
+                                    <span>{{ message|escape }}</span>
+
+                                    
+                                </div>
+
+                            {% endfor %}
+                        </ul>
+                    {% endif %}
+                </div>
+
+                <div class="profile-edit-contain">
+                    {% if data.type == "profile_settings" %}
+                    <form action="#" method="post" enctype="multipart/form-data">
+                        
+                        <div class="input-list">
+                            {% csrf_token %}
+                            <div class="input_container half">
+                                <label for="{{data.u_form.first_name.id_for_label }}">{{data.u_form.first_name.label}}</label>
+                                {{data.u_form.first_name}}
+                                {% if data.u_form.first_name.errors %}<span class="pl-2 text-red-500 text-sm"> -{{data.u_form.first_name.errors.as_text}}</span>{% endif %}
+                            </div>
+
+                            <div class="input_container half">
+                                <label for="{{data.u_form.last_name.id_for_label }}">{{data.u_form.last_name.label}}</label>
+                                {{data.u_form.last_name}}
+                                {% if data.u_form.last_name.errors %}<span class="pl-2 text-red-500 text-sm"> -{{data.u_form.last_name.errors.as_text}}</span>{% endif %}
+                            </div>
+
+                            <div class="input_container half">
+                                <label for="{{data.p_form.profile_picture.id_for_label }}">{{data.p_form.profile_picture.label}}</label>
+                                {{data.p_form.profile_picture}}
+                                {% if data.p_form.profile_picture.errors %}<span class="pl-2 text-red-500 text-sm"> -{{data.p_form.profile_picture.errors.as_text}}</span>{% endif %}
+                            </div>
+
+                            <div class="input_container half">
+                                <label for="{{data.p_form.birthday.id_for_label }}">{{data.p_form.birthday.label}}</label>
+                                {{data.p_form.birthday}}
+                                {% if data.p_form.birthday.errors %}<span class="pl-2 text-red-500 text-sm"> -{{data.p_form.birthday.errors.as_text}}</span>{% endif %}
+                            </div>
+
+                            <div class="input_container half">
+                                <label for="{{data.p_form.address.id_for_label }}">{{data.p_form.address.label}}</label>
+                                {{data.p_form.address}}
+                                {% if data.p_form.address.errors %}<span class="pl-2 text-red-500 text-sm"> -{{data.p_form.address.errors.as_text}}</span>{% endif %}
+                            </div>
+
+                            <div class="input_container half">
+                                <label for="{{data.p_form.user_details.id_for_label }}">{{data.p_form.user_details.label}}</label>
+                                {{data.p_form.user_details}}
+                                {% if data.p_form.user_details.errors %}<span class="pl-2 text-red-500 text-sm"> -{{data.p_form.user_details.errors.as_text}}</span>{% endif %}
+                            </div>
+                            
+                        </div>
+                        <div class="button-list">
+                            <button id="save_profile_button" class="bg-blue-100 border border-blue-500 text-blue-700 px-4 py-3 font-medium rounded-md">Save</button>
+                            <button class="bg-red-100 border border-red-500 text-red-700 px-4 py-3 font-medium rounded-md" type="reset">Cancel</button>
+                        </div>
+
+
+                    </form>
+                    
+                    {% elif data.type == "password_settings" %}
+                        {{data.p_form}}
+                    {% endif %}
+                </div>
+
+
+            </div>
 
         </div>
 

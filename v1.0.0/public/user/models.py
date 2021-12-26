@@ -3,7 +3,7 @@ from django.utils import timezone
 from django.contrib.auth.models import User
 from django.utils.translation import gettext_lazy as _
 
-from django.db.models.signals import post_save
+from django.db.models.signals import post_save, pre_save
 from django.dispatch import receiver
 
 from django.urls import reverse
@@ -125,3 +125,21 @@ def create_profile(sender, instance, created, **kwargs):
 @receiver(post_save, sender=User)
 def save_user_profile(sender, instance, **kwargs):
     instance.profile.save()
+
+
+
+@receiver(pre_save, sender=Profile)
+def delete_old_file(sender, instance, **kwargs):
+    if instance._state.adding and not instance.pk:
+        return False
+    
+    try:
+        old_file = sender.objects.get(pk=instance.pk).profile_picture
+    except sender.DoesNotExist:
+        return False
+
+    file = instance.profile_picture
+    if not old_file == file:
+        if old_file:
+            old_file.delete(save=False)
+        return False

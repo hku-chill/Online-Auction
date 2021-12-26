@@ -1651,7 +1651,7 @@ hr{
             
     
             a{
-                padding: 20px 40px;
+                padding: 10px 0 10px 16px;
                 display: flex;
                 align-items: center;
                 flex-direction: row;
@@ -1662,12 +1662,67 @@ hr{
                 &.active{
                     background-color: theme("colors.mavi_5");
                     color: theme("colors.beyaz.0");
+                    border-right: 5px solid theme("colors.turuncu");
                 }
             }
         }
     }
 
-    
+    .edit-body{
+        .profile-edit-contain{
+
+            .input-list{
+                padding: 0 16px;
+                display: flex;
+                flex-flow: wrap row;
+
+                .input_container{
+                    flex: 1 1 50%;
+                    display: flex;
+                    flex-direction: column;
+                    padding: 8px;
+
+
+
+                    input,textarea{
+                        background-color: transparent;
+                        border-width: 2px;
+                        border-color: theme("colors.beyaz.15");
+                        border-radius: 12px;
+                        line-height: 1.5;
+                        padding: .5rem .75rem;
+                        color: theme("colors.beyaz.30");
+
+                        &:focus{
+                            border-color: theme("colors.mavi_5");
+                            color: theme("colors.siyah.20");
+                        }
+
+                        &:not([type='file']){
+                            padding: calc(.5rem + 3px) .75rem;
+                        }
+                    }
+
+                    &.half{
+                        flex-basis: 50%;
+                    }
+
+                    &.full{
+                        flex-basis: 100%;
+                    }
+                }
+            }
+
+            .button-list{
+                padding: 0px 24px;
+                display: flex;
+                flex-direction: row;
+                justify-content: flex-end;
+                gap: 8px;
+            }
+
+        }
+    }
 }
 
 
