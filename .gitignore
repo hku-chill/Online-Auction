@@ -54,3 +54,4 @@ docs/_build/
 *.pyc
 *.pyc
 *.pyc
+v1.0.0/public/db.sqlite3
